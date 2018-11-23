@@ -1,5 +1,5 @@
 {
-  "name": "isomorphic",
+  "name": "actual-cedis",
   "version": "2.9.4",
   "private": true,
   "dependencies": {
@@ -37,6 +37,8 @@
     "styled-theme": "^0.3.3"
   },
   "scripts": {
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -60,6 +62,8 @@
     ]
   },
   "devDependencies": {
+    "docz": "^0.12.13",
+    "docz-theme-default": "^0.12.13",
     "eslint": "5.6.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",

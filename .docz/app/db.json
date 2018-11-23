@@ -1,0 +1,32 @@
+{
+  "config": {
+    "title": "Isomorphic",
+    "description": "My awesome app using docz",
+    "themeConfig": {},
+    "menu": [],
+    "ordering": "descending",
+    "version": "2.9.4",
+    "repository": null,
+    "native": false,
+    "codeSandbox": true
+  },
+  "entries": {
+    "src/app.mdx": {
+      "name": "Hello world",
+      "id": "a725c84cf0c5e510978aca78a2ae52f6",
+      "filepath": "src/app.mdx",
+      "link": null,
+      "slug": "src-app",
+      "route": "/src-app",
+      "order": 0,
+      "menu": null,
+      "headings": [
+        {
+          "depth": 1,
+          "slug": "hello-world",
+          "value": "Hello world"
+        }
+      ]
+    }
+  }
+}
