@@ -37,7 +37,6 @@
     "styled-theme": "^0.3.3"
   },
   "scripts": {
-    "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -49,6 +48,11 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "**/*.{js,json,css}": [
       "prettier --single-quote --trailing-comma=es5 --write",
