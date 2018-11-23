@@ -1,0 +1,5 @@
+build
+coverage
+flow-typed
+src/setupTests.js
+src/registerServiceWorker.js
