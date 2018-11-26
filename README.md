@@ -7,7 +7,3 @@
   via e-mail so you can decide if/when you wish to participate!
 
   ![watch this repo](images/watch-repo.png)
-
-## Sections
-
-- [Development practices](development/README.md)
