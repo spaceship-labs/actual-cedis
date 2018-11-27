@@ -1,8 +1,8 @@
-import Table from 'components/uielements/table';
+import Table from '../uielements/table';
 import styled from 'styled-components';
 import { palette } from 'styled-theme';
-import { transition, boxShadow, borderRadius } from 'config/style-util';
-import WithDirection from 'config/withDirection';
+import { transition, boxShadow, borderRadius } from '../../settings/style-util';
+import WithDirection from '../../settings/withDirection';
 
 const TableWrapper = styled(Table)`
   overflow: hidden;
