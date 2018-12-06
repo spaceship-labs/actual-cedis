@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken } from 'services/auth';
+import { getToken } from './auth';
 
 const API_BASE = 'http://127.0.0.1:1337';
 

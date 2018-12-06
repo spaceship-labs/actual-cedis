@@ -1,14 +1,14 @@
 import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import actions from './actions';
-import api from 'services/api';
-import { logout as authLogout } from 'services/auth';
+import api from '../../services/api';
+import { logout as authLogout } from '../../services/auth';
 
 function* onLogin(action) {
   try {
     yield put(actions.setLoading(true));
     const { data } = yield call(api.login.do, action.payload);
-    yield put(actions.loginSuccess(data.data));
+    yield put(actions.loginSuccess(data));
   } catch (e) {
     yield put(actions.setLoading(false));
     yield put(actions.loginError(e));
@@ -17,7 +17,7 @@ function* onLogin(action) {
 
 function* onLoginSuccess(action) {
   yield localStorage.setItem('id_token', action.payload.token);
-  yield put(push('/dashboard/categories'));
+  yield put(push('/dashboard'));
 }
 
 function* onLoginError() {}

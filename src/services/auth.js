@@ -2,7 +2,7 @@ import history from './history';
 import {
   getToken as utilityGetToken,
   clearToken as utilityClearToken,
-} from 'helpers/utility';
+} from '../helpers/utility';
 import jwt from 'jsonwebtoken';
 
 export function logout() {
