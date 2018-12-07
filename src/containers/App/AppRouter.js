@@ -15,6 +15,10 @@ const routes = [
     path: 'authCheck',
     component: asyncComponent(() => import('../AuthCheck')),
   },
+  {
+    path: 'requestList',
+    component: asyncComponent(() => import('../RequestList/requestList')),
+  },
 ];
 
 class AppRouter extends Component {
