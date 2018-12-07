@@ -16,7 +16,7 @@ const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
         <Redirect
           to={{
             pathname: '/signin',
-            state: { from: props.location }
+            state: { from: props.location },
           }}
         />
       )
@@ -37,6 +37,14 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
           path={'/signin'}
           component={asyncComponent(() => import('./containers/Page/signin'))}
         />
+        <Route
+          exact
+          path={'/OrderSingle'}
+          component={asyncComponent(() =>
+            import('./containers/Order/index.js')
+          )}
+        />
+
         <RestrictedRoute
           path="/dashboard"
           component={App}
@@ -48,5 +56,5 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
 };
 
 export default connect(state => ({
-  isLoggedIn: state.Auth.idToken !== null
+  isLoggedIn: state.Auth.idToken !== null,
 }))(PublicRoutes);
