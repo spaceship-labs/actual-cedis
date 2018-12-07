@@ -156,5 +156,4 @@ export default {
   RequestIcon,
   RequestSpan,
   RequestH3,
-  RequestP,
 };
