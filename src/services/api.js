@@ -9,18 +9,18 @@ const put = (url, params = {}) => axios.put(url, params);
 const post = (url, params = {}) => axios.post(url, params);
 const destroy = (url, params = {}) => axios.delete(url, params);
 
-axios.interceptors.request.use(function(config) {
+axios.interceptors.request.use(config => {
   const token = getToken();
   config.headers.Authorization = `JWR ${token}`;
   return config;
 });
 
 function objectToForm(obj, form, level) {
-  let f = form || new FormData();
+  const f = form || new FormData();
 
-  for (let k in obj) {
+  for (const k in obj) {
     if (obj.hasOwnProperty(k)) {
-      let levelProp = level ? level + '[' + k + ']' : k;
+      const levelProp = level ? `${level}[${k}]` : k;
 
       if (
         typeof obj[k] === 'object' &&
@@ -50,5 +50,16 @@ export default {
       };
       return post('/auth/signin', loginParams);
     },
+  },
+  orders: {
+    list: params => get('/order/find', { params }),
+    findById: params => get('/order/findbyid', { params }),
+  },
+  cancel: {
+    list: params => get('/cancel', { params }),
+    create: ({ orderId, ...params }) =>
+      post(`/cancel/${orderId}/order`, params),
+    get: orderId => get(`/cancel/${orderId}/order`),
+    update: ({ orderId, ...params }) => put(`/cancel/${orderId}/order`, params),
   },
 };
