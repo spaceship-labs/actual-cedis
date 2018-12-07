@@ -40,7 +40,13 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
             import('./containers/Order/index.js')
           )}
         />
-
+        <Route
+          exact
+          path={'/requestList'}
+          component={asyncComponent(() =>
+            import('./containers/RequestList/requestList.js')
+          )}
+        />
         <RestrictedRoute
           path="/dashboard"
           component={App}
