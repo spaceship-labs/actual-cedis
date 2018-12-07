@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import App from './containers/App/App';
 import asyncComponent from './helpers/AsyncFunc';
+import { isAuthenticated } from './services/auth';
 
 const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
@@ -15,8 +16,8 @@ const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
       ) : (
         <Redirect
           to={{
-            pathname: '/signin',
-            state: { from: props.location }
+            pathname: '/',
+            state: { from: props.location },
           }}
         />
       )
@@ -30,12 +31,7 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
         <Route
           exact
           path={'/'}
-          component={asyncComponent(() => import('./containers/Page/signin'))}
-        />
-        <Route
-          exact
-          path={'/signin'}
-          component={asyncComponent(() => import('./containers/Page/signin'))}
+          component={asyncComponent(() => import('./containers/Login'))}
         />
         <RestrictedRoute
           path="/dashboard"
@@ -48,5 +44,5 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
 };
 
 export default connect(state => ({
-  isLoggedIn: state.Auth.idToken !== null
+  isLoggedIn: isAuthenticated(),
 }))(PublicRoutes);
