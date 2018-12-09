@@ -9,7 +9,7 @@ import {
   StatusSpan,
   StatusH3,
   StatusP,
-} from './requestList.style';
+} from './CancelRequest.styled';
 import Trash from '../../image/favicon.png';
 
 export default class extends Component {

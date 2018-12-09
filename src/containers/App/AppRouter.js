@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: 'requestList',
-    component: asyncComponent(() => import('../RequestList/requestList')),
+    component: asyncComponent(() => import('../CancelRequest/CancelRequest')),
   },
   {
     path: 'orders',
