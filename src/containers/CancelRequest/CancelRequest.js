@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col, Button } from 'antd';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import actions from './actions';
 import LayoutContentWrapper from '../../components/utility/layoutWrapper';
 import LayoutContent from '../../components/utility/layoutContent';
 import RequestContent from '../../components/requestList/RequestContent';
@@ -11,14 +14,17 @@ import {
   StatusP,
 } from './CancelRequest.styled';
 import Trash from '../../image/favicon.png';
+import selectors from './selectors';
 
-export default class extends Component {
+class CancelRequest extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.state = {};
   }
+
+  componentDidMount() {}
 
   handleClick() {
     this.setState({});
@@ -118,3 +124,33 @@ export default class extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  const {
+    addAccepted,
+    addRejected,
+    removeAccepted,
+    removeRejected,
+    getCancelRequest,
+    updateCancelRequest,
+    setStatus,
+  } = actions;
+
+  return bindActionCreators(
+    {
+      addAccepted,
+      addRejected,
+      removeAccepted,
+      removeRejected,
+      setStatus,
+      updateCancelRequest,
+      getCancelRequest,
+    },
+    dispatch
+  );
+};
+
+export default connect(
+  selectors.propsSelector,
+  mapDispatchToProps
+)(CancelRequest);

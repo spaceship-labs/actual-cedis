@@ -1,7 +1,12 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import containerActions from './actions';
 import { getCancelSaga, updateCancelSaga } from '../../redux/objects/sagas';
-import { statusSelector, acceptedSelector, requestSelector } from './selectors';
+import {
+  statusSelector,
+  acceptedSelector,
+  requestSelector,
+  rejectedSelector,
+} from './selectors';
 
 export function* getCancelRequestSaga(cancelRequestId) {
   const cancelRequest = yield call(getCancelSaga, cancelRequestId);
@@ -9,7 +14,7 @@ export function* getCancelRequestSaga(cancelRequestId) {
   yield put(containerActions.setCancelRequest(cancelRequest));
 }
 
-export function* updateCancelRequest() {
+export function* updateCancelRequestSaga() {
   const status = yield select(statusSelector);
   if (status === 'rejected' || status === 'authorized') {
     yield call(updateCancelSaga, { requestStatus: status });
@@ -31,8 +36,9 @@ export function* addAcceptedSaga(index) {
 
 export function* addRejectedSaga(index) {
   const request = yield select(requestSelector);
+  const rejected = yield select(rejectedSelector);
   const elem = { id: request.someAttr[index].id, authorized: true };
-  const newRejected = [...accepted, { ...elem }];
+  const newRejected = [...rejected, { ...elem }];
   yield put(containerActions.setRejected(newRejected));
 }
 

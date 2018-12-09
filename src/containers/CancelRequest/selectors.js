@@ -12,10 +12,14 @@ export const rejectedSelector = ({ containers }) =>
 
 export const propsSelector = ({ containers }) => {
   const {
-    CancelRequest: { request },
+    CancelRequest: {
+      request,
+      accepted: acceptedElements,
+      rejected: rejectedElements,
+    },
   } = containers;
 
-  return { request };
+  return { request, acceptedElements, rejectedElements };
 };
 
 export default {
