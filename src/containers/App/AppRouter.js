@@ -19,6 +19,14 @@ const routes = [
     path: 'requestList',
     component: asyncComponent(() => import('../RequestList/requestList')),
   },
+  {
+    path: 'orders',
+    component: asyncComponent(() => import('../OrdersView')),
+  },
+  {
+    path: 'order/:id',
+    component: asyncComponent(() => import('../Order/Single')),
+  },
 ];
 
 class AppRouter extends Component {

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import ImageCellView from './imageCell';
 import { Icon, Input, Popconfirm } from 'antd';
 import * as numeral from 'numeral';
+import ImageCellView from './imageCell';
 
 const DateCell = data => {
   const date = new Date(data);
   return <p>{date.toLocaleString()}</p>;
 };
 const ImageCell = src => <ImageCellView src={src} />;
-const LinkCell = (link, href) => <a href={href ? href : '#'}>{link}</a>;
+const LinkCell = (link, href) => <a href={href || '#'}>{link}</a>;
 const TextCell = text => <p>{text}</p>;
 const CurrencyCell = value => <p>{numeral(value).format('$0,0.00')}</p>;
 
@@ -23,10 +23,12 @@ class EditableCell extends Component {
       editable: false,
     };
   }
+
   handleChange(event) {
     const value = event.target.value;
     this.setState({ value });
   }
+
   check() {
     this.setState({ editable: false });
     if (this.props.onChange) {
@@ -37,9 +39,11 @@ class EditableCell extends Component {
       );
     }
   }
+
   edit() {
     this.setState({ editable: true });
   }
+
   render() {
     const { value, editable } = this.state;
     return (
@@ -80,7 +84,7 @@ class DeleteCell extends Component {
 }
 
 const renderCell = (object, type, key) => {
-  const value = object[key];
+  const value = key ? object[key] : object;
   switch (type) {
     case 'DateCell':
       return DateCell(value);

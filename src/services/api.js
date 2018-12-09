@@ -11,7 +11,7 @@ const destroy = (url, params = {}) => axios.delete(url, params);
 
 axios.interceptors.request.use(config => {
   const token = getToken();
-  config.headers.Authorization = `JWR ${token}`;
+  config.headers.Authorization = `JWT ${token}`;
   return config;
 });
 
@@ -52,7 +52,7 @@ export default {
     },
   },
   orders: {
-    list: params => get('/order/find', { params }),
+    list: ({ page }) => get(`/order/find/${page}`),
     findById: params => get('/order/findbyid', { params }),
   },
   cancel: {
@@ -61,5 +61,8 @@ export default {
       post(`/cancel/${orderId}/order`, params),
     get: orderId => get(`/cancel/${orderId}/order`),
     update: ({ orderId, ...params }) => put(`/cancel/${orderId}/order`, params),
+  },
+  alerts: {
+    list: params => get('/alert', { params }),
   },
 };

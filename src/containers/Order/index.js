@@ -11,9 +11,10 @@ import Topbar from '../Topbar/Topbar';
 import { siteConfig } from '../../settings';
 import themes from '../../settings/themes';
 import { themeConfig } from '../../settings';
-import AppHolder from './../App/commonStyle';
-import './../App/global.css';
-import SingleOrder from './../Order/Single';
+import AppHolder from '../App/commonStyle';
+import '../App/global.css';
+import SingleOrder from './Single';
+
 const { Footer } = Layout;
 const { logout } = authAction;
 const { toggleAll } = appActions;
@@ -42,7 +43,7 @@ export class App extends Component {
               <Layout
                 className="isoContentMainLayout"
                 style={{
-                  height: height,
+                  height,
                 }}
               >
                 <SingleOrder />
@@ -64,10 +65,16 @@ export class App extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  const {
+    Auth: auth,
+    App: { height },
+  } = state;
+
+  return { auth, height };
+};
+
 export default connect(
-  state => ({
-    auth: state.Auth,
-    height: state.App.height,
-  }),
+  mapStateToProps,
   { logout, toggleAll }
 )(App);

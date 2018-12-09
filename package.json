@@ -20,6 +20,7 @@
     "ractionx": "^1.0.6",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-emoji-render": "^0.5.0",
     "react-intl": "^2.3.0",
     "react-placeholder": "^2.0.0",
     "react-redux": "^5.0.4",

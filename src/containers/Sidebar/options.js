@@ -10,8 +10,18 @@ const options = [
     leftIcon: 'ion-document',
   },
   {
-    key: 'requestList',
-    label: 'Request List',
+    key: 'orders',
+    label: 'Orders List',
+    leftIcon: 'ion-document',
+  },
+  {
+    key: 'cancel-requests',
+    label: 'Cancelaciones',
+    leftIcon: 'ion-document',
+  },
+  {
+    key: 'alerts',
+    label: 'Alertas',
     leftIcon: 'ion-document',
   },
 ];
