@@ -53,7 +53,7 @@ export default {
   },
   orders: {
     list: ({ page }) => get(`/order/find/${page}`),
-    findById: params => get('/order/findbyid', { params }),
+    findById: orderId => get(`/order/findbyid/${orderId}`),
   },
   cancel: {
     list: params => get('/cancel', { params }),

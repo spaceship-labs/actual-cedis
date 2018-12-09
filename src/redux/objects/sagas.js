@@ -3,7 +3,7 @@ import actions from './actions';
 import api from '../../services/api';
 
 export function* orderSaga(orderId) {
-  const { data: order } = yield call(api.orders.findById, { id: orderId });
+  const order = yield call(api.orders.findById, orderId);
   return order;
 }
 

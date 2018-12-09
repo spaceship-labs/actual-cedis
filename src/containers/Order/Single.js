@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import {
   Container,
   Seccion,
@@ -17,6 +19,8 @@ import {
 } from './single.style';
 import AntButton from '../../components/uielements/button';
 import { Row, Col, Icon, Select, Input } from 'antd';
+import { getOrder } from './actions';
+import selector from './selectors';
 // import antiBind from './../../components/services/utils';
 class OrderSingle extends Component {
   constructor(props) {
@@ -28,6 +32,15 @@ class OrderSingle extends Component {
       visible: false,
       showCancel: false,
     };
+  }
+  componentDidMount() {
+    const {
+      match: {
+        params: { id },
+      },
+      getOrder,
+    } = this.props;
+    getOrder(id);
   }
   stateCancel = () => {
     const { showCancel } = this.state;
@@ -48,6 +61,7 @@ class OrderSingle extends Component {
     });
   };
   render() {
+    console.log(this.props);
     const data = {
       VALOR: '017588',
       name: 'Fernando Marquez',
@@ -406,4 +420,10 @@ class OrderSingle extends Component {
   }
 }
 
-export default OrderSingle;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getOrder }, dispatch);
+
+export default connect(
+  selector,
+  mapDispatchToProps
+)(OrderSingle);

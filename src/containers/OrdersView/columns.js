@@ -81,7 +81,7 @@ const columns = [
   {
     title: 'Acceder',
     key: 'id',
-    render: object => LinkCell('Acceder', `/order/${object.id}`),
+    render: object => LinkCell('Acceder', `/dashboard/order/${object.id}`),
   },
   /*
 	{
