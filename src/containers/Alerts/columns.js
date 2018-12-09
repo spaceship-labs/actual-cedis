@@ -36,10 +36,7 @@ const columns = [
     title: 'Cliente',
     key: 'Client',
     width: 300,
-    render: object => {
-      console.log('*****', object);
-      return renderCell(object, 'TextCell', 'CardName');
-    },
+    render: object => renderCell(object, 'TextCell', 'CardName'),
     sorter: true,
   },
   {
@@ -47,7 +44,6 @@ const columns = [
     key: 'broker',
     width: 300,
     render: object => {
-      console.log(object);
       const { Broker } = object;
       const string = Broker ? Broker.Name || 'No Registrado' : 'No Aplica';
       return renderCell(string, 'TextCell');

@@ -16,8 +16,8 @@ const routes = [
     component: asyncComponent(() => import('../AuthCheck')),
   },
   {
-    path: 'requestList',
-    component: asyncComponent(() => import('../CancelRequest/CancelRequest')),
+    path: 'cancel-requests',
+    component: asyncComponent(() => import('../CancelRequestsList')),
   },
   {
     path: 'orders',

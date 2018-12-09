@@ -8,8 +8,8 @@ import OrdersViewStyled from '../../components/OrdersView';
 
 class OrdersView extends Component {
   componentDidMount() {
-    const { getOrders, page } = this.props;
-    getOrders(page);
+    const { getOrders } = this.props;
+    getOrders();
   }
 
   render() {

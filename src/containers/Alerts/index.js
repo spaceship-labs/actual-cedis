@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import columns from './columns';
 import { containerSelector } from './selectors';
 import actions from './actions';
-import CancelRequestsListStyled from '../../components/CancelRequestsList';
+import AlertsListStyled from '../../components/Alerts';
 
-class CancelRequestsList extends Component {
+class AlertsList extends Component {
   componentDidMount() {
-    const { getCancelRequests } = this.props;
-    getCancelRequests();
+    const { getAlerts } = this.props;
+    getAlerts();
   }
 
   render() {
@@ -19,7 +19,7 @@ class CancelRequestsList extends Component {
       pagination: { ...pagination, onChange: changePage },
     };
     return (
-      <CancelRequestsListStyled
+      <AlertsListStyled
         {...newProps}
         columns={columns}
         rowKey={item => `orden-${item.id}-view`}
@@ -29,11 +29,11 @@ class CancelRequestsList extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  const { changePage, getCancelRequests } = actions;
-  return bindActionCreators({ changePage, getCancelRequests }, dispatch);
+  const { changePage, getAlerts } = actions;
+  return bindActionCreators({ changePage, getAlerts }, dispatch);
 };
 
 export default connect(
   containerSelector,
   mapDispatchToProps
-)(CancelRequestsList);
+)(AlertsList);

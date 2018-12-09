@@ -56,7 +56,7 @@ export default {
     findById: orderId => get(`/order/findbyid/${orderId}`),
   },
   cancel: {
-    list: params => get('/cancel', { params }),
+    list: params => get('/cancel', params),
     create: ({ orderId, ...params }) =>
       post(`/cancel/${orderId}/order`, params),
     get: orderId => get(`/cancel/${orderId}/order`),

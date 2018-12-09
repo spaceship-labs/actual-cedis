@@ -1,20 +1,20 @@
 import { createActions } from 'ractionx';
 
-const prefix = '@actual/cedis/containers/OrdersView';
+const prefix = '@actual/cedis/containers/CancelRequestsList';
 
-export const types = [
+const types = [
   'CHANGE_PAGE',
-  'GET_ORDERS',
-  'SET_ORDERS',
+  'GET_CANCEL_REQUESTS',
+  'SET_CANCEL_REQUESTS',
   'SET_PAGE',
   'SET_TOTAL',
   'SET_PAGINATION',
 ];
 
-const {
+export const {
   changePage,
-  getOrders,
-  setOrders,
+  getCancelRequests,
+  setCancelRequests,
   setPage,
   setTotal,
   setPagination,
@@ -22,8 +22,8 @@ const {
 
 export default {
   changePage,
-  getOrders,
-  setOrders,
+  getCancelRequests,
+  setCancelRequests,
   setPage,
   setTotal,
   setPagination,

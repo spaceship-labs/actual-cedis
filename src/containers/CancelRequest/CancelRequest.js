@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import actions from './actions';
 import LayoutContentWrapper from '../../components/utility/layoutWrapper';
 import LayoutContent from '../../components/utility/layoutContent';
-import RequestContent from '../../components/requestList/RequestContent';
+import RequestContent from '../../components/CancelRequest/RequestContent';
 import {
   StatusBar,
   StatusIcon,
@@ -24,7 +24,15 @@ class CancelRequest extends Component {
     this.state = {};
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const {
+      getCancelRequest,
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    getCancelRequest(id);
+  }
 
   handleClick() {
     this.setState({});
