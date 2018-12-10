@@ -72,11 +72,21 @@ class OrderSingle extends Component {
         acc.push(cancels[item]);
         return acc;
       }, []);
-      const payload = cancelAll || details;
-      createCancelRequest(payload);
+      const {
+        match: {
+          params: { id: orderId },
+        },
+      } = this.props;
+      const payload = cancelAll ? { cancelAll } : { details };
+      createCancelRequest({ orderId, ...payload });
     } else {
       alert('Porfavor indique el motivo de la cancelacion');
     }
+  }
+
+  handleAllCancel() {
+    this.setState({ cancelAll: true });
+    this.showpopup();
   }
 
   handleItemNumber(e, index) {
@@ -170,7 +180,7 @@ class OrderSingle extends Component {
             </Row>
             <Row style={{ border: '0' }}>
               <Col span={6}>
-                <AntButton>Aceptar</AntButton>
+                <AntButton onClick={this.acceptCallback}>Aceptar</AntButton>
               </Col>
               <Col span={6}>
                 <AntButton onClick={this.handleCancel}>Cancelar</AntButton>
