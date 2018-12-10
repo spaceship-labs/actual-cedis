@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getToken } from './auth';
 
-const API_BASE = 'http://127.0.0.1:1337';
+const API_BASE = 'https://sandboxapi.miactual.com';
 
 axios.defaults.baseURL = API_BASE;
 const get = (url, params = {}) => axios.get(url, { params });
@@ -11,7 +11,7 @@ const destroy = (url, params = {}) => axios.delete(url, params);
 
 axios.interceptors.request.use(function(config) {
   const token = getToken();
-  config.headers.Authorization = `JWR ${token}`;
+  config.headers.Authorization = `JWT ${token}`;
   return config;
 });
 
