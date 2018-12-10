@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import DashApp from './dashApp';
 import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
+import dotenv from 'dotenv';
+dotenv.config();
 
 ReactDOM.render(<DashApp />, document.getElementById('root'));
 
