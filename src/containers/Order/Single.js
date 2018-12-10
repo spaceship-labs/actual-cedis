@@ -69,7 +69,7 @@ class OrderSingle extends Component {
     const { cancels, cancelAll, reason } = this.state;
     if (reason) {
       const details = Object.keys(cancels).reduce((acc, item) => {
-        acc.push(cancels[item]);
+        acc.push({ id: item, quantity: cancels[item] });
         return acc;
       }, []);
       const {
@@ -77,7 +77,7 @@ class OrderSingle extends Component {
           params: { id: orderId },
         },
       } = this.props;
-      const payload = cancelAll ? { cancelAll } : { details };
+      const payload = { cancelAll, details, reason };
       createCancelRequest({ orderId, ...payload });
     } else {
       alert('Porfavor indique el motivo de la cancelacion');
@@ -148,7 +148,7 @@ class OrderSingle extends Component {
         folio,
         createdAt,
         CardName: cardName,
-        Client: { E_Mail: email },
+        Client: { E_Mail: email, Balance: balance },
         Store: { name: storeName },
         Details: productos,
         Payments: pagos,
@@ -157,7 +157,23 @@ class OrderSingle extends Component {
         total: totalCompra,
         ammountPaid,
         Broker,
+        E_Mail: deliveryEmail,
+        Tel1: deliveryTel,
+        Cellolar: deliveryCellphone,
+        address: deliveryAddress,
+        U_Noexterior: deliveryExterior,
+        U_Nointerior: deliveryInterior,
+        U_Colonia: deliveryColonia,
+        U_Mpio: deliveryMunicipio,
+        U_Ciudad: deliveryCudad,
+        U_Estado: deliveryEstado,
+        U_CP: deliveryCP,
+        U_Entrecalle: deliveryEntrecalle,
+        U_Ycalle: deliveryYcalle,
+        U_Notes1: deliveryNotes,
+        OrdersSap: sapOrders,
       },
+      products,
     } = this.props;
     return (
       <Container>
@@ -251,7 +267,12 @@ class OrderSingle extends Component {
               </Row>
               {productos.map((item, index) => (
                 <RowItem key={item.id}>
-                  <Col span={this.state.showCancel ? 4 : 6}>{item.Product}</Col>
+                  <Col span={this.state.showCancel ? 4 : 6}>
+                    {products[item.Product].code}
+                  </Col>
+                  <Col span={this.state.showCancel ? 4 : 6}>
+                    {products[item.Product].name}
+                  </Col>
                   <Col span={this.state.showCancel ? 4 : 5}>
                     {item.quantity}
                   </Col>
@@ -386,6 +407,7 @@ class OrderSingle extends Component {
                     <br />
                     <p>
                       <strong>$</strong>
+                      {balance}
                     </p>
                   </Col>
                 </Row>
@@ -399,17 +421,17 @@ class OrderSingle extends Component {
           </h3>
           <Sap>
             <ul>
-              <li ng-repeat="orderSap in vm.order.OrdersSap">
-                <p>
-                  <strong>Factura de deudores SAP</strong>:{' '}
-                </p>
-                <p>
-                  <strong>Pagos</strong>:
-                </p>
-                <ul>
-                  <li>1015059</li>
-                </ul>
-              </li>
+              {sapOrders.map(item => (
+                <li>
+                  <p>
+                    <strong>Orden SAP:</strong> {item.document}
+                  </p>
+                  <p>
+                    <strong>Factura de deudores SAP:</strong>{' '}
+                    {`${item.invoiceSap || 'N/A'}`}
+                  </p>
+                </li>
+              ))}
             </ul>
           </Sap>
         </Seccion>
@@ -425,48 +447,62 @@ class OrderSingle extends Component {
                 <Row>
                   <Col span={12}>
                     <p>
-                      <strong>Email: </strong>{' '}
+                      <strong>Email: </strong>
+                      {` ${deliveryEmail}`}
                     </p>
                     <p>
-                      <strong>Télefono: </strong>{' '}
+                      <strong>Télefono: </strong>
+                      {` ${deliveryTel}`}
                     </p>
                     <p>
-                      <strong>Celular: </strong>{' '}
+                      <strong>Celular: </strong>
+                      {` ${deliveryCellphone}`}
                     </p>
                     <p>
-                      <strong>Calle: </strong>{' '}
+                      <strong>Calle: </strong>
+                      {` ${deliveryAddress}`}
                     </p>
                     <p>
-                      <strong>No. exterior: </strong>{' '}
+                      <strong>No. exterior: </strong>
+                      {` ${deliveryExterior}`}
                     </p>
                     <p>
-                      <strong>No. interior: </strong>{' '}
+                      <strong>No. interior: </strong>
+                      {` ${deliveryInterior}`}
                     </p>
                     <p>
-                      <strong>Colonia: </strong>{' '}
+                      <strong>Colonia: </strong>
+                      {` ${deliveryColonia}`}
                     </p>
                   </Col>
                   <Col span={12}>
                     <p>
                       <strong>Municipio: </strong>
+                      {` ${deliveryMunicipio}`}
                     </p>
                     <p>
                       <strong>Ciudad: </strong>
+                      {` ${deliveryCudad}`}
                     </p>
                     <p>
                       <strong>Estado: </strong>
+                      {` ${deliveryEstado}`}
                     </p>
                     <p>
                       <strong>C.P.: </strong>
+                      {` ${deliveryCP}`}
                     </p>
                     <p>
                       <strong>Entre calle: </strong>
+                      {` ${deliveryEntrecalle}`}
                     </p>
                     <p>
                       <strong>Y calle: </strong>
+                      {` ${deliveryYcalle}`}
                     </p>
                     <p>
                       <strong>Referencias: </strong>
+                      {` ${deliveryNotes}`}
                     </p>
                   </Col>
                 </Row>

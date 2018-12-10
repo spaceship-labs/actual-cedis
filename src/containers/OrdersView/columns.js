@@ -37,7 +37,8 @@ const columns = [
     key: 'Client',
     width: 300,
     render: object => {
-      console.log('*****', object);
+      // console.log('*****', object);
+      const a = 1;
       return renderCell(object, 'TextCell', 'CardName');
     },
     sorter: true,
