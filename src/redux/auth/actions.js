@@ -7,6 +7,7 @@ const types = [
   'LOGIN_ERROR',
   'CLEAR_SESSION',
   'SET_LOADING',
+  'CHECK_AUTHORIZATION',
 ];
 const authActions = createActions(prefix, types);
 
