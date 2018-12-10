@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+import numeral from 'numeral';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Row, Col, Icon, Select, Input } from 'antd';
 import {
   Container,
   Seccion,
@@ -18,21 +21,32 @@ import {
   StateClr,
 } from './single.style';
 import AntButton from '../../components/uielements/button';
-import { Row, Col, Icon, Select, Input } from 'antd';
-import { getOrder } from './actions';
+import { getOrder, createCancelRequest } from './actions';
 import selector from './selectors';
-// import antiBind from './../../components/services/utils';
+import { antiBind } from '../../components/services/utils';
+
+const { Option } = Select;
+
 class OrderSingle extends Component {
   constructor(props) {
     super(props);
     this.showpopup = this.showpopup.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.stateCancel = this.stateCancel.bind(this);
+    this.handleItemNumber = this.handleItemNumber.bind(this);
+    this.handleReason = this.handleReason.bind(this);
+    this.handleArticleCancel = this.handleArticleCancel.bind(this);
+    this.acceptCallback = this.acceptCallback.bind(this);
     this.state = {
       visible: false,
       showCancel: false,
+      firstLoad: true,
+      cancels: {},
+      reason: '',
+      cancelAll: false,
     };
   }
+
   componentDidMount() {
     const {
       match: {
@@ -42,76 +56,124 @@ class OrderSingle extends Component {
     } = this.props;
     getOrder(id);
   }
-  stateCancel = () => {
+
+  componentWillReceiveProps(nextProps) {
+    const { firstLoad } = this.state;
+    if (nextProps.order && firstLoad) {
+      this.setState({ firstLoad: false });
+    }
+  }
+
+  acceptCallback() {
+    const { createCancelRequest } = this.props;
+    const { cancels, cancelAll, reason } = this.state;
+    if (reason) {
+      const details = Object.keys(cancels).reduce((acc, item) => {
+        acc.push(cancels[item]);
+        return acc;
+      }, []);
+      const payload = cancelAll || details;
+      createCancelRequest(payload);
+    } else {
+      alert('Porfavor indique el motivo de la cancelacion');
+    }
+  }
+
+  handleItemNumber(e, index) {
+    const { name, value } = e.target;
+    const {
+      order: { Details: productos },
+    } = this.props;
+    const { quantity } = productos[index];
+    const { cancels } = this.state;
+    const val = Number(value) > -1 ? Number(value) : 0;
+    this.setState({
+      cancels: { ...cancels, [name]: val > quantity ? quantity : val },
+    });
+  }
+
+  handleReason(e) {
+    const {
+      target: { value },
+    } = e;
+    this.setState({ reason: value });
+  }
+
+  handleArticleCancel() {
+    // console.log('Entra al handle');
+    const { reason, cancels: details } = this.state;
+    const detailsKeys = Object.keys(details).length;
+    if (detailsKeys === 0) {
+      this.setState({ cancelAll: true });
+    }
+    this.showpopup();
+  }
+
+  stateCancel() {
     const { showCancel } = this.state;
     this.setState({
       showCancel: !showCancel,
     });
-  };
-  showpopup = () => {
+  }
+
+  showpopup() {
     this.setState({
       visible: true,
     });
-  };
+  }
 
-  handleCancel = e => {
+  handleCancel(e) {
     console.log(e);
     this.setState({
       visible: false,
     });
-  };
+  }
+
   render() {
+    const { firstLoad, reason, cancels } = this.state;
+    if (firstLoad) return null;
     console.log(this.props);
-    const data = {
-      VALOR: '017588',
-      name: 'Fernando Marquez',
-      E_Mail: 'yupit@spaceshiplabs.com',
-      Store_name: 'yupitslabs',
-    };
-    const Option = Select.Option;
-    const textarea = Input;
-    const stclr1 = 'auth';
-    const stclr2 = 'nauth';
+    const {
+      order: {
+        folio,
+        createdAt,
+        CardName: cardName,
+        Client: { E_Mail: email },
+        Store: { name: storeName },
+        Details: productos,
+        Payments: pagos,
+        subtotal,
+        discount,
+        total: totalCompra,
+        ammountPaid,
+        Broker,
+      },
+    } = this.props;
     return (
       <Container>
         <CancelBanner>
-          <p>
-            <strong>ESTATUS DE CANCELACIONES </strong>
-            <span onClick={this.showpopup}>#{data.VALOR}</span>
-            <span className="click">
-              {' '}
-              HAZ CLICK SOBRE LA ORDEN PARA VER LOS DETALLER
-            </span>
-          </p>
           <Modal
             visible={this.state.visible}
             onCancel={this.handleCancel}
             footer={null}
           >
             <p className="title-cnl">
-              <strong>DETALLE DE CANCELACIONES</strong>{' '}
-              <span>#{data.VALOR}</span>
+              <strong>DETALLE DE CANCELACIONES</strong> <span>#{folio}</span>
             </p>
             <Row>
-              <Col span={12}>
-                <p>SKU: 123456789</p>
-                <p>Cantidad: 123456789</p>
-              </Col>
-              <Col span={12}>
-                <StateClr stclr={stclr2}>
-                  {stclr2 === 'auth' ? 'Autorizado' : 'No Autorizado'}
-                </StateClr>
+              <Col>
+                <p>
+                  Porfavor, confirme que desea enviar la solicitud de
+                  cancelacion.
+                </p>
               </Col>
             </Row>
-            <Row>
-              <Col span={12}>
-                <p>SKU: 123456789</p>
-                <p>Cantidad: 123456789</p>
+            <Row style={{ border: '0' }}>
+              <Col span={6}>
+                <AntButton>Aceptar</AntButton>
               </Col>
-              <Col span={12}>
-                <StateClr stclr={stclr1}>
-                  {stclr1 === 'auth' ? 'Autorizado' : 'No Autorizado'}
-                </StateClr>
+              <Col span={6}>
+                <AntButton onClick={this.handleCancel}>Cancelar</AntButton>
               </Col>
             </Row>
           </Modal>
@@ -121,10 +183,10 @@ class OrderSingle extends Component {
             <Row>
               <Col span={8}>
                 <h3>
-                  NUMERO DE ORDEN <span>#{data.VALOR}</span>
+                  NUMERO DE ORDEN <span>{`#${folio}`}</span>
                 </h3>
               </Col>
-              <Col span={3}>22/nov/2018</Col>
+              <Col span={3}>{moment(createdAt).format('DD/MM/YYYY')}</Col>
               <Col span={5}>
                 <AntButton>IMPRIMIR RECIBO</AntButton>
               </Col>
@@ -139,16 +201,17 @@ class OrderSingle extends Component {
                 <strong>¡GRACIAS POR SU COMPRA!</strong>
               </h3>
               <p>
-                Estimado<strong> {data.name}</strong>
+                Estimado<strong>{` ${cardName}`}</strong>
               </p>
               <p>
                 Su compra ha sido procesada y en breve estará recibiendo su
                 confirmación al correo electrónico
-                <strong> {data.E_Mail}</strong>
+                <strong>{` ${email}`}</strong>
               </p>
 
               <p>
-                <strong>Tienda: </strong> {data.Store_name}
+                <strong>Tienda: </strong>
+                {` ${storeName}`}
               </p>
               {this.state.showCancel && (
                 <p className="cancelAll">
@@ -161,7 +224,7 @@ class OrderSingle extends Component {
         <Seccion>
           <h3>
             <strong>
-              <i class="icon-checkout-ticket" /> ARTÍCULOS ADQUIRIDOS
+              <i className="icon-checkout-ticket" /> ARTÍCULOS ADQUIRIDOS
             </strong>
           </h3>
           <OrderItems>
@@ -176,27 +239,31 @@ class OrderSingle extends Component {
                 {this.state.showCancel && <Col span={3} />}
                 {this.state.showCancel && <Col span={3} />}
               </Row>
-              <RowItem>
-                <Col span={this.state.showCancel ? 4 : 6}>h</Col>
-                <Col span={this.state.showCancel ? 4 : 5}>1</Col>
-                <Col span={this.state.showCancel ? 6 : 7}>21/oct/2018</Col>
-                <Col span={this.state.showCancel ? 4 : 5}>$3,0025</Col>
-                {this.state.showCancel && (
-                  <Col className="Delete-items trash" span={3}>
-                    <Icon type="delete" />
-                    <p>CANCELAR ARTICULO</p>
+              {productos.map((item, index) => (
+                <RowItem key={item.id}>
+                  <Col span={this.state.showCancel ? 4 : 6}>{item.Product}</Col>
+                  <Col span={this.state.showCancel ? 4 : 5}>
+                    {item.quantity}
                   </Col>
-                )}
-                {this.state.showCancel && (
-                  <Col className="Delete-items" span={3}>
-                    <Select defaultValue="Option1-1">
-                      <Option value="Option1-1">1</Option>
-                      <Option value="Option1-2">2</Option>
-                    </Select>
-                    <p>PIEZAS A CANCELAR</p>
+                  <Col span={this.state.showCancel ? 6 : 7}>
+                    {moment(item.shipDate).format('DD/MM/YYYY')}
                   </Col>
-                )}
-              </RowItem>
+                  <Col span={this.state.showCancel ? 4 : 5}>
+                    {numeral(item.total).format('$0,0.00')}
+                  </Col>
+                  {this.state.showCancel && (
+                    <Col className="Delete-items" span={3}>
+                      <Input
+                        type="number"
+                        name={item.id}
+                        value={cancels[item.id]}
+                        onChange={antiBind(this.handleItemNumber, index)}
+                      />
+                      <p>PIEZAS A CANCELAR</p>
+                    </Col>
+                  )}
+                </RowItem>
+              ))}
             </div>
           </OrderItems>
         </Seccion>
@@ -208,9 +275,16 @@ class OrderSingle extends Component {
               </p>
               <div className="area-cancel">
                 <div className="input-tex-area">
-                  <textarea row={8} />
+                  <textarea
+                    row={8}
+                    onChange={this.handleReason}
+                    value={reason}
+                  />
                 </div>
-                <div className="btn-send-arrow">
+                <div
+                  className="btn-send-arrow"
+                  onClick={this.handleArticleCancel}
+                >
                   <Icon type="right" />
                   <p>ENVIAR SOLICITUD DE CANCELACION</p>
                 </div>
@@ -219,18 +293,21 @@ class OrderSingle extends Component {
           )}
           <h3>
             <strong>
-              <i class="icon-metodo-pago" /> PAGOS
+              <i className="icon-metodo-pago" /> PAGOS
             </strong>
           </h3>
           <OrderPago>
-            <div class="order-block-inner">
+            <div className="order-block-inner">
               <div
-                class="order-table-header"
+                className="order-table-header"
                 layout="row"
                 layout-align="space-between start"
               >
-                <div flex class="pull-left">
-                  <strong>FORMA DE PAGO</strong>
+                <div flex className="pull-left">
+                  <p>
+                    <strong>FORMA DE PAGO</strong>
+                  </p>
+                  <p className="taxes">*Todos los montos incluyen impuestos</p>
                 </div>
                 <Row>
                   <Col span={4}>FORMA DE PAGO</Col>
@@ -240,12 +317,20 @@ class OrderSingle extends Component {
                   <Col span={4}>TERMINAL</Col>
                   <Col span={4}>MONTO COBRADO</Col>
                 </Row>
+                {pagos.map((item, index) => (
+                  <Row key={item.id}>
+                    <Col span={4}>{item.name}</Col>
+                    <Col span={4}>{moment(createdAt).format('DD/MM/YYYY')}</Col>
+                    <Col span={4}>{item.folio}</Col>
+                    <Col span={4}>{item.type}</Col>
+                    <Col span={4}>{item.type}</Col>
+                    <Col span={4}>
+                      {numeral(item.ammount).format('$0,0.00')}
+                    </Col>
+                  </Row>
+                ))}
                 <Row className="venta">
-                  <Col span={16}>
-                    <p className="taxes">
-                      *Todos los montos incluyen impuestos
-                    </p>
-                  </Col>
+                  {/* <Col span={16} /> */}
                   <Col span={4}>
                     <p>
                       <strong>SUBTOTAL COMPRA:</strong>
@@ -270,18 +355,23 @@ class OrderSingle extends Component {
                   <Col span={4}>
                     <p>
                       <strong>$</strong>
+                      {subtotal}
                     </p>
                     <p>
                       <strong>$</strong>
+                      {discount}
                     </p>
                     <p>
                       <strong>$</strong>
+                      {totalCompra}
                     </p>
                     <p>
                       <strong>$</strong>
+                      {ammountPaid}
                     </p>
                     <p>
                       <strong>$</strong>
+                      {totalCompra - ammountPaid}
                     </p>
                     <br />
                     <p>
@@ -316,7 +406,7 @@ class OrderSingle extends Component {
         <Seccion>
           <h3>
             <strong>
-              <i class="icon-envio" /> ENVÍO
+              <i className="icon-envio" /> ENVÍO
             </strong>
           </h3>
           <OrderEnvio>
@@ -392,36 +482,38 @@ class OrderSingle extends Component {
             </div>
           </OrderEnvio>
         </Seccion>
-        <Seccion>
-          <h3>
-            <strong>
-              <i class="icon-vendedor" /> ASESOR DE INTERIORES
-            </strong>
-          </h3>
-          <Asesor>
-            <div class="order-block-inner">
-              <p>
-                <strong>Nombre: </strong>
-              </p>
-              <p>
-                <strong>Teléfono: </strong>
-              </p>
-              <p>
-                <strong>Celular: </strong>
-              </p>
-              <p>
-                <strong>Email:</strong>
-              </p>
-            </div>
-          </Asesor>
-        </Seccion>
+        {Broker && (
+          <Seccion>
+            <h3>
+              <strong>
+                <i className="icon-vendedor" /> ASESOR DE INTERIORES
+              </strong>
+            </h3>
+            <Asesor>
+              <div className="order-block-inner">
+                <p>
+                  <strong>Nombre: </strong>
+                </p>
+                <p>
+                  <strong>Teléfono: </strong>
+                </p>
+                <p>
+                  <strong>Celular: </strong>
+                </p>
+                <p>
+                  <strong>Email:</strong>
+                </p>
+              </div>
+            </Asesor>
+          </Seccion>
+        )}
       </Container>
     );
   }
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getOrder }, dispatch);
+  bindActionCreators({ getOrder, createCancelRequest }, dispatch);
 
 export default connect(
   selector,
