@@ -152,25 +152,25 @@ export const CancelBanner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
   p {
     margin: 0px;
-  }
-  strong {
-    font-size: 20px;
-  }
-  span {
-    text-decoration: underline;
-    font-size: 20px;
-  }
-  .click {
-    text-decoration: none;
-    font-size: 15px;
   }
 `;
 const stateColor = {
   auth: 'green',
   nauth: 'red',
 };
+export const TxtStrong = styled.p`
+  font-weight: bold;
+`;
+export const TitleModal = styled.div`
+  text-align: center;
+`;
+export const TxtData = styled.span`
+  font-weight: normal;
+  text-decoration: underline;
+`;
 export const Modal = styled(modalCnl)`
   .title-cnl {
     text-align: center;

@@ -16,11 +16,15 @@ import {
   ReasonCancel,
   Modal,
   StateClr,
+  TxtStrong,
+  TxtData,
+  TitleModal,
 } from './single.style';
 import AntButton from '../../components/uielements/button';
 import { Row, Col, Icon, Select, Input } from 'antd';
 import { getOrder } from './actions';
 import selector from './selectors';
+import Title from 'antd/lib/skeleton/Avatar';
 // import antiBind from './../../components/services/utils';
 class OrderSingle extends Component {
   constructor(props) {
@@ -75,23 +79,21 @@ class OrderSingle extends Component {
     return (
       <Container>
         <CancelBanner>
-          <p>
-            <strong>ESTATUS DE CANCELACIONES </strong>
-            <span onClick={this.showpopup}>#{data.VALOR}</span>
-            <span className="click">
-              {' '}
-              HAZ CLICK SOBRE LA ORDEN PARA VER LOS DETALLER
-            </span>
-          </p>
+          <TxtStrong>
+            ESTATUS DE CANCELACIONES{' '}
+            <TxtData onClick={this.showpopup}>#{data.VALOR}</TxtData> HAZ CLICK
+            SOBRE LA ORDEN PARA VER LOS DETALLER
+          </TxtStrong>
           <Modal
             visible={this.state.visible}
             onCancel={this.handleCancel}
             footer={null}
           >
-            <p className="title-cnl">
-              <strong>DETALLE DE CANCELACIONES</strong>{' '}
-              <span>#{data.VALOR}</span>
-            </p>
+            <TitleModal>
+              <TxtStrong>
+                DETALLE DE CANCELACIONES <TxtData>#{data.VALOR}</TxtData>
+              </TxtStrong>
+            </TitleModal>
             <Row>
               <Col span={12}>
                 <p>SKU: 123456789</p>
