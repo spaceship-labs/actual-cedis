@@ -17,6 +17,11 @@ export function* alertsSaga(page = 1) {
   return alerts;
 }
 
+export function* productsSaga(ids) {
+  const { data: products } = yield call(api.products.list, ids);
+  return products;
+}
+
 export default function* listsSagas() {
   yield takeLatest(actions.getOrders.type, ordersSaga);
   yield takeLatest(actions.getCancels.type, cancelsSaga);

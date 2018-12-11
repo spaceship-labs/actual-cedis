@@ -5,16 +5,16 @@ import { pageSelector } from './selectors';
 
 export function* getCancelRequestsSaga() {
   const page = yield select(pageSelector);
-  const { data: cancelRequests, total } = yield call(cancelsSaga, page);
+  const { orderCancelations, total } = yield call(cancelsSaga, page);
   yield put(containerActions.setTotal(total));
-  yield put(containerActions.setCancelRequests(cancelRequests));
+  yield put(containerActions.setCancelRequests(orderCancelations));
 }
 
 export function* changePageSaga({ payload: page }) {
   yield put(containerActions.setPage(page));
 }
 
-export default function* OrdersViewSaga() {
+export default function* CancelRequestsListsSaga() {
   yield takeLatest(
     containerActions.getCancelRequests.type,
     getCancelRequestsSaga

@@ -1,5 +1,3 @@
-import React from 'react';
-// import { connect } from 'react-redux';
 import clone from 'clone';
 import {
   renderCell,
@@ -19,9 +17,8 @@ import {
 // )(DeleteCell);
 
 const statusText = {
-  paid: 'Pagado',
-  canceled: 'Cancelado',
-  partiallyCanceled: 'Parcialmente Cancelado',
+  pending: 'Pendiente',
+  reviewed: 'Revisado',
 };
 /*
 ESTE ES EL BUENO:
@@ -43,14 +40,14 @@ const columns = [
     title: 'Folio',
     key: 'folio',
     width: 300,
-    render: object => renderCell(object.Order, 'TextCell'),
+    render: object => renderCell(object.Order, 'TextCell', 'folio'),
     sorter: true,
   },
   {
     title: 'Motivos',
-    key: 'status',
+    key: 'reason',
     width: 300,
-    render: object => renderCell(object, 'TextCell'),
+    render: object => renderCell(object, 'TextCell', 'reason'),
     sorter: true,
   },
   {
@@ -62,6 +59,12 @@ const columns = [
       return renderCell(statusText[object.status], 'TextCell');
     },
     sorter: true,
+  },
+  {
+    title: 'Acceder',
+    key: 'id',
+    render: object =>
+      LinkCell('Acceder', `/dashboard/cancel-request/${object.id}`),
   },
 ];
 

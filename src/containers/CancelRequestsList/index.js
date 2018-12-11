@@ -18,6 +18,7 @@ class CancelRequestsList extends Component {
       ...this.props,
       pagination: { ...pagination, onChange: changePage },
     };
+    console.log(this.props);
     return (
       <CancelRequestsListStyled
         {...newProps}

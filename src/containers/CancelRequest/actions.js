@@ -1,6 +1,6 @@
 import { createActions } from 'ractionx';
 
-const prefix = '@actual/cedis/containers/CancelRequestsList';
+const prefix = '@actual/cedis/containers/CancelRequest';
 
 const types = [
   'GET_CANCEL_REQUEST',

@@ -63,6 +63,10 @@ export default {
     update: ({ orderId, ...params }) => put(`/cancel/${orderId}/order`, params),
   },
   alerts: {
-    list: params => get('/alert', { params }),
+    list: params => get('/alert', params),
+  },
+  products: {
+    list: ids =>
+      post('/product/multiplefindbyids', { ids, populate_fields: [] }),
   },
 };

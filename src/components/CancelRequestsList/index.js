@@ -19,7 +19,7 @@ const CancelRequestsList = props => {
   //   );
   return (
     <div>
-      <h3>Pedidos</h3>
+      <h3>Solicitudes de cancelacion</h3>
       <TableList
         onChange={getCancelRequests}
         rowKey={rowKey}

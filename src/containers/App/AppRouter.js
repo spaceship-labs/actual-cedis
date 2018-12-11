@@ -27,6 +27,10 @@ const routes = [
     path: 'order/:id',
     component: asyncComponent(() => import('../Order/Single')),
   },
+  {
+    path: 'cancel-request/:id',
+    component: asyncComponent(() => import('../CancelRequest/CancelRequest')),
+  },
 ];
 
 class AppRouter extends Component {

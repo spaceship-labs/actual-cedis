@@ -6,9 +6,9 @@ export const cancelRequestsSelector = ({
   containers: { CancelRequestsList },
 }) => CancelRequestsList.entries;
 export const containerSelector = ({ containers: { CancelRequestsList } }) => {
-  const { entries: orders, page: current, total } = CancelRequestsList;
+  const { entries: cancelRequests, page: current, total } = CancelRequestsList;
   const pagination = { total, current };
-  return { orders, pagination };
+  return { cancelRequests, pagination };
 };
 
 export default {
