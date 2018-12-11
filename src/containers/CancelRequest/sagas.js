@@ -27,15 +27,23 @@ export function* getCancelRequestSaga({ payload: cancelRequestId }) {
   );
 }
 
-export function* updateCancelRequestSaga() {
-  const status = yield select(statusSelector);
-  if (status === 'rejected' || status === 'authorized') {
-    yield call(updateCancelSaga, { requestStatus: status });
-  } else {
-    const accepted = yield select(acceptedSelector);
-    const rejected = yield select(rejectedSelector);
-    const detailApprovement = [...accepted, ...rejected];
-    yield call(updateCancelSaga, { detailApprovement });
+export function* updateCancelRequestSaga({ payload }) {
+  try {
+    const { id, requestStatus, answers } = payload;
+    const detailApprovement = Object.keys(answers).map(item => ({
+      id: item,
+      status: answers[item],
+    }));
+    const params = {
+      orderId: id,
+      requestStatus,
+      detailApprovement,
+    };
+    yield call(updateCancelSaga, params);
+    alert('Cambios guardados con exito. puede cerrar la confirmacion.');
+  } catch (err) {
+    console.log(err);
+    alert('Hubo un error al guardar los cambios, intente mas tarde.');
   }
 }
 

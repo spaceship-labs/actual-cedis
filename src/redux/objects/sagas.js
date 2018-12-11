@@ -17,9 +17,8 @@ export function* createCancelSaga(cancelData) {
   return cancelOrder;
 }
 
-export function* updateCancelSaga({ payload }) {
-  const { cancelOrderId: id, ...params } = payload;
-  const { data: cancelOrder } = yield call(api.cancel.update, { id, params });
+export function* updateCancelSaga(params) {
+  const { data: cancelOrder } = yield call(api.cancel.update, params);
   return cancelOrder;
 }
 
