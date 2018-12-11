@@ -1,17 +1,30 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import containerActions from './actions';
 import { getCancelSaga, updateCancelSaga } from '../../redux/objects/sagas';
+import { productsSaga } from '../../redux/lists/sagas';
 import {
   statusSelector,
   acceptedSelector,
   requestSelector,
   rejectedSelector,
 } from './selectors';
+import { extractKeyValues, arrayToObject } from '../../helpers/dataStructures';
 
-export function* getCancelRequestSaga(cancelRequestId) {
+export function* getCancelRequestSaga({ payload: cancelRequestId }) {
   const cancelRequest = yield call(getCancelSaga, cancelRequestId);
+  const prodsIds = yield call(
+    extractKeyValues,
+    cancelRequest.Details,
+    'Product',
+    false
+  );
+  const Details = yield call(arrayToObject, cancelRequest.Details, 'id');
+  const prods = yield call(productsSaga, prodsIds);
+  const products = yield call(arrayToObject, prods, 'id');
 
-  yield put(containerActions.setCancelRequest(cancelRequest));
+  yield put(
+    containerActions.setCancelRequest({ ...cancelRequest, Details, products })
+  );
 }
 
 export function* updateCancelRequestSaga() {

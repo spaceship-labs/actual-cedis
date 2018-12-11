@@ -8,7 +8,7 @@ export function* orderSaga(orderId) {
 }
 
 export function* getCancelSaga(cancelId) {
-  const { data: cancelOrder } = yield call(api.cancel.get, { id: cancelId });
+  const { data: cancelOrder } = yield call(api.cancel.get, cancelId);
   return cancelOrder;
 }
 

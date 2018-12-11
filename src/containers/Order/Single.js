@@ -23,7 +23,7 @@ import {
 import AntButton from '../../components/uielements/button';
 import { getOrder, createCancelRequest } from './actions';
 import selector from './selectors';
-import { antiBind } from '../../components/services/utils';
+import { antiBind } from '../../helpers/utils';
 
 const { Option } = Select;
 
@@ -149,7 +149,7 @@ class OrderSingle extends Component {
         createdAt,
         CardName: cardName,
         Client: { E_Mail: email, Balance: balance },
-        Store: { name: storeName },
+        // Store: { name: storeName },
         Details: productos,
         Payments: pagos,
         subtotal,
@@ -160,7 +160,7 @@ class OrderSingle extends Component {
         E_Mail: deliveryEmail,
         Tel1: deliveryTel,
         Cellolar: deliveryCellphone,
-        address: deliveryAddress,
+        // address: deliveryAddress,
         U_Noexterior: deliveryExterior,
         U_Nointerior: deliveryInterior,
         U_Colonia: deliveryColonia,
@@ -175,6 +175,9 @@ class OrderSingle extends Component {
       },
       products,
     } = this.props;
+    const { order } = this.props;
+    const storeName = order.Store ? order.Store.name : '';
+    const { address: deliveryAddress = '' } = order;
     return (
       <Container>
         <CancelBanner>
