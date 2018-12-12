@@ -1,5 +1,5 @@
 import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import actions from './actions';
 import api from '../../services/api';
 import { logout as authLogout } from '../../services/auth';
@@ -16,6 +16,7 @@ function* onLogin(action) {
 }
 
 function* onLoginSuccess(action) {
+  console.log('Login SAGA');
   yield localStorage.setItem('id_token', action.payload.token);
   yield put(push('/dashboard'));
 }
