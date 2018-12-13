@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Row } from 'antd';
-import { RequestIcon, RequestH3 } from './request.style';
-import Trash from '../../image/favicon.png';
+import { StatusIcon, StatusH3 } from './CancelRequest.style';
 import Autorizado from './Autorizado';
 import Cancelado from './Cancelado';
+import Transfer from '../../image/svgs/transfer.svg';
 
 export default class Regresar extends Component {
   constructor(props) {
@@ -18,15 +18,17 @@ export default class Regresar extends Component {
         <div>
           <Cancelado rechazado={rechazado} />
           <Autorizado autorizado={autorizado} />
+          <br />
           <Row type="flex" justify="end" onClick={goBack}>
-            <RequestIcon
-              src={Trash}
-              alt="trash"
-              width="20px"
-              height="20px"
+            <StatusIcon
+              src={Transfer}
+              alt="transfer"
+              width="30px"
+              height="30px"
               margin="0px 24px 0px 0px"
+              cursor="pointer"
             />
-            <RequestH3
+            <StatusH3
               cursor="pointer"
               weight="normal"
               align="right"
@@ -34,9 +36,10 @@ export default class Regresar extends Component {
               color="lightgrey"
               transform="uppercase"
               font="12px"
+              lheight="2.5"
             >
               <strong>Regresar</strong>
-            </RequestH3>
+            </StatusH3>
           </Row>
         </div>
       );

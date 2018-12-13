@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
-import { RequestIcon, RequestP } from './request.style';
-import Trash from '../../image/favicon.png';
+import { StatusIcon, StatusP } from './CancelRequest.style';
+import Autorizar from '../../image/svgs/autorizar.svg';
+import Trash from '../../image/svgs/trash.svg';
 
 export default class Option extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.state = {};
-  }
-
-  handleClick() {
-    this.setState({});
   }
 
   render() {
@@ -21,47 +17,48 @@ export default class Option extends Component {
         <Row>
           <Col span={12} onClick={handleClickAprove}>
             <Row type="flex" justify="center">
-              <RequestIcon
+              <StatusIcon
                 cursor="pointer"
-                src={Trash}
-                alt="trash"
-                width="20px"
-                height="20px"
+                src={Autorizar}
+                alt="authorize"
+                width="30px"
+                height="30px"
                 margin="0px 0px 0px 0px"
               />
             </Row>
-            <RequestP
+            <StatusP
               cursor="pointer"
               font="8px"
               align="center"
-              color="green"
+              color="#33BA2C"
               space="normal"
               transform="uppercase"
+              padding="0px 5px"
             >
               <strong>Autorizar Cancelación</strong>
-            </RequestP>
+            </StatusP>
           </Col>
           <Col span={12} onClick={handleClickDenied}>
             <Row type="flex" justify="center">
-              <RequestIcon
+              <StatusIcon
                 cursor="pointer"
                 src={Trash}
-                alt="trash"
-                width="20px"
-                height="20px"
+                alt="cancel"
+                width="30px"
+                height="30px"
                 margin="0px 0px 0px 0px"
               />
             </Row>
-            <RequestP
+            <StatusP
               cursor="pointer"
               font="8px"
               align="center"
-              color="red"
+              color="#C82828"
               space="normal"
               transform="uppercase"
             >
               <strong>No Autorizar Cancelación</strong>
-            </RequestP>
+            </StatusP>
           </Col>
         </Row>
       );
