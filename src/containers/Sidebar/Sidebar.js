@@ -12,6 +12,7 @@ import appActions from '../../redux/app/actions';
 import Logo from '../../components/utility/logo';
 import themes from '../../settings/themes';
 import { themeConfig } from '../../settings';
+import { Icon } from 'antd';
 
 const SubMenu = Menu.SubMenu;
 const { Sider } = Layout;
@@ -108,7 +109,7 @@ class Sidebar extends Component {
       <Menu.Item key={key}>
         <Link to={`/dashboard/${key}`}>
           <span className="isoMenuHolder" style={submenuColor}>
-            <i className={leftIcon} />
+            <Icon type={leftIcon} />
             <span className="nav-text">
               <IntlMessages id={label} />
             </span>

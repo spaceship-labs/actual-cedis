@@ -8,14 +8,6 @@ const routes = [
     component: asyncComponent(() => import('../dashboard')),
   },
   {
-    path: 'blankPage',
-    component: asyncComponent(() => import('../blankPage')),
-  },
-  {
-    path: 'authCheck',
-    component: asyncComponent(() => import('../AuthCheck')),
-  },
-  {
     path: 'cancel-requests',
     component: asyncComponent(() => import('../CancelRequestsList')),
   },

@@ -33,18 +33,6 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
           path={'/'}
           component={asyncComponent(() => import('./containers/Login'))}
         />
-        <Route
-          exact
-          path={'/OrderSingle'}
-          component={asyncComponent(() => import('./containers/Order/index'))}
-        />
-        <Route
-          exact
-          path={'/requestList'}
-          component={asyncComponent(() =>
-            import('./containers/CancelRequest/CancelRequest')
-          )}
-        />
         <RestrictedRoute
           path="/dashboard"
           component={App}
