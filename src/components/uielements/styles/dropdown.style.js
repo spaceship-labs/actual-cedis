@@ -16,7 +16,8 @@ const DropdownWrapper = ComponentName => styled(ComponentName)`
     }
 
     &.ant-btn-group .ant-btn + .ant-btn {
-      margin: ${props => (props['data-rtl'] === 'rtl' ? '0 -1px 0 0' : '0 0 0 -1px')};
+      margin: ${props =>
+        props['data-rtl'] === 'rtl' ? '0 -1px 0 0' : '0 0 0 -1px'};
     }
   }
 

@@ -3,11 +3,11 @@ import { jwtConfig } from '../settings';
 const customHeader = () => ({
   'Content-Type': 'application/json',
   Accept: 'application/json',
-  Authorization: 'Bearer ' + localStorage.getItem('id_token') || undefined,
+  Authorization: `Bearer ${localStorage.getItem('id_token')}` || undefined,
 });
 
-const base = (method, url, data = {}) => {
-  return fetch(`${jwtConfig.fetchUrl}${url}`, {
+const base = (method, url, data = {}) =>
+  fetch(`${jwtConfig.fetchUrl}${url}`, {
     method,
     headers: customHeader(),
     body: JSON.stringify(data),
@@ -15,7 +15,6 @@ const base = (method, url, data = {}) => {
     .then(response => response.json())
     .then(res => res)
     .catch(error => ({ error: 'Server Error' }));
-};
 
 const SuperFetch = {};
 ['get', 'post', 'put', 'delete'].forEach(method => {

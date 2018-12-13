@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import clone from 'clone';
 import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
+import { Icon } from 'antd';
 import options from './options';
 import Scrollbars from '../../components/utility/customScrollBar.js';
 import Menu from '../../components/uielements/menu';
@@ -12,7 +13,6 @@ import appActions from '../../redux/app/actions';
 import Logo from '../../components/utility/logo';
 import themes from '../../settings/themes';
 import { themeConfig } from '../../settings';
-import { Icon } from 'antd';
 
 const SubMenu = Menu.SubMenu;
 const { Sider } = Layout;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CardReactFormContainer from 'card-react';
-import Form from '../uielements/form';
 import { Input } from 'antd';
+import Form from '../uielements/form';
 import isoModal from '../feedback/modal';
 import './card.css';
 import { CardInfoWrapper, InfoFormWrapper } from './cardModal.style';

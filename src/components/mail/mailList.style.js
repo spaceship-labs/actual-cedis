@@ -73,7 +73,8 @@ const MailListWrapper = styled.div`
 
     .isoMailInfo {
       width: 100%;
-      padding: ${props => (props['data-rtl'] === 'rtl' ? '0 20px 0 0' : '0 0 0 20px')};
+      padding: ${props =>
+        props['data-rtl'] === 'rtl' ? '0 20px 0 0' : '0 0 0 20px'};
 
       .infoHead {
         width: 100%;

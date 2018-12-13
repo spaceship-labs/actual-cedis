@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { InputSearch } from '../uielements/input';
+
 export default class extends Component {
   componentDidMount() {
     setTimeout(() => {
@@ -8,6 +9,7 @@ export default class extends Component {
       } catch (e) {}
     }, 200);
   }
+
   render() {
     return (
       <InputSearch

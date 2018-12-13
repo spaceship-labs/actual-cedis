@@ -29,7 +29,8 @@ const MailTagsList = styled.ul`
       width: 10px;
       height: 10px;
       display: flex;
-      margin: ${props => (props['data-rtl'] === 'rtl' ? '0 5px 0 0' : '0 0 0 5px')};
+      margin: ${props =>
+        props['data-rtl'] === 'rtl' ? '0 5px 0 0' : '0 0 0 5px'};
       ${borderRadius('50%')};
     }
 
@@ -39,7 +40,8 @@ const MailTagsList = styled.ul`
       color: ${palette('secondary', 2)};
       cursor: pointer;
       line-height: 1.1;
-      margin: ${props => (props['data-rtl'] === 'rtl' ? '0 20px 0 0' : '0 0 0 20px')};
+      margin: ${props =>
+        props['data-rtl'] === 'rtl' ? '0 20px 0 0' : '0 0 0 20px'};
       ${transition()};
     }
 

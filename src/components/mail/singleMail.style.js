@@ -49,7 +49,8 @@ const WDSingleMailHeader = styled.div`
     line-height: 25px;
     background-color: ${palette('primary', 0)};
     text-transform: capitalize;
-    margin: ${props => (props['data-rtl'] === 'rtl' ? '0 25px 0 0' : '0 0 0 25px')};
+    margin: ${props =>
+      props['data-rtl'] === 'rtl' ? '0 25px 0 0' : '0 0 0 25px'};
   }
 `;
 
@@ -99,7 +100,8 @@ const WDSingleMailInfo = styled.div`
 
   .isoMailAddress {
     width: 100%;
-    padding: ${props => (props['data-rtl'] === 'rtl' ? '0 20px 0 0' : '0 0 0 20px')};
+    padding: ${props =>
+      props['data-rtl'] === 'rtl' ? '0 20px 0 0' : '0 0 0 20px'};
     display: flex;
     flex-direction: column;
     text-align: ${props => (props['data-rtl'] === 'rtl' ? 'right' : 'left')};
@@ -216,7 +218,8 @@ const WDSingleMailReply = styled.div`
       font-size: inherit;
       color: ${palette('text', 2)};
       text-decoration: underline;
-      padding: ${props => (props['data-rtl'] === 'rtl' ? '0 3px 0 0' : '0 0 0 3px')};
+      padding: ${props =>
+        props['data-rtl'] === 'rtl' ? '0 3px 0 0' : '0 0 0 3px'};
       cursor: pointer;
       ${transition()};
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Row, Modal as modalCnl } from 'antd';
+
 export const Container = styled.div`
   padding-left: 6%;
   padding-right: 60px;

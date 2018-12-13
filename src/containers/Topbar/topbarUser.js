@@ -17,9 +17,11 @@ class TopbarUser extends Component {
       visible: false,
     };
   }
+
   hide() {
     this.setState({ visible: false });
   }
+
   handleVisibleChange() {
     this.setState({ visible: !this.state.visible });
   }
@@ -48,7 +50,7 @@ class TopbarUser extends Component {
         trigger="click"
         visible={this.state.visible}
         onVisibleChange={this.handleVisibleChange}
-        arrowPointAtCenter={true}
+        arrowPointAtCenter
         placement="bottomLeft"
       >
         <div className="isoImgWrapper">

@@ -9,15 +9,18 @@ export default class extends Component {
     this.handleVisibleChange = this.handleVisibleChange.bind(this);
     this.hide = this.hide.bind(this);
     this.state = {
-      visible: false
+      visible: false,
     };
   }
+
   hide() {
     this.setState({ visible: false });
   }
+
   handleVisibleChange() {
     this.setState({ visible: !this.state.visible });
   }
+
   render() {
     const { colors, seectedColor, changeColor } = this.props;
     const content = () => (
@@ -28,7 +31,7 @@ export default class extends Component {
             changeColor(index);
           };
           const style = {
-            background: color
+            background: color,
           };
           return <Button key={index} onClick={onClick} style={style} />;
         })}

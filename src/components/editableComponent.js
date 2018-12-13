@@ -13,16 +13,19 @@ export default class EditableComponent extends Component {
       editable: false,
     };
   }
+
   handleChange(event) {
     const value = event.target.value;
     this.setState({ value });
   }
+
   check() {
     this.setState({ editable: false });
     if (this.props.onChange) {
       this.props.onChange(this.props.itemKey, this.state.value);
     }
   }
+
   edit() {
     this.setState({ editable: true });
   }

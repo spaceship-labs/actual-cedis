@@ -12,29 +12,29 @@ const demoMassage = [
     name: 'David Doe',
     time: '3 minutes ago',
     massage:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner'
+      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
   },
   {
     id: 2,
     name: 'Navis Doe',
     time: '4 minutes ago',
     massage:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner'
+      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
   },
   {
     id: 3,
     name: 'Emanual Doe',
     time: '5 minutes ago',
     massage:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner'
+      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
   },
   {
     id: 4,
     name: 'Dowain Doe',
     time: '6 minutes ago',
     massage:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner'
-  }
+      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
+  },
 ];
 
 class TopbarMessage extends Component {
@@ -43,15 +43,18 @@ class TopbarMessage extends Component {
     this.handleVisibleChange = this.handleVisibleChange.bind(this);
     this.hide = this.hide.bind(this);
     this.state = {
-      visible: false
+      visible: false,
     };
   }
+
   hide() {
     this.setState({ visible: false });
   }
+
   handleVisibleChange() {
     this.setState({ visible: !this.state.visible });
   }
+
   render() {
     const { customizedTheme } = this.props;
     const content = (
@@ -105,5 +108,5 @@ class TopbarMessage extends Component {
 
 export default connect(state => ({
   ...state.App,
-  customizedTheme: state.ThemeSwitcher.topbarTheme
+  customizedTheme: state.ThemeSwitcher.topbarTheme,
 }))(TopbarMessage);

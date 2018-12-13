@@ -1,22 +1,5 @@
-import React from 'react';
-// import { connect } from 'react-redux';
 import clone from 'clone';
-import {
-  renderCell,
-  LinkCell,
-  // DeleteCell
-} from '../../components/TableList/helperCells';
-// import actions from './actions';
-
-// const deleteCellDispatcher = (dispatch, ownProps) => ({
-// 		onDeleteCell: () => dispatch(actions.deleteEntry(ownProps.id))
-// 	});
-
-// const selectorCellDispatcher = props => ({});
-// const DeleteCellWrapper = connect(
-//   selectorCellDispatcher,
-//   deleteCellDispatcher
-// )(DeleteCell);
+import { renderCell, LinkCell } from '../../components/TableList/helperCells';
 
 const statusText = {
   paid: 'Pagado',
@@ -36,11 +19,7 @@ const columns = [
     title: 'Cliente',
     key: 'Client',
     width: 300,
-    render: object => {
-      // console.log('*****', object);
-      const a = 1;
-      return renderCell(object, 'TextCell', 'CardName');
-    },
+    render: object => renderCell(object, 'TextCell', 'CardName'),
     sorter: true,
   },
   {
@@ -88,15 +67,6 @@ const columns = [
     key: 'id',
     render: object => LinkCell('Acceder', `/dashboard/order/${object.id}`),
   },
-  /*
-	{
-		title: 'Eliminar',
-		key: 'delete',
-		render: object => {
-			return <DeleteCellWrapper id={object.id} />
-		}
-	}	
-	*/
 ];
 
 export default clone(columns);

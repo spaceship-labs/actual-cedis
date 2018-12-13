@@ -10,7 +10,6 @@ import appActions from '../../redux/app/actions';
 import Sidebar from '../Sidebar/Sidebar';
 import Topbar from '../Topbar/Topbar';
 import AppRouter from './AppRouter';
-import { siteConfig } from '../../settings';
 import themes from '../../settings/themes';
 import { themeConfig } from '../../settings';
 import AppHolder from './commonStyle';

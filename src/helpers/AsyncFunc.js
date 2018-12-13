@@ -9,22 +9,25 @@ export default function asyncComponent(importComponent) {
     constructor(props) {
       super(props);
       this.state = {
-        component: null
+        component: null,
       };
     }
+
     componentWillMount() {
       Nprogress.start();
     }
+
     componentWillUnmount() {
       this.mounted = false;
     }
+
     async componentDidMount() {
       this.mounted = true;
       const { default: Component } = await importComponent();
       Nprogress.done();
       if (this.mounted) {
         this.setState({
-          component: <Component {...this.props} />
+          component: <Component {...this.props} />,
         });
       }
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import MailTagsList from './mailTags.style';
+
 const tags = [
   'Friend',
   'Family',

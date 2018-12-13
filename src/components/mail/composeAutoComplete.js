@@ -22,25 +22,25 @@ export default class extends Component {
   }
 
   handleDelete(i) {
-    let tags = this.state.tags;
+    const tags = this.state.tags;
     tags.splice(i, 1);
-    this.setState({ tags: tags });
+    this.setState({ tags });
   }
 
   handleAddition(tag) {
-    let tags = this.state.tags;
+    const tags = this.state.tags;
     tags.push({
       id: tags.length + 1,
       text: tag,
     });
-    this.setState({ tags: tags });
+    this.setState({ tags });
   }
 
   handleDrag(tag, currPos, newPos) {
-    let tags = this.state.tags;
+    const tags = this.state.tags;
     tags.splice(currPos, 1);
     tags.splice(newPos, 0, tag);
-    this.setState({ tags: tags });
+    this.setState({ tags });
   }
 
   render() {

@@ -6,7 +6,7 @@ import FilterDropdown from './filterDropdown';
 
 const DateCell = data => <p>{data.toLocaleString()}</p>;
 const ImageCell = src => <ImageCellView src={src} />;
-const LinkCell = (link, href) => <a href={href ? href : '#'}>{link}</a>;
+const LinkCell = (link, href) => <a href={href || '#'}>{link}</a>;
 const TextCell = text => <p>{text}</p>;
 
 export {
@@ -16,5 +16,5 @@ export {
   TextCell,
   EditableCell,
   DeleteCell,
-  FilterDropdown
+  FilterDropdown,
 };

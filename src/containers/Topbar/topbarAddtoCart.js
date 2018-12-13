@@ -10,7 +10,7 @@ import TopbarDropdownWrapper from './topbarDropdown.style';
 const {
   initData,
   changeViewTopbarCart,
-  changeProductQuantity
+  changeProductQuantity,
 } = ecommerceAction;
 let totalPrice;
 class TopbarAddtoCart extends Component {
@@ -22,18 +22,22 @@ class TopbarAddtoCart extends Component {
     this.changeQuantity = this.changeQuantity.bind(this);
     this.cancelQuantity = this.cancelQuantity.bind(this);
   }
+
   hide() {
     this.props.changeViewTopbarCart(false);
   }
+
   handleVisibleChange() {
     this.props.changeViewTopbarCart(!this.props.viewTopbarCart);
   }
+
   componentDidMount() {
     const { loadingInitData, initData } = this.props;
     if (!loadingInitData) {
       initData();
     }
   }
+
   renderProducts() {
     const { productQuantity, products } = this.props;
     totalPrice = 0;
@@ -57,6 +61,7 @@ class TopbarAddtoCart extends Component {
       );
     });
   }
+
   changeQuantity(objectID, quantity) {
     const { productQuantity } = this.props;
     const newProductQuantity = [];
@@ -66,12 +71,13 @@ class TopbarAddtoCart extends Component {
       } else {
         newProductQuantity.push({
           objectID,
-          quantity
+          quantity,
         });
       }
     });
     this.props.changeProductQuantity(newProductQuantity);
   }
+
   cancelQuantity(objectID) {
     const { productQuantity } = this.props;
     const newProductQuantity = [];
@@ -88,7 +94,7 @@ class TopbarAddtoCart extends Component {
       url,
       productQuantity,
       viewTopbarCart,
-      customizedTheme
+      customizedTheme,
     } = this.props;
     const content = (
       <TopbarDropdownWrapper className="topbarAddtoCart">
@@ -138,11 +144,14 @@ class TopbarAddtoCart extends Component {
 function mapStateToProps(state) {
   return {
     ...state.Ecommerce,
-    customizedTheme: state.ThemeSwitcher.topbarTheme
+    customizedTheme: state.ThemeSwitcher.topbarTheme,
   };
 }
-export default connect(mapStateToProps, {
-  initData,
-  changeViewTopbarCart,
-  changeProductQuantity
-})(TopbarAddtoCart);
+export default connect(
+  mapStateToProps,
+  {
+    initData,
+    changeViewTopbarCart,
+    changeProductQuantity,
+  }
+)(TopbarAddtoCart);

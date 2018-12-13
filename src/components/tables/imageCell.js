@@ -12,18 +12,21 @@ export default class ImageCell extends Component {
       ready: false,
     };
   }
+
   componentWillMount() {
     this.loadImage(this.props.src);
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.src !== this.props.src) {
       this.setState({ src: null });
       this.loadImage(nextProps.src);
     }
   }
+
   loadImage(src) {
     if (ReadyPool[src]) {
-      this.setState({ src: src });
+      this.setState({ src });
       return;
     }
 
@@ -44,14 +47,16 @@ export default class ImageCell extends Component {
     };
     img.src = src;
   }
+
   onLoadImage(src) {
     ReadyPool[src] = true;
     if (src === this.props.src) {
       this.setState({
-        src: src,
+        src,
       });
     }
   }
+
   render() {
     const style = this.state.src
       ? {

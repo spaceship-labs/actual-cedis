@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import IntlMessages from '../utility/intlMessages';
 import { InputSearch } from '../uielements/input';
 import DeleteButton from './deleteButton';
-import { PropTypes } from 'prop-types';
 import { ContactListWrapper } from './contactList.style';
 import Scrollbar from '../utility/customScrollBar';
 
@@ -22,6 +22,7 @@ export default class ContactList extends Component {
       search: '',
     };
   }
+
   singleContact(contact) {
     const { seectedId, deleteContact, changeContact } = this.props;
     const activeClass = seectedId === contact.id ? 'active' : '';
@@ -42,9 +43,11 @@ export default class ContactList extends Component {
       </div>
     );
   }
+
   onChange(event) {
     this.setState({ search: event.target.value });
   }
+
   render() {
     const { search } = this.state;
     const contacts = filterContacts(this.props.contacts, search);

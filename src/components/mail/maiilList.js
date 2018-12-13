@@ -23,7 +23,7 @@ export default function mailList(
       splitLet: recpName
         .match(/\b(\w)/g)
         .join('')
-        .split('', 2)
+        .split('', 2),
     };
     const activeClass = isSelected ? 'activeMail' : '';
     const unreadClass = !mail.read ? 'unreadMail' : '';
@@ -39,11 +39,9 @@ export default function mailList(
         <span
           className="isoLabelIndicator"
           style={
-            rtl === 'rtl' ? (
-              { borderRightColor: tagOption }
-            ) : (
-              { borderTopColor: tagOption }
-            )
+            rtl === 'rtl'
+              ? { borderRightColor: tagOption }
+              : { borderTopColor: tagOption }
           }
         />
         <div className="isoRecipentsImg">

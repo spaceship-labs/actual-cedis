@@ -13,7 +13,6 @@ export default class extends Component {
 
   render() {
     const { toggle, handleClickAY, handleClickAN } = this.props;
-    const { test } = this.state;
     if (toggle === true) {
       return (
         <RequestPop width="100px" height="auto">

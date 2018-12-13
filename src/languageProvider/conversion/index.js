@@ -6,18 +6,18 @@ import arab from './raw/arab.js';
 import english from './raw/eng.js';
 
 export function getKeys(object) {
-  let keys = [];
-  let variables = [];
+  const keys = [];
+  const variables = [];
   let text = '';
   Object.keys(object).forEach(key => {
     keys.push(key);
     variables.push(object[key]);
-    text += object[key] + '\n';
+    text += `${object[key]}\n`;
   });
   // getValues(keys);
   return {
     keys,
-    variables
+    variables,
   };
 }
 export function getValues(enMessages) {

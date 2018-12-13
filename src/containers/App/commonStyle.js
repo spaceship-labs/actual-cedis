@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { palette } from "styled-theme";
+import styled from 'styled-components';
+import { palette } from 'styled-theme';
 
 const AppHolder = styled.div`
   .trigger {
@@ -11,7 +11,7 @@ const AppHolder = styled.div`
   }
 
   .trigger:hover {
-    color: ${palette("primary", 0)};
+    color: ${palette('primary', 0)};
   }
 
   .ant-layout-sider-collapsed .anticon {
@@ -23,7 +23,7 @@ const AppHolder = styled.div`
   }
 
   .ant-layout {
-    background: ${palette("secondary", 1)};
+    background: ${palette('secondary', 1)};
 
     &.isoContentMainLayout {
       overflow: auto;
@@ -44,7 +44,7 @@ const AppHolder = styled.div`
     width: 100%;
     padding: 35px;
     background-color: #ffffff;
-    border: 1px solid ${palette("border", 0)};
+    border: 1px solid ${palette('border', 0)};
     height: 100%;
   }
 

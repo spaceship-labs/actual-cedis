@@ -3,8 +3,8 @@ import { palette } from 'styled-theme';
 import { transition, borderRadius, boxShadow } from '../../settings/style-util';
 
 const ComposeAutoCompleteStyleWrapper = styled.div`
-  .ReactTags__{
-    &tags{
+  .ReactTags__ {
+    &tags {
       min-height: 36px;
       width: 100%;
       position: relative;
@@ -14,12 +14,12 @@ const ComposeAutoCompleteStyleWrapper = styled.div`
       ${borderRadius('3px')};
     }
 
-    &selected{
+    &selected {
       width: 100%;
       padding: 4px 0;
     }
 
-    &tag{
+    &tag {
       font-size: 13px;
       font-weight: 400;
       line-height: 1;
@@ -38,7 +38,7 @@ const ComposeAutoCompleteStyleWrapper = styled.div`
       ${borderRadius('3px')};
     }
 
-    &remove{
+    &remove {
       background: none;
       background-color: transparent;
       border: 0;
@@ -54,21 +54,22 @@ const ComposeAutoCompleteStyleWrapper = styled.div`
       cursor: pointer;
       ${transition()};
 
-      &:hover{
+      &:hover {
         color: ${palette('text', 3)};
       }
     }
 
-    &tagInput{
+    &tagInput {
       width: 100%;
       display: inline;
 
-      &Field{
+      &Field {
         font-size: 14px;
         font-weight: 400;
         color: ${palette('text', 0)};
         line-height: inherit;
-        text-align: ${props => (props['data-rtl'] === 'rtl' ? 'right' : 'left')};
+        text-align: ${props =>
+          props['data-rtl'] === 'rtl' ? 'right' : 'left'};
         height: 22px;
         min-width: 240px;
         padding: 0;
@@ -78,27 +79,31 @@ const ComposeAutoCompleteStyleWrapper = styled.div`
         background-color: transparent;
 
         &::-webkit-input-placeholder {
-          text-align: ${props => (props['data-rtl'] === 'rtl' ? 'right' : 'left')};
+          text-align: ${props =>
+            props['data-rtl'] === 'rtl' ? 'right' : 'left'};
           color: ${palette('grayscale', 0)};
         }
 
         &:-moz-placeholder {
-          text-align: ${props => (props['data-rtl'] === 'rtl' ? 'right' : 'left')};
+          text-align: ${props =>
+            props['data-rtl'] === 'rtl' ? 'right' : 'left'};
           color: ${palette('grayscale', 0)};
         }
 
         &::-moz-placeholder {
-          text-align: ${props => (props['data-rtl'] === 'rtl' ? 'right' : 'left')};
+          text-align: ${props =>
+            props['data-rtl'] === 'rtl' ? 'right' : 'left'};
           color: ${palette('grayscale', 0)};
         }
         &:-ms-input-placeholder {
-          text-align: ${props => (props['data-rtl'] === 'rtl' ? 'right' : 'left')};
+          text-align: ${props =>
+            props['data-rtl'] === 'rtl' ? 'right' : 'left'};
           color: ${palette('grayscale', 0)};
         }
       }
     }
 
-    &suggestions{
+    &suggestions {
       z-index: 999;
       display: -webkit-flex;
       display: -ms-flex;
@@ -117,7 +122,7 @@ const ComposeAutoCompleteStyleWrapper = styled.div`
       ${borderRadius()};
       ${boxShadow('0 2px 4px rgba(0,0,0,0.2)')};
 
-      li{
+      li {
         font-size: 14px;
         font-weight: 400;
         color: ${palette('text', 0)};
@@ -129,7 +134,7 @@ const ComposeAutoCompleteStyleWrapper = styled.div`
         cursor: pointer;
         ${transition()};
 
-        &:hover{
+        &:hover {
           background-color: ${palette('grayscale', 3)};
         }
 
@@ -139,7 +144,7 @@ const ComposeAutoCompleteStyleWrapper = styled.div`
       }
     }
 
-    &activeSuggestion{
+    &activeSuggestion {
       background-color: ${palette('grayscale', 3)};
     }
   }

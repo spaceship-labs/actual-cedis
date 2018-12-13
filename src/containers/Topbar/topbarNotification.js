@@ -9,26 +9,26 @@ const demoNotifications = [
     id: 1,
     name: 'David Doe',
     notification:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner'
+      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
   },
   {
     id: 2,
     name: 'Navis Doe',
     notification:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner'
+      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
   },
   {
     id: 3,
     name: 'Emanual Doe',
     notification:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner'
+      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
   },
   {
     id: 4,
     name: 'Dowain Doe',
     notification:
-      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner'
-  }
+      'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner',
+  },
 ];
 
 class TopbarNotification extends Component {
@@ -37,15 +37,18 @@ class TopbarNotification extends Component {
     this.handleVisibleChange = this.handleVisibleChange.bind(this);
     this.hide = this.hide.bind(this);
     this.state = {
-      visible: false
+      visible: false,
     };
   }
+
   hide() {
     this.setState({ visible: false });
   }
+
   handleVisibleChange() {
     this.setState({ visible: !this.state.visible });
   }
+
   render() {
     const { customizedTheme } = this.props;
     const content = (
@@ -90,5 +93,5 @@ class TopbarNotification extends Component {
 
 export default connect(state => ({
   ...state.App,
-  customizedTheme: state.ThemeSwitcher.topbarTheme
+  customizedTheme: state.ThemeSwitcher.topbarTheme,
 }))(TopbarNotification);

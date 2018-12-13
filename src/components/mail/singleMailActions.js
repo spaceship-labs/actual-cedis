@@ -9,7 +9,7 @@ import {
   MailActionsWrapper,
   MailCategoryWrapper,
   MailPaginationWrapper,
-  MailActionDropdown
+  MailActionDropdown,
 } from './singleMailActions.style';
 import { rtl } from '../../settings/withDirection';
 
@@ -17,7 +17,7 @@ class DeleteButton extends Component {
   render() {
     return (
       <Popconfirm
-        title={`Sure to delete This mail?`}
+        title="Sure to delete This mail?"
         okText="DELETE"
         cancelText="No"
         onConfirm={() => {
@@ -47,7 +47,7 @@ class MoveMailButton extends Component {
     const content = <MailActionDropdown>{bucketOptions}</MailActionDropdown>;
     return (
       <Popover
-        title={`Move mail`}
+        title="Move mail"
         content={content}
         overlayClassName="mailMoveDropdown"
       >
@@ -74,7 +74,7 @@ class SelectTagButton extends Component {
     const content = <MailActionDropdown>{tagOptions}</MailActionDropdown>;
     return (
       <Popover
-        title={`Select tag`}
+        title="Select tag"
         content={content}
         overlayClassName="mailMoveDropdown"
       >
