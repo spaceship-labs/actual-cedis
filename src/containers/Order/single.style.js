@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { Row, Modal as modalCnl } from 'antd';
+import { Row, Col, Modal as modalCnl, Button } from 'antd';
 export const Container = styled.div`
   padding-left: 6%;
   padding-right: 60px;
   padding-top: 15px;
-  margin: 80px auto;
+  margin: 40px auto;
   width: 100%;
   background: white;
 `;
@@ -13,78 +13,44 @@ export const Seccion = styled.div`
   border-bottom: 1px solid #000;
   margin: 10px 0;
 `;
+
+export const BtnPrint = styled(Button)`
+  font-size: 20px;
+  background: #3dad1b !important;
+  border-style: none !important;
+  width: 100%;
+`;
+export const BtnCancel = styled(Button)`
+  font-size: 20px;
+  background: red !important;
+  border-style: none !important;
+  width: 100%;
+`;
+export const CancelAll = styled.div`
+  color: red;
+  text-align: right;
+  text-decoration: underline;
+  align-content: center;
+`;
 export const Order = styled.div`
-  .ant-row h3,
-  .ant-btn {
-    font-size: 20px;
-    margin: 20px 15px;
-  }
-  .ant-col-3 {
-    margin: 25px 0px;
-  }
-  .ant-row h3 span {
-    text-decoration: underline;
-  }
+  height: 10%;
+  justify-content: center;
+  align-items: center;
+
   .ant-row {
     background: #eaecef;
   }
-  .ant-btn {
-    background: #3dad1b;
-  }
-  .ant-btn span {
-    color: white;
-  }
-  .ant-btn:hover,
-  .ant-btn:focus.ant-btn:hover,
-  .ant-btn:focus {
-    background: #3dad1b;
-    border-color: #46c61f;
-  }
-  .ant-btn:hover,
-  .ant-btn:focus span {
-    color: white;
-  }
-  .ant-btn::selection {
-    background: #3dad1b;
-    border-color: #46c61f;
-  }
-  .ant-btn::selection span {
-    color: white;
-  }
-  .Btn-cancel {
-    font-size: 13px;
-    background: red;
-  }
-  .Btn-cancel:hover,
-  .Btn-cancel:focus.Btn-cancel:hover,
-  .Btn-cancel:focus {
-    background: red;
-    border-color: #46c61f;
-  }
-  .Btn-cancel:hover,
-  .Btn-cancel:focus span {
-    color: white;
-  }
-  .Btn-cancel::selection {
-    background: red;
-    border-color: #46c61f;
-  }
-  .Btn-cancel::selection span {
-    color: white;
-  }
-  .ant-btn::selection span {
-    color: white;
-  }
+`;
 
-  .text-fact {
-    font-size: 13px;
-    float: right;
-    margin-right: 15px;
-  }
-  .cancelAll {
-    color: red;
-    text-align: right;
-    text-decoration: underline;
+export const ColBtn = styled(Col)`
+  align-content: center;
+  height: 40px;
+  h3,
+  span,
+  .ant-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 export const OrderTextBlock = styled.div`
@@ -146,31 +112,32 @@ export const Asesor = styled.div`
 `;
 export const CancelBanner = styled.div`
   width: 100%;
-  height: 40px;
+  height: 15%;
+  text-align: center;
   background: #bf0101;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
   p {
     margin: 0px;
   }
-  strong {
-    font-size: 20px;
-  }
-  span {
-    text-decoration: underline;
-    font-size: 20px;
-  }
-  .click {
-    text-decoration: none;
-    font-size: 15px;
-  }
 `;
 const stateColor = {
-  auth: 'green',
-  nauth: 'red',
+  true: 'green',
+  false: 'red',
 };
+export const TxtStrong = styled.p`
+  font-weight: bold;
+`;
+export const TitleModal = styled.div`
+  text-align: center;
+`;
+export const TxtData = styled.span`
+  font-weight: normal;
+  text-decoration: underline;
+`;
 export const Modal = styled(modalCnl)`
   .title-cnl {
     text-align: center;
@@ -184,7 +151,7 @@ export const Modal = styled(modalCnl)`
 export const StateClr = styled.p`
   text-align: right;
   margin-right: 20px;
-  color: ${({ stclr }) => stateColor[stclr]};
+  color: ${({ auth }) => stateColor[auth]};
 `;
 export const RowItem = styled(Row)`
   margin: 25px 0px;

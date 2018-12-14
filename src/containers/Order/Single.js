@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import {
   Container,
   Seccion,
-  Order,
-  OrderTextBlock,
   OrderItems,
   OrderPago,
   OrderEnvio,
@@ -15,39 +13,28 @@ import {
   RowItem,
   ReasonCancel,
   Modal,
-  StateClr,
+  TxtStrong,
+  TxtData,
 } from './single.style';
-import AntButton from '../../components/uielements/button';
 import { Row, Col, Icon, Select, Input } from 'antd';
 import { getOrder } from './actions';
 import selector from './selectors';
+// import Title from 'antd/lib/skeleton/Avatar';
+import OrderModal from './../../components/SingleOrder/modal';
+import { modaldata, dataorder } from './fakeData';
+import CnlActiv from './../../components/SingleOrder/cnlAct';
 // import antiBind from './../../components/services/utils';
 class OrderSingle extends Component {
   constructor(props) {
     super(props);
     this.showpopup = this.showpopup.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
-    this.stateCancel = this.stateCancel.bind(this);
     this.state = {
       visible: false,
       showCancel: false,
     };
   }
-  componentDidMount() {
-    const {
-      match: {
-        params: { id },
-      },
-      getOrder,
-    } = this.props;
-    getOrder(id);
-  }
-  stateCancel = () => {
-    const { showCancel } = this.state;
-    this.setState({
-      showCancel: !showCancel,
-    });
-  };
+
   showpopup = () => {
     this.setState({
       visible: true,
@@ -61,7 +48,7 @@ class OrderSingle extends Component {
     });
   };
   render() {
-    console.log(this.props);
+    console.log('modal data', modaldata);
     const data = {
       VALOR: '017588',
       name: 'Fernando Marquez',
@@ -70,93 +57,25 @@ class OrderSingle extends Component {
     };
     const Option = Select.Option;
     const textarea = Input;
-    const stclr1 = 'auth';
-    const stclr2 = 'nauth';
+
     return (
       <Container>
         <CancelBanner>
-          <p>
-            <strong>ESTATUS DE CANCELACIONES </strong>
-            <span onClick={this.showpopup}>#{data.VALOR}</span>
-            <span className="click">
-              {' '}
-              HAZ CLICK SOBRE LA ORDEN PARA VER LOS DETALLER
-            </span>
-          </p>
+          <TxtStrong>
+            ESTATUS DE CANCELACIONES{' '}
+            <TxtData onClick={this.showpopup}>#{data.VALOR}</TxtData> HAZ CLICK
+            SOBRE LA ORDEN PARA VER LOS DETALLES
+          </TxtStrong>
           <Modal
             visible={this.state.visible}
             onCancel={this.handleCancel}
             footer={null}
           >
-            <p className="title-cnl">
-              <strong>DETALLE DE CANCELACIONES</strong>{' '}
-              <span>#{data.VALOR}</span>
-            </p>
-            <Row>
-              <Col span={12}>
-                <p>SKU: 123456789</p>
-                <p>Cantidad: 123456789</p>
-              </Col>
-              <Col span={12}>
-                <StateClr stclr={stclr2}>
-                  {stclr2 === 'auth' ? 'Autorizado' : 'No Autorizado'}
-                </StateClr>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
-                <p>SKU: 123456789</p>
-                <p>Cantidad: 123456789</p>
-              </Col>
-              <Col span={12}>
-                <StateClr stclr={stclr1}>
-                  {stclr1 === 'auth' ? 'Autorizado' : 'No Autorizado'}
-                </StateClr>
-              </Col>
-            </Row>
+            <OrderModal modaldata={modaldata} order={data.VALOR} />
           </Modal>
         </CancelBanner>
         <Seccion>
-          <Order>
-            <Row>
-              <Col span={8}>
-                <h3>
-                  NUMERO DE ORDEN <span>#{data.VALOR}</span>
-                </h3>
-              </Col>
-              <Col span={3}>22/nov/2018</Col>
-              <Col span={5}>
-                <AntButton>IMPRIMIR RECIBO</AntButton>
-              </Col>
-              <Col span={6}>
-                <AntButton onClick={this.stateCancel} className="Btn-cancel">
-                  CREAR SOLICITUD DE CANCELACION
-                </AntButton>
-              </Col>
-            </Row>
-            <OrderTextBlock>
-              <h3>
-                <strong>¡GRACIAS POR SU COMPRA!</strong>
-              </h3>
-              <p>
-                Estimado<strong> {data.name}</strong>
-              </p>
-              <p>
-                Su compra ha sido procesada y en breve estará recibiendo su
-                confirmación al correo electrónico
-                <strong> {data.E_Mail}</strong>
-              </p>
-
-              <p>
-                <strong>Tienda: </strong> {data.Store_name}
-              </p>
-              {this.state.showCancel && (
-                <p className="cancelAll">
-                  <strong>CANCELAR TODA LA ORDEN</strong>
-                </p>
-              )}
-            </OrderTextBlock>
-          </Order>
+          <CnlActiv />
         </Seccion>
         <Seccion>
           <h3>
@@ -223,13 +142,9 @@ class OrderSingle extends Component {
             </strong>
           </h3>
           <OrderPago>
-            <div class="order-block-inner">
-              <div
-                class="order-table-header"
-                layout="row"
-                layout-align="space-between start"
-              >
-                <div flex class="pull-left">
+            <div>
+              <div>
+                <div>
                   <strong>FORMA DE PAGO</strong>
                 </div>
                 <Row>
@@ -299,7 +214,7 @@ class OrderSingle extends Component {
           </h3>
           <Sap>
             <ul>
-              <li ng-repeat="orderSap in vm.order.OrdersSap">
+              <li>
                 <p>
                   <strong>Factura de deudores SAP</strong>:{' '}
                 </p>
@@ -399,7 +314,7 @@ class OrderSingle extends Component {
             </strong>
           </h3>
           <Asesor>
-            <div class="order-block-inner">
+            <div>
               <p>
                 <strong>Nombre: </strong>
               </p>
