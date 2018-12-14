@@ -1,7 +1,7 @@
 import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
+import api from 'services/api';
 import actions from './actions';
-import api from '../../services/api';
 import { logout as authLogout } from '../../services/auth';
 
 function* onLogin(action) {
