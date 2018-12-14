@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import { Row, Button } from 'antd';
-import { RequestPop, RequestH3 } from './request.style';
+import { StatusPop, StatusH3, ItemCol } from './CancelRequest.style';
 
 export default class extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      test: null,
-    };
+    this.state = {};
   }
 
   render() {
     const { toogle, handleClickAY, handleClickAN } = this.props;
-    const { test } = this.state;
     if (toogle === true) {
       return (
-        <RequestPop width="100px" height="auto">
-          <div className="request-bar-item flex column">
+        <StatusPop width="100px" height="auto">
+          <ItemCol>
             <Row type="flex">
-              <RequestH3
+              <StatusH3
                 font="18px"
                 color="black"
                 weight="bold"
@@ -28,23 +25,22 @@ export default class extends Component {
                 align="center"
               >
                 ¿Esta seguro que desea aprobar la siguiente operación?
-                {test}
-              </RequestH3>
+              </StatusH3>
             </Row>
             <Row type="flex" justify="center">
-              <div className="flex row center">
+              <Row type="flex" justify="center">
                 <Button type="danger" size="large" onClick={handleClickAN}>
                   Cancelar
                 </Button>
-              </div>
-              <div className="flex row center">
+              </Row>
+              <Row type="flex" justify="center">
                 <Button type="primary" size="large" onClick={handleClickAY}>
                   Aceptar
                 </Button>
-              </div>
+              </Row>
             </Row>
-          </div>
-        </RequestPop>
+          </ItemCol>
+        </StatusPop>
       );
     }
     return <div />;
