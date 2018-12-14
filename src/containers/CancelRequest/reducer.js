@@ -1,4 +1,10 @@
-import actions from './actions';
+import {
+  setCancelRequest,
+  setAccepted,
+  setRejected,
+  resetState,
+  setStatus,
+} from './actions';
 
 const initialState = {
   request: {},
@@ -9,15 +15,15 @@ const initialState = {
 
 export default function(state = initialState, { type, payload }) {
   switch (type) {
-    case actions.setCancelRequest.type:
+    case setCancelRequest.type:
       return { ...state, request: { ...payload } };
-    case actions.setAccepted.type:
+    case setAccepted.type:
       return { ...state, accepted: [...payload] };
-    case actions.setRejected.type:
+    case setRejected.type:
       return { ...state, rejected: [...payload] };
-    case actions.resetState.type:
+    case resetState.type:
       return initialState;
-    case actions.setStatus.type:
+    case setStatus.type:
       return { ...state, status: payload };
     default:
       return state;

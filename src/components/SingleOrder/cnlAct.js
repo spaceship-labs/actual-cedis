@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Row } from 'antd';
 import {
   Order,
   OrderTextBlock,
@@ -8,9 +9,8 @@ import {
   TxtData,
   CancelAll,
   ColBtn,
-} from './../../containers/Order/single.style';
-import { Row, Col } from 'antd';
-import AntButton from '../uielements/button';
+} from '../../containers/Order/single.style';
+
 class CnlActiv extends Component {
   constructor(props) {
     super(props);
@@ -19,9 +19,8 @@ class CnlActiv extends Component {
       showCancel: false,
     };
   }
-  componentDidMount() {
-    const dataorder = this.props;
-  }
+  componentDidMount() {}
+
   stateCancel = () => {
     const { showCancel } = this.state;
     this.setState({
@@ -30,18 +29,19 @@ class CnlActiv extends Component {
   };
   render() {
     const data = {
-      VALOR: '017588',
+      folio: '017588',
       name: 'Fernando Marquez',
       E_Mail: 'yupit@spaceshiplabs.com',
       Store_name: 'yupitslabs',
     };
+    const { showCancel } = this.state;
     return (
       <div>
         <Order>
           <Row gutter={16}>
             <ColBtn xs={12} sm={12} md={12} lg={7} xl={7}>
               <h3>
-                NUMERO DE ORDEN <TxtData>#{data.VALOR}</TxtData>
+                NUMERO DE ORDEN <TxtData>#{data.folio}</TxtData>
               </h3>
             </ColBtn>
             <ColBtn xs={12} sm={12} md={12} lg={3} xl={3}>
@@ -72,7 +72,7 @@ class CnlActiv extends Component {
             <p>
               <strong>Tienda: </strong> {data.Store_name}
             </p>
-            {this.state.showCancel && (
+            {showCancel && (
               <TxtStrong>
                 <CancelAll>CANCELAR TODA LA ORDEN</CancelAll>
               </TxtStrong>

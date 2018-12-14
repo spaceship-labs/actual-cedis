@@ -1,5 +1,4 @@
 module.exports = function(api) {
-  console.log('FUNCAA');
   const presets = ['react-app'];
   const plugins = [
     [

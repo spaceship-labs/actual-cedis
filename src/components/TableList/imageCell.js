@@ -9,21 +9,38 @@ export default class ImageCell extends Component {
     this.loadImage = this.loadImage.bind(this);
     this.onLoadImage = this.onLoadImage.bind(this);
     this.state = {
+      // eslint-disable-next-line
       ready: false,
     };
   }
+
   componentWillMount() {
-    this.loadImage(this.props.src);
+    const { src } = this.props;
+    this.loadImage(src);
   }
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.src !== this.props.src) {
+    const { src } = this.props;
+    const { src: nextSrc } = nextProps;
+    if (nextSrc !== src) {
       this.setState({ src: null });
-      this.loadImage(nextProps.src);
+      this.loadImage(nextSrc);
     }
   }
+
+  onLoadImage(src) {
+    ReadyPool[src] = true;
+    const { src: propsSrc } = this.props;
+    if (src === propsSrc) {
+      this.setState({
+        src,
+      });
+    }
+  }
+
   loadImage(src) {
     if (ReadyPool[src]) {
-      this.setState({ src: src });
+      this.setState({ src });
       return;
     }
 
@@ -40,22 +57,17 @@ export default class ImageCell extends Component {
       });
       delete PendingPool[src];
       img.onload = null;
+      // eslint-disable-next-line
       src = undefined;
     };
     img.src = src;
   }
-  onLoadImage(src) {
-    ReadyPool[src] = true;
-    if (src === this.props.src) {
-      this.setState({
-        src: src,
-      });
-    }
-  }
+
   render() {
-    const style = this.state.src
+    const { src } = this.state;
+    const style = src
       ? {
-          backgroundImage: `url(${this.state.src})`,
+          backgroundImage: `url(${src})`,
           width: '70px',
           height: '70px',
           backgroundSize: 'cover',

@@ -1,4 +1,4 @@
-import actions from './actions';
+import { setCancelRequests, setPage, setTotal } from './actions';
 
 const initialState = {
   page: 1,
@@ -8,11 +8,11 @@ const initialState = {
 
 export default function(state = initialState, { type, payload }) {
   switch (type) {
-    case actions.setCancelRequests.type:
+    case setCancelRequests.type:
       return { ...state, entries: [...payload] };
-    case actions.setPage.type:
+    case setPage.type:
       return { ...state, page: payload };
-    case actions.setTotal.type:
+    case setTotal.type:
       return { ...state, total: payload };
     default:
       return state;
