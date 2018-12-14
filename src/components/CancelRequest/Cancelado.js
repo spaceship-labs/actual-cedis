@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { Row } from 'antd';
-import { StatusIcon, StatusH3 } from './CancelRequest.style';
-import Cancelar from '../../image/svgs/cancelar.svg';
+
+import { RequestIcon, RequestH3 } from './request.style';
+import Trash from '../../image/favicon.png';
 
 export default class Cancelado extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {};
+  }
+
+  handleClick() {
+    this.setState({});
   }
 
   render() {
@@ -14,24 +20,23 @@ export default class Cancelado extends Component {
     if (rechazado === true) {
       return (
         <Row type="flex" justify="end">
-          <StatusIcon
-            src={Cancelar}
-            alt="cancelar"
-            width="30px"
-            height="30px"
+          <RequestIcon
+            src={Trash}
+            alt="trash"
+            width="20px"
+            height="20px"
             margin="0px 14px 0px 0px"
           />
-          <StatusH3
+          <RequestH3
             weight="normal"
             align="right"
             margin="0px 0px 5px 0px"
-            color="#C82828"
+            color="red"
             transform="uppercase"
             font="12px"
-            lheight="2.5"
           >
             <strong>Cancelado</strong>
-          </StatusH3>
+          </RequestH3>
         </Row>
       );
     }

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { Row } from 'antd';
-import { StatusIcon, StatusH3 } from './CancelRequest.style';
-import Autorizar from '../../image/svgs/autorizar.svg';
+import Trash from '../../image/favicon.png';
+import { RequestIcon, RequestH3 } from './request.style';
 
 export default class Autorizado extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {};
+  }
+
+  handleClick() {
+    this.setState({});
   }
 
   render() {
@@ -14,25 +19,23 @@ export default class Autorizado extends Component {
     if (autorizado === true) {
       return (
         <Row type="flex" justify="end">
-          <StatusIcon
-            src={Autorizar}
+          <RequestIcon
+            src={Trash}
             alt="trash"
-            width="30px"
-            height="30px"
+            width="20px"
+            height="20px"
             margin="0px 10px 0px 0px"
           />
-          <StatusH3
+          <RequestH3
             weight="normal"
             align="right"
             margin="0px 0px 5px 0px"
-            color="#33BA2Cs"
+            color="lightgreen"
             transform="uppercase"
             font="12px"
-            lheight="2.5"
-            cursor="pointer"
           >
             <strong>Autorizado</strong>
-          </StatusH3>
+          </RequestH3>
         </Row>
       );
     }

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import {
-  StatusContent,
-  StatusIcon,
-  StatusSpan,
-  StatusH3,
-  StatusP,
-} from './CancelRequest.style';
+  RequestContent,
+  RequestIcon,
+  RequestSpan,
+  RequestH3,
+  RequestP,
+} from './request.style';
 import Trash from '../../image/favicon.png';
 import RequestConfirmAprove from './RequestConfirmAprove';
 import RequestConfirmDenied from './RequestConfirmDenied';
@@ -14,7 +14,7 @@ import Option from './Option';
 import Regresar from './Regresar';
 
 const Item = ({ description }) => (
-  <StatusH3 weight="bolder">{description.id}</StatusH3>
+  <RequestH3 weight="bolder">{description}</RequestH3>
 );
 
 Item.defaultProps = {
@@ -22,9 +22,9 @@ Item.defaultProps = {
 };
 
 const Codigo = ({ code }) => (
-  <StatusP weight="bolder">
-    Codigo: <StatusSpan weight="lighter">{code}</StatusSpan>
-  </StatusP>
+  <RequestP weight="bolder">
+    Codigo: <RequestSpan weight="lighter">{code}</RequestSpan>
+  </RequestP>
 );
 
 Codigo.defaultProps = {
@@ -32,9 +32,9 @@ Codigo.defaultProps = {
 };
 
 const Color = ({ color }) => (
-  <StatusP weight="bolder">
-    Color: <StatusSpan weight="lighter">{color}</StatusSpan>
-  </StatusP>
+  <RequestP weight="bolder">
+    Color: <RequestSpan weight="lighter">{color}</RequestSpan>
+  </RequestP>
 );
 
 Color.defaultProps = {
@@ -42,9 +42,9 @@ Color.defaultProps = {
 };
 
 const Cantidad = ({ quantity }) => (
-  <StatusP weight="normal" align="right" margin="0px">
+  <RequestP weight="normal" align="right" margin="0px">
     {quantity}
-  </StatusP>
+  </RequestP>
 );
 
 Cantidad.defaultProps = {
@@ -52,9 +52,9 @@ Cantidad.defaultProps = {
 };
 
 const Entrega = ({ delivery }) => (
-  <StatusP weight="normal" align="right" margin="0px">
+  <RequestP weight="normal" align="right" margin="0px">
     {delivery}
-  </StatusP>
+  </RequestP>
 );
 
 Entrega.defaultProps = {
@@ -62,9 +62,9 @@ Entrega.defaultProps = {
 };
 
 const Precio = ({ price }) => (
-  <StatusP weight="normal" align="right" margin="0px">
+  <RequestP weight="normal" align="right" margin="0px">
     {price}
-  </StatusP>
+  </RequestP>
 );
 
 Precio.defaultProps = {
@@ -147,26 +147,26 @@ export default class extends Component {
     } = this.state;
     return (
       <div>
-        <StatusContent>
+        <RequestContent>
           <hr />
           <Row type="flex">
-            <StatusIcon
+            <RequestIcon
               src={Trash}
               alt="trash"
               width="20px"
               height="20px"
               margin="0px 10px 0px 0px"
             />
-            <StatusH3 transform="uppercase" weight="bolder">
+            <RequestH3 transform="uppercase" weight="bolder">
               Articulos Adquiridos
-            </StatusH3>
+            </RequestH3>
           </Row>
           <Row>
             <Col md={6} lg={10}>
               <div className="flex column end">
                 <Item description={description} />
                 <Row type="flex">
-                  <StatusIcon
+                  <RequestIcon
                     src={Trash}
                     alt="trash"
                     width="20px"
@@ -184,40 +184,40 @@ export default class extends Component {
               <Row>
                 <Col span={5}>
                   <div className="flex column">
-                    <StatusP
+                    <RequestP
                       weight="bold"
                       align="right"
                       margin="0px 0px 28px 0px"
                       transform="uppercase"
                     >
                       Cantidad
-                    </StatusP>
+                    </RequestP>
                     <Cantidad quantity={quantity} />
                   </div>
                 </Col>
                 <Col span={11}>
                   <div className="flex column">
-                    <StatusP
+                    <RequestP
                       weight="bold"
                       align="right"
                       margin="0px 0px 28px 0px"
                       transform="uppercase"
                     >
                       Entrega aproximada
-                    </StatusP>
+                    </RequestP>
                     <Entrega delivery={delivery} />
                   </div>
                 </Col>
                 <Col span={8}>
                   <div className="flex column">
-                    <StatusP
+                    <RequestP
                       weight="bold"
                       align="right"
                       margin="0px 0px 28px 0px"
                       transform="uppercase"
                     >
                       Precio
-                    </StatusP>
+                    </RequestP>
                     <Precio price={price} />
                   </div>
                 </Col>
@@ -239,7 +239,7 @@ export default class extends Component {
               </div>
             </Col>
           </Row>
-        </StatusContent>
+        </RequestContent>
         <RequestConfirmAprove
           toogle={toogleConfirmA}
           handleClickAN={this.handleClickAN}
