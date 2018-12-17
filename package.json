@@ -95,7 +95,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "lint": "eslint '**/*.{js,jsx}' --quiet"
+    "lint": "eslint . --ext js,jsx --quiet"
   },
   "browserslist": [
     ">0.2%",
