@@ -1,22 +1,5 @@
-import React from 'react';
-// import { connect } from 'react-redux';
 import clone from 'clone';
-import {
-  renderCell,
-  LinkCell,
-  // DeleteCell
-} from '../../components/TableList/helperCells';
-// import actions from './actions';
-
-// const deleteCellDispatcher = (dispatch, ownProps) => ({
-// 		onDeleteCell: () => dispatch(actions.deleteEntry(ownProps.id))
-// 	});
-
-// const selectorCellDispatcher = props => ({});
-// const DeleteCellWrapper = connect(
-//   selectorCellDispatcher,
-//   deleteCellDispatcher
-// )(DeleteCell);
+import { renderCell, LinkCell } from '../../components/TableList/helperCells';
 
 const statusText = {
   paid: 'Pagado',
@@ -36,10 +19,7 @@ const columns = [
     title: 'Cliente',
     key: 'Client',
     width: 300,
-    render: object => {
-      console.log('*****', object);
-      return renderCell(object, 'TextCell', 'CardName');
-    },
+    render: object => renderCell(object, 'TextCell', 'CardName'),
     sorter: true,
   },
   {
@@ -47,7 +27,6 @@ const columns = [
     key: 'broker',
     width: 300,
     render: object => {
-      console.log(object);
       const { Broker } = object;
       const string = Broker ? Broker.Name || 'No Registrado' : 'No Aplica';
       return renderCell(string, 'TextCell');

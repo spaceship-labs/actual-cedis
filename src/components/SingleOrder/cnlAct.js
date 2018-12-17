@@ -19,6 +19,7 @@ class CnlActiv extends Component {
       showCancel: false,
     };
   }
+
   componentDidMount() {}
 
   stateCancel = () => {
@@ -27,6 +28,7 @@ class CnlActiv extends Component {
       showCancel: !showCancel,
     });
   };
+
   render() {
     const data = {
       folio: '017588',

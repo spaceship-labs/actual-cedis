@@ -10,7 +10,6 @@ import appActions from '../../redux/app/actions';
 import Sidebar from '../Sidebar/Sidebar';
 import Topbar from '../Topbar/Topbar';
 import AppRouter from './AppRouter';
-import { siteConfig } from '../../settings';
 import themes from '../../settings/themes';
 import { themeConfig } from '../../settings';
 import AppHolder from './commonStyle';
@@ -24,7 +23,7 @@ const { toggleAll } = appActions;
 export class App extends Component {
   render() {
     const { url } = this.props.match;
-    const { height } = this.props;
+    const { height, toggleAll } = this.props;
     const appHeight = window.innerHeight;
     return (
       <ThemeProvider theme={themes[themeConfig.theme]}>
@@ -33,10 +32,7 @@ export class App extends Component {
             <Debounce time="1000" handler="onResize">
               <WindowResizeListener
                 onResize={windowSize =>
-                  this.props.toggleAll(
-                    windowSize.windowWidth,
-                    windowSize.windowHeight
-                  )
+                  toggleAll(windowSize.windowWidth, windowSize.windowHeight)
                 }
               />
             </Debounce>

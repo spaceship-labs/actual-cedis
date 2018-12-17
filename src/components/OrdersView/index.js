@@ -2,7 +2,6 @@ import React from 'react';
 import TableList from '../TableList';
 
 const OrdersView = props => {
-  console.log(props);
   const { getOrders, pagination, loading, orders, columns, rowKey } = props;
   // if (!loading)
   //   return (

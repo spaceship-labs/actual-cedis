@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Row, Col, Icon, Select, Input } from 'antd';
 import {
   Container,
   Seccion,
@@ -16,13 +17,12 @@ import {
   TxtStrong,
   TxtData,
 } from './single.style';
-import { Row, Col, Icon, Select, Input } from 'antd';
 import { getOrder } from './actions';
 import selector from './selectors';
 // import Title from 'antd/lib/skeleton/Avatar';
-import OrderModal from './../../components/SingleOrder/modal';
-import { modaldata, dataorder } from './fakeData';
-import CnlActiv from './../../components/SingleOrder/cnlAct';
+import OrderModal from '../../components/SingleOrder/modal';
+import { modaldata } from './fakeData';
+import CnlActiv from '../../components/SingleOrder/cnlAct';
 // import antiBind from './../../components/services/utils';
 class OrderSingle extends Component {
   constructor(props) {
@@ -41,22 +41,22 @@ class OrderSingle extends Component {
     });
   };
 
-  handleCancel = e => {
-    console.log(e);
+  handleCancel = () => {
     this.setState({
       visible: false,
     });
   };
+
   render() {
-    console.log('modal data', modaldata);
     const data = {
       VALOR: '017588',
       name: 'Fernando Marquez',
       E_Mail: 'yupit@spaceshiplabs.com',
       Store_name: 'yupitslabs',
     };
-    const Option = Select.Option;
+    const { Option } = Select;
     const textarea = Input;
+    const { visible, showCancel } = this.state;
 
     return (
       <Container>
@@ -66,11 +66,7 @@ class OrderSingle extends Component {
             <TxtData onClick={this.showpopup}>#{data.VALOR}</TxtData> HAZ CLICK
             SOBRE LA ORDEN PARA VER LOS DETALLES
           </TxtStrong>
-          <Modal
-            visible={this.state.visible}
-            onCancel={this.handleCancel}
-            footer={null}
-          >
+          <Modal visible={visible} onCancel={this.handleCancel} footer={null}>
             <OrderModal modaldata={modaldata} order={data.VALOR} />
           </Modal>
         </CancelBanner>
@@ -80,33 +76,31 @@ class OrderSingle extends Component {
         <Seccion>
           <h3>
             <strong>
-              <i class="icon-checkout-ticket" /> ARTÍCULOS ADQUIRIDOS
+              <i className="icon-checkout-ticket" /> ARTÍCULOS ADQUIRIDOS
             </strong>
           </h3>
           <OrderItems>
             <div>
               <Row>
-                <Col span={this.state.showCancel ? 4 : 6}>Articulo</Col>
-                <Col span={this.state.showCancel ? 4 : 5}>CANTIDAD</Col>
-                <Col span={this.state.showCancel ? 6 : 7}>
-                  ENTREGA APROXIMADA
-                </Col>
-                <Col span={this.state.showCancel ? 4 : 5}>PRECIO</Col>
-                {this.state.showCancel && <Col span={3} />}
-                {this.state.showCancel && <Col span={3} />}
+                <Col span={showCancel ? 4 : 6}>Articulo</Col>
+                <Col span={showCancel ? 4 : 5}>CANTIDAD</Col>
+                <Col span={showCancel ? 6 : 7}>ENTREGA APROXIMADA</Col>
+                <Col span={showCancel ? 4 : 5}>PRECIO</Col>
+                {showCancel && <Col span={3} />}
+                {showCancel && <Col span={3} />}
               </Row>
               <RowItem>
-                <Col span={this.state.showCancel ? 4 : 6}>h</Col>
-                <Col span={this.state.showCancel ? 4 : 5}>1</Col>
-                <Col span={this.state.showCancel ? 6 : 7}>21/oct/2018</Col>
-                <Col span={this.state.showCancel ? 4 : 5}>$3,0025</Col>
-                {this.state.showCancel && (
+                <Col span={showCancel ? 4 : 6}>h</Col>
+                <Col span={showCancel ? 4 : 5}>1</Col>
+                <Col span={showCancel ? 6 : 7}>21/oct/2018</Col>
+                <Col span={showCancel ? 4 : 5}>$3,0025</Col>
+                {showCancel && (
                   <Col className="Delete-items trash" span={3}>
                     <Icon type="delete" />
                     <p>CANCELAR ARTICULO</p>
                   </Col>
                 )}
-                {this.state.showCancel && (
+                {showCancel && (
                   <Col className="Delete-items" span={3}>
                     <Select defaultValue="Option1-1">
                       <Option value="Option1-1">1</Option>
@@ -120,7 +114,7 @@ class OrderSingle extends Component {
           </OrderItems>
         </Seccion>
         <Seccion>
-          {this.state.showCancel && (
+          {showCancel && (
             <ReasonCancel>
               <p>
                 <strong>MOTIVO DE CANCELACION: </strong>
@@ -138,7 +132,7 @@ class OrderSingle extends Component {
           )}
           <h3>
             <strong>
-              <i class="icon-metodo-pago" /> PAGOS
+              <i className="icon-metodo-pago" /> PAGOS
             </strong>
           </h3>
           <OrderPago>
@@ -231,7 +225,7 @@ class OrderSingle extends Component {
         <Seccion>
           <h3>
             <strong>
-              <i class="icon-envio" /> ENVÍO
+              <i className="icon-envio" /> ENVÍO
             </strong>
           </h3>
           <OrderEnvio>
@@ -310,7 +304,7 @@ class OrderSingle extends Component {
         <Seccion>
           <h3>
             <strong>
-              <i class="icon-vendedor" /> ASESOR DE INTERIORES
+              <i className="icon-vendedor" /> ASESOR DE INTERIORES
             </strong>
           </h3>
           <Asesor>

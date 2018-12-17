@@ -1,8 +1,8 @@
 import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import api from 'services/api';
-import actions from './actions';
 import { logout as authLogout } from 'services/auth';
+import actions from './actions';
 
 function* onLogin(action) {
   try {
@@ -20,7 +20,7 @@ function* onLoginSuccess(action) {
   yield put(push('/dashboard'));
 }
 
-function* onLoginError() {}
+function* onLoginError() {} // eslint-disable-line
 
 function* onLogout() {
   yield authLogout();

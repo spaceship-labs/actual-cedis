@@ -239,7 +239,7 @@ const SidebarWrapper = styled.div`
         display: none;
       }
 
-      .ant-menu-submenu-inline >  {
+      .ant-menu-submenu-inline > {
         .ant-menu-submenu-title:after {
           display: none;
         }

@@ -1,4 +1,5 @@
 import { createActions } from 'ractionx';
+
 const prefix = '@actual/auth';
 const types = [
   'LOGIN',

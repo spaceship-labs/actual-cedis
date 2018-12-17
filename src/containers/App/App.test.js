@@ -1,10 +1,11 @@
-import AppRouter from './AppRouter';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import Adapter from 'enzyme-adapter-react-16';
+import AppRouter from './AppRouter';
+
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 

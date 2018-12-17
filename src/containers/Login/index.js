@@ -15,19 +15,19 @@ class SignIn extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (
-      this.props.isLoggedIn !== nextProps.isLoggedIn &&
-      nextProps.isLoggedIn === true
-    ) {
+    const { isLoggedIn: nextIsLoggedIn } = nextProps;
+    const { isLoggedIn } = this.props;
+    if (isLoggedIn !== nextIsLoggedIn && nextIsLoggedIn === true) {
       this.setState({ redirectToReferrer: true });
     }
   }
 
   handleLogin = () => {
-    const { login } = this.props;
+    const { username, password } = this.state;
+    const { login } = this.props; // eslint-disable-line
     login({
-      email: this.state.username,
-      password: this.state.password,
+      email: username,
+      password,
     });
   };
 
@@ -42,7 +42,7 @@ class SignIn extends Component {
   render() {
     const from = { pathname: '/dashboard' };
     const { redirectToReferrer } = this.state;
-
+    const { loading } = this.props;
     if (redirectToReferrer) {
       return <Redirect to={from} />;
     }
@@ -57,7 +57,7 @@ class SignIn extends Component {
             <form onSubmit={this.handleLogin} className="isoSignInForm">
               <div className="isoInputWrapper">
                 <Input
-                  disabled={this.props.loading}
+                  disabled={loading}
                   onPressEnter={this.handleLogin}
                   onChange={this.onUsernameChange}
                   size="large"
@@ -67,7 +67,7 @@ class SignIn extends Component {
 
               <div className="isoInputWrapper">
                 <Input
-                  disabled={this.props.loading}
+                  disabled={loading}
                   onPressEnter={this.handleLogin}
                   onChange={this.onPasswordChange}
                   size="large"
@@ -78,7 +78,7 @@ class SignIn extends Component {
 
               <div className="isoInputWrapper isoLeftRightComponent">
                 <Button
-                  loading={this.props.loading}
+                  loading={loading}
                   type="primary"
                   onClick={this.handleLogin}
                 >
@@ -101,7 +101,7 @@ class SignIn extends Component {
 
 export default connect(
   state => ({
-    isLoggedIn: state.Auth.get('idToken') !== null ? true : false,
+    isLoggedIn: state.Auth.get('idToken') !== null,
     loading: state.Auth.get('loading'),
   }),
   { login }

@@ -3,7 +3,7 @@ import { Row, Col } from 'antd';
 import { StatusIcon, StatusP } from './CancelRequest.style';
 import Trash from '../../image/favicon.png';
 
-const TestOption = ({ toogle, handleClickAprove, handleClickDenied }) => (
+const TestOption = ({ handleClickAprove, handleClickDenied }) => (
   <Row>
     <Col span={12} onClick={handleClickAprove}>
       <Row type="flex" justify="center">

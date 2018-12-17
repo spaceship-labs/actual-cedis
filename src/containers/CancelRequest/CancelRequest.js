@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import actions from './actions';
+import {
+  addAccepted,
+  addRejected,
+  removeAccepted,
+  removeRejected,
+  getCancelRequest,
+  updateCancelRequest,
+  setStatus,
+} from './actions';
 import LayoutContentWrapper from '../../components/utility/layoutWrapper';
 import LayoutContent from '../../components/utility/layoutContent';
 import CancelContent from '../../components/CancelRequest/CancelContent';
-import selectors from './selectors';
+import { propsSelector } from './selectors';
 
 class CancelRequest extends Component {
   constructor(props) {
@@ -29,7 +37,6 @@ class CancelRequest extends Component {
 
   componentDidMount() {
     const {
-      getCancelRequest,
       match: {
         params: { id },
       },
@@ -81,10 +88,6 @@ class CancelRequest extends Component {
   }
 
   render() {
-    // const test = 'testo';
-    // // array de prueba
-    // const arr = [id:'ogla', 1234, 2, 'blue', '21/dic/2018', '$4500 MXN'];
-    // objeto de prueba
     const objeto = {
       description: { id: 1, value: 'Mueble Blanco' },
       code: 'lyoco',
@@ -129,18 +132,8 @@ class CancelRequest extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  const {
-    addAccepted,
-    addRejected,
-    removeAccepted,
-    removeRejected,
-    getCancelRequest,
-    updateCancelRequest,
-    setStatus,
-  } = actions;
-
-  return bindActionCreators(
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
     {
       addAccepted,
       addRejected,
@@ -152,9 +145,8 @@ const mapDispatchToProps = dispatch => {
     },
     dispatch
   );
-};
 
 export default connect(
-  selectors.propsSelector,
+  propsSelector,
   mapDispatchToProps
 )(CancelRequest);

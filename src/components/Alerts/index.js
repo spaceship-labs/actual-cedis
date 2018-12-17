@@ -2,7 +2,6 @@ import React from 'react';
 import TableList from '../TableList';
 
 const AlertsList = props => {
-  console.log(props);
   const { getAlerts, pagination, loading, alerts, columns, rowKey } = props;
   // if (!loading)
   //   return (

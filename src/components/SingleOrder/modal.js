@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
+import { Row, Col } from 'antd';
 import {
   TitleModal,
   TxtStrong,
   TxtData,
   StateClr,
-} from './../../containers/Order/single.style';
-import { Row, Col } from 'antd';
+} from '../../containers/Order/single.style';
 
 class OrderModal extends Component {
-  componentDidMount() {
-    const modaldata = this.props;
-    const order = this.props;
-  }
+  componentDidMount() {}
+
   render() {
-    console.log(this.props);
+    const { modaldata, order } = this.props;
     return (
       <div>
         <TitleModal>
           <TxtStrong>
-            DETALLE DE CANCELACIONES <TxtData>#{this.props.order}</TxtData>
+            DETALLE DE CANCELACIONES <TxtData>#{order}</TxtData>
           </TxtStrong>
         </TitleModal>
-        {this.props.modaldata.map(({ sku, auth }) => (
+        {modaldata.map(({ sku, auth }) => (
           <Row>
             <Col span={12}>
               <p>SKU: {sku} </p>

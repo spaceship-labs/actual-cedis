@@ -12,7 +12,7 @@ const AppLocale = {
   sa: Salang,
   it: Itlang,
   es: Eslang,
-  fr: Frlang
+  fr: Frlang,
 };
 addLocaleData(AppLocale.en.data);
 addLocaleData(AppLocale.zh.data);

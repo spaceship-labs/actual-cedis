@@ -38,7 +38,7 @@ class AppRouter extends Component {
           const { path, exact, ...otherProps } = singleRoute;
           return (
             <Route
-              exact={exact === false ? false : true}
+              exact={exact !== false}
               key={singleRoute.path}
               path={`${url}/${singleRoute.path}`}
               {...otherProps}

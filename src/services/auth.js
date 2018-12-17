@@ -1,9 +1,9 @@
+import jwt from 'jsonwebtoken';
 import history from './history';
 import {
   getToken as utilityGetToken,
   clearToken as utilityClearToken,
 } from '../helpers/utility';
-import jwt from 'jsonwebtoken';
 
 export function logout() {
   utilityClearToken();
@@ -22,7 +22,6 @@ export function isAuthenticated() {
 
   const { exp } = jwt.decode(token);
   const expiresAt = new Date(exp * 1000);
-  console.log('expiresAt', expiresAt);
   // Check whether the current time is past the
   // access token's expiry time
   return new Date().getTime() < expiresAt;

@@ -25,7 +25,7 @@ export function getDefaultPath() {
         'reactVis',
         'reactChart2',
         'reactTrend',
-        'echart'
+        'echart',
       ],
       Forms: [
         'InputField',
@@ -37,7 +37,7 @@ export function getDefaultPath() {
         'checkbox',
         'radiobox',
         'transfer',
-        'autocomplete'
+        'autocomplete',
       ],
       uielements: [
         'op_badge',
@@ -51,7 +51,7 @@ export function getDefaultPath() {
         'dropdown',
         'pagination',
         'rating',
-        'tree'
+        'tree',
       ],
       advancedUielements: ['reactDates', 'codeMirror', 'uppy', 'dropzone'],
       feedback: [
@@ -60,7 +60,7 @@ export function getDefaultPath() {
         'message',
         'notification',
         'popconfirm',
-        'spin'
+        'spin',
       ],
       table: ['table_ant'],
       pages: [
@@ -71,8 +71,8 @@ export function getDefaultPath() {
         'forgotpassword',
         'resetpassword',
         'invoice',
-        'comingSoon'
-      ]
+        'comingSoon',
+      ],
     };
     let parent;
     Object.keys(parents).forEach(key => {

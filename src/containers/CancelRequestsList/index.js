@@ -3,17 +3,17 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import columns from './columns';
 import { containerSelector } from './selectors';
-import actions from './actions';
+import { changePage, getCancelRequests } from './actions';
 import CancelRequestsListStyled from '../../components/CancelRequestsList';
 
 class CancelRequestsList extends Component {
   componentDidMount() {
-    const { getCancelRequests } = this.props;
+    const { getCancelRequests } = this.props; // eslint-disable-line
     getCancelRequests();
   }
 
   render() {
-    const { pagination, changePage } = this.props;
+    const { pagination, changePage } = this.props; // eslint-disable-line
     const newProps = {
       ...this.props,
       pagination: { ...pagination, onChange: changePage },
@@ -28,10 +28,8 @@ class CancelRequestsList extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  const { changePage, getCancelRequests } = actions;
-  return bindActionCreators({ changePage, getCancelRequests }, dispatch);
-};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ changePage, getCancelRequests }, dispatch);
 
 export default connect(
   containerSelector,

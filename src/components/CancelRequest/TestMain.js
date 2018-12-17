@@ -13,7 +13,6 @@ import {
 import RequestConfirmAprove from './RequestConfirmAprove';
 import RequestConfirmDenied from './RequestConfirmDenied';
 import Option from './Option';
-import TestOption from './TestOption';
 import Regresar from './Regresar';
 import Checkout from '../../image/svgs/checkout-ticket.svg';
 

@@ -4,7 +4,7 @@ import clone from 'clone';
 import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 import options from './options';
-import Scrollbars from '../../components/utility/customScrollBar.js';
+import Scrollbars from '../../components/utility/customScrollBar';
 import Menu from '../../components/uielements/menu';
 import IntlMessages from '../../components/utility/intlMessages';
 import SidebarWrapper from './sidebar.style';
@@ -13,7 +13,7 @@ import Logo from '../../components/utility/logo';
 import themes from '../../settings/themes';
 import { themeConfig } from '../../settings';
 
-const SubMenu = Menu.SubMenu;
+const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 const {
@@ -36,16 +36,6 @@ class Sidebar extends Component {
     this.onOpenChange = this.onOpenChange.bind(this);
     this.getAncestorKeys = this.getAncestorKeys.bind(this);
     this.getMenuItem = this.getMenuItem.bind(this);
-  }
-
-  handleClick(e) {
-    this.props.changeCurrent([e.key]);
-    if (this.props.app.view === 'MobileView') {
-      setTimeout(() => {
-        this.props.toggleCollapsed();
-        this.props.toggleOpenDrawer();
-      }, 100);
-    }
   }
 
   onOpenChange(newOpenKeys) {
@@ -75,7 +65,8 @@ class Sidebar extends Component {
 
   getMenuItem({ singleOption, submenuStyle, submenuColor }) {
     const { key, label, leftIcon, children } = singleOption;
-    const url = stripTrailingSlash(this.props.url);
+    const { url: propsUrl } = this.props;
+    const url = stripTrailingSlash(propsUrl);
     if (children) {
       return (
         <SubMenu
@@ -118,12 +109,28 @@ class Sidebar extends Component {
     );
   }
 
+  handleClick(e) {
+    const {
+      changeCurrent,
+      app,
+      toggleCollapsed,
+      toggleOpenDrawer,
+    } = this.props;
+    changeCurrent([e.key]);
+    if (app.view === 'MobileView') {
+      setTimeout(() => {
+        toggleCollapsed();
+        toggleOpenDrawer();
+      }, 100);
+    }
+  }
+
   render() {
     const { app, toggleOpenDrawer, height } = this.props;
     const collapsed = clone(app.collapsed) && !clone(app.openDrawer);
     const { openDrawer } = app;
     const mode = collapsed === true ? 'vertical' : 'inline';
-    const onMouseEnter = event => {
+    const onMouseEnter = () => {
       if (openDrawer === false) {
         toggleOpenDrawer();
       }

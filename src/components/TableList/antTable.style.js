@@ -1,6 +1,6 @@
-import Table from '../uielements/table';
 import styled from 'styled-components';
 import { palette } from 'styled-theme';
+import Table from '../uielements/table';
 import { transition, boxShadow, borderRadius } from '../../settings/style-util';
 import WithDirection from '../../settings/withDirection';
 

@@ -2,7 +2,6 @@ import React from 'react';
 import TableList from '../TableList';
 
 const CancelRequestsList = props => {
-  console.log(props);
   const {
     getCancelRequests,
     pagination,
