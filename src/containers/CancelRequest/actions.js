@@ -14,6 +14,8 @@ const types = [
   'REMOVE_REJECTED',
   'RESET_STATE',
   'SET_STATUS',
+  'SHOW_CONFIRM_DIALOG',
+  'HIDE_CONFIRM_DIALOG',
 ];
 
 export const {
@@ -28,6 +30,8 @@ export const {
   removeRejected,
   resetState,
   setStatus,
+  showConfirmDialog,
+  hideConfirmDialog,
 } = createActions(prefix, types);
 
 export default {
@@ -42,4 +46,6 @@ export default {
   removeRejected,
   resetState,
   setStatus,
+  showConfirmDialog,
+  hideConfirmDialog,
 };

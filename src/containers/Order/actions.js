@@ -8,6 +8,8 @@ const types = [
   'CREATE_CANCEL_REQUEST',
   'SET_PRODUCTS',
   'SET_ALL',
+  'SHOW_POP_UP',
+  'HIDE_POP_UP',
 ];
 
 export const {
@@ -16,6 +18,16 @@ export const {
   createCancelRequest,
   setProducts,
   setAll,
+  showPopUp,
+  hidePopUp,
 } = createActions(prefix, types);
 
-export default { getOrder, setOrder, createCancelRequest, setProducts, setAll };
+export default {
+  getOrder,
+  setOrder,
+  createCancelRequest,
+  setProducts,
+  setAll,
+  showPopUp,
+  hidePopUp,
+};

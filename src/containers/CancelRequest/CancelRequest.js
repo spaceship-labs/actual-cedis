@@ -104,7 +104,6 @@ class CancelRequest extends Component {
     this.state = {
       firstLoad: true,
       answers: {},
-      confirmDialog: false,
       requestStatus: 'partially',
     };
     this.getText = this.getText.bind(this);
@@ -171,15 +170,18 @@ class CancelRequest extends Component {
 
   allButton(e, val) {
     this.setRequestStatus(val);
-    this.setState({ confirmDialog: true });
+    const { showConfirmDialog } = this.props;
+    showConfirmDialog();
   }
 
   showDialog() {
-    this.setState({ confirmDialog: true });
+    const { showConfirmDialog } = this.props;
+    showConfirmDialog();
   }
 
   hideDialog() {
-    this.setState({ confirmDialog: false });
+    const { hideConfirmDialog } = this.props;
+    hideConfirmDialog();
   }
 
   acceptCb() {
@@ -203,7 +205,7 @@ class CancelRequest extends Component {
   }
 
   render() {
-    const { firstLoad, answers, confirmDialog } = this.state;
+    const { firstLoad, answers } = this.state;
     if (firstLoad) return null;
     // array de prueba
     const arr = ['holi', 1234, 2, 'blue', '21/dic/2018', '$4500 MXN'];
@@ -214,6 +216,7 @@ class CancelRequest extends Component {
         Details: requestDetails,
         CancelationDetails: cancelDetails,
       },
+      confirmDialog,
     } = this.props;
     return (
       <LayoutContentWrapper style={{ height: 'auto' }}>
@@ -459,6 +462,8 @@ const mapDispatchToProps = dispatch => {
     getCancelRequest,
     updateCancelRequest,
     setStatus,
+    showConfirmDialog,
+    hideConfirmDialog,
   } = actions;
 
   return bindActionCreators(

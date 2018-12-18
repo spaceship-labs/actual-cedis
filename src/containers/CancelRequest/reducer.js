@@ -5,6 +5,7 @@ const initialState = {
   status: '',
   accepted: [],
   rejected: [],
+  confirmDialog: false,
 };
 
 export default function(state = initialState, { type, payload }) {
@@ -19,6 +20,10 @@ export default function(state = initialState, { type, payload }) {
       return initialState;
     case actions.setStatus.type:
       return { ...state, status: payload };
+    case actions.showConfirmDialog.type:
+      return { ...state, confirmDialog: true };
+    case actions.hideConfirmDialog.type:
+      return { ...state, confirmDialog: false };
     default:
       return state;
   }

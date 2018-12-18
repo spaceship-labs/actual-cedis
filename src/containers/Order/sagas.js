@@ -5,6 +5,7 @@ import {
   createCancelRequest,
   setProducts,
   setAll,
+  hidePopUp,
 } from './actions';
 import { orderSaga, createCancelSaga } from '../../redux/objects/sagas';
 import { productsSaga } from '../../redux/lists/sagas';
@@ -26,6 +27,7 @@ export function* createRequestSaga({ payload }) {
   try {
     const { data } = yield call(createCancelSaga, payload);
     alert('Solicitud generada con exito');
+    yield put(hidePopUp());
   } catch (err) {
     console.log(err);
     alert('Hubo un error intentalo mas tarde');

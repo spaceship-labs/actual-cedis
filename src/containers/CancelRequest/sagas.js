@@ -41,6 +41,7 @@ export function* updateCancelRequestSaga({ payload }) {
     };
     yield call(updateCancelSaga, params);
     alert('Cambios guardados con exito. puede cerrar la confirmacion.');
+    yield put(containerActions.hideConfirmDialog());
   } catch (err) {
     console.log(err);
     alert('Hubo un error al guardar los cambios, intente mas tarde.');

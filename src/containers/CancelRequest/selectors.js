@@ -16,10 +16,11 @@ export const propsSelector = ({ containers }) => {
       request,
       accepted: acceptedElements,
       rejected: rejectedElements,
+      confirmDialog,
     },
   } = containers;
 
-  return { request, acceptedElements, rejectedElements };
+  return { request, acceptedElements, rejectedElements, confirmDialog };
 };
 
 export default {

@@ -21,7 +21,7 @@ import {
   StateClr,
 } from './single.style';
 import AntButton from '../../components/uielements/button';
-import { getOrder, createCancelRequest } from './actions';
+import { getOrder, createCancelRequest, showPopUp, hidePopUp } from './actions';
 import selector from './selectors';
 import { antiBind } from '../../helpers/utils';
 
@@ -38,7 +38,6 @@ class OrderSingle extends Component {
     this.handleArticleCancel = this.handleArticleCancel.bind(this);
     this.acceptCallback = this.acceptCallback.bind(this);
     this.state = {
-      visible: false,
       showCancel: false,
       firstLoad: true,
       cancels: {},
@@ -127,16 +126,14 @@ class OrderSingle extends Component {
   }
 
   showpopup() {
-    this.setState({
-      visible: true,
-    });
+    const { showPopUp: show } = this.props;
+    show();
   }
 
   handleCancel(e) {
     console.log(e);
-    this.setState({
-      visible: false,
-    });
+    const { hidePopUp: hide } = this.props;
+    hide();
   }
 
   render() {
@@ -174,6 +171,7 @@ class OrderSingle extends Component {
         OrdersSap: sapOrders,
       },
       products,
+      showPopUp: visible,
     } = this.props;
     const { order } = this.props;
     const storeName = order.Store ? order.Store.name : '';
@@ -181,11 +179,7 @@ class OrderSingle extends Component {
     return (
       <Container>
         <CancelBanner>
-          <Modal
-            visible={this.state.visible}
-            onCancel={this.handleCancel}
-            footer={null}
-          >
+          <Modal visible={visible} onCancel={this.handleCancel} footer={null}>
             <p className="title-cnl">
               <strong>DETALLE DE CANCELACIONES</strong> <span>#{folio}</span>
             </p>
@@ -562,7 +556,10 @@ class OrderSingle extends Component {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getOrder, createCancelRequest }, dispatch);
+  bindActionCreators(
+    { getOrder, createCancelRequest, showPopUp, hidePopUp },
+    dispatch
+  );
 
 export default connect(
   selector,
