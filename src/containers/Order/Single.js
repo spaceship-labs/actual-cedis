@@ -80,12 +80,13 @@ class OrderSingle extends Component {
       createCancelRequest({ orderId, ...payload });
     } else {
       alert('Porfavor indique el motivo de la cancelacion');
+      const { hidePopUp: hide } = this.props;
+      hide();
     }
   }
 
   handleAllCancel() {
     this.setState({ cancelAll: true });
-    console.log('llama 1');
     const { showPopUp: show } = this.props;
     show();
   }
