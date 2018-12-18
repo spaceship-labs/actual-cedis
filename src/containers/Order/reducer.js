@@ -3,7 +3,7 @@ import actions from './actions';
 const initialState = {
   order: {},
   products: {},
-  showPopUp: false,
+  showPopUpFlag: false,
 };
 
 export default function(state = initialState, { type, payload }) {
@@ -15,9 +15,9 @@ export default function(state = initialState, { type, payload }) {
     case actions.setAll.type:
       return { ...payload };
     case actions.showPopUp.type:
-      return { ...state, showPopUp: true };
+      return { ...state, showPopUpFlag: true };
     case actions.hidePopUp.type:
-      return { ...state, showPopUp: false };
+      return { ...state, showPopUpFlag: false };
     default:
       return state;
   }

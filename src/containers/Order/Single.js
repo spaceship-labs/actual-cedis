@@ -85,7 +85,9 @@ class OrderSingle extends Component {
 
   handleAllCancel() {
     this.setState({ cancelAll: true });
-    this.showpopup();
+    console.log('llama 1');
+    const { showPopUp: show } = this.props;
+    show();
   }
 
   handleItemNumber(e, index) {
@@ -115,7 +117,9 @@ class OrderSingle extends Component {
     if (detailsKeys === 0) {
       this.setState({ cancelAll: true });
     }
-    this.showpopup();
+    console.log('llama 2');
+    const { showPopUp: show } = this.props;
+    show();
   }
 
   stateCancel() {
@@ -126,12 +130,14 @@ class OrderSingle extends Component {
   }
 
   showpopup() {
+    console.log('llama 3');
     const { showPopUp: show } = this.props;
     show();
   }
 
   handleCancel(e) {
     console.log(e);
+    console.log('llama 4');
     const { hidePopUp: hide } = this.props;
     hide();
   }
@@ -171,7 +177,7 @@ class OrderSingle extends Component {
         OrdersSap: sapOrders,
       },
       products,
-      showPopUp: visible,
+      showPopUpFlag: visible,
     } = this.props;
     const { order } = this.props;
     const storeName = order.Store ? order.Store.name : '';

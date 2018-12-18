@@ -475,6 +475,8 @@ const mapDispatchToProps = dispatch => {
       setStatus,
       updateCancelRequest,
       getCancelRequest,
+      showConfirmDialog,
+      hideConfirmDialog,
     },
     dispatch
   );
