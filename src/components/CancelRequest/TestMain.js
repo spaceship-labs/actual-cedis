@@ -10,12 +10,8 @@ import {
   RequestIcon,
   StatusIcon,
 } from './CancelRequest.style';
-// import RequestConfirmAprove from './RequestConfirmAprove';
-// import RequestConfirmDenied from './RequestConfirmDenied';
 import TestRequestConfirmAprove from './TestRequestConfirmAprove';
 import TestRequestConfirmDenied from './TestRequestConfirmDenied';
-// import Option from './Option';
-// import Regresar from './Regresar';
 import TestOption from './TestOption';
 import TestRegresar from './TestRegresar';
 import Checkout from '../../image/svgs/checkout-ticket.svg';
@@ -172,22 +168,11 @@ const TestMain = ({
         </Col>
         <Col md={4} lg={4}>
           <ColCenter height="100px!important">
-            {/* <Option
-              toogle={toogleOption}
-              handleClickAprove={handleClickAprove}
-              handleClickDenied={handleClickDenied}
-            /> */}
             <TestOption
               toogle={toogleOption}
               handleClickAprove={handleClickAprove}
               handleClickDenied={handleClickDenied}
             />
-            {/* <Regresar
-              toogle={toogleBack}
-              autorizado={autorizado}
-              rechazado={rechazado}
-              goBack={goBack}
-            /> */}
             <TestRegresar
               toogle={toogleBack}
               autorizado={autorizado}
@@ -198,16 +183,6 @@ const TestMain = ({
         </Col>
       </Row>
     </StatusContent>
-    {/* <RequestConfirmAprove
-      toogle={toogleConfirmA}
-      handleClickAN={handleClickAN}
-      handleClickAY={handleClickAY}
-    />
-    <RequestConfirmDenied
-      toogle={toogleConfirmD}
-      handleClickDN={handleClickDN}
-      handleClickDY={handleClickDY}
-    /> */}
     <TestRequestConfirmAprove
       toogle={toogleConfirmA}
       handleClickAN={handleClickAN}

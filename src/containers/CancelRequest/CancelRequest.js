@@ -107,34 +107,24 @@ class CancelRequest extends Component {
       rechazado,
     } = this.state;
 
-    const {
-      handleClickAprove,
-      handleClickDenied,
-      handleClickAN,
-      handleClickAY,
-      handleClickDN,
-      handleClickDY,
-      goBack,
-    } = this.props;
-
     return (
       <LayoutContentWrapper style={{ height: 'auto' }}>
         <LayoutContent>
           <CancelContent
             object={objeto}
             toogleOption={toogleOption}
-            handleClickAprove={handleClickAprove}
-            handleClickDenied={handleClickDenied}
+            handleClickAprove={this.handleClickAprove}
+            handleClickDenied={this.handleClickDenied}
             toogleBack={toogleBack}
             autorizado={autorizado}
             rechazado={rechazado}
-            goBack={goBack}
+            goBack={this.goBack}
             toogleConfirmA={toogleConfirmA}
-            handleClickAN={handleClickAN}
-            handleClickAY={handleClickAY}
+            handleClickAN={this.handleClickAN}
+            handleClickAY={this.handleClickAY}
             toogleConfirmD={toogleConfirmD}
-            handleClickDN={handleClickDN}
-            handleClickDY={handleClickDY}
+            handleClickDN={this.handleClickDN}
+            handleClickDY={this.handleClickDY}
           />
         </LayoutContent>
       </LayoutContentWrapper>

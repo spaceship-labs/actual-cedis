@@ -40,7 +40,6 @@ const CancelContent = ({
       handleClickDN={handleClickDN}
       handleClickDY={handleClickDY}
     />
-    {/* <RequestContent object={object} /> */}
     <CambiosBar />
   </div>
 );
