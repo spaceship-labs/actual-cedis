@@ -10,10 +10,14 @@ import {
   RequestIcon,
   StatusIcon,
 } from './CancelRequest.style';
-import RequestConfirmAprove from './RequestConfirmAprove';
-import RequestConfirmDenied from './RequestConfirmDenied';
-import Option from './Option';
-import Regresar from './Regresar';
+// import RequestConfirmAprove from './RequestConfirmAprove';
+// import RequestConfirmDenied from './RequestConfirmDenied';
+import TestRequestConfirmAprove from './TestRequestConfirmAprove';
+import TestRequestConfirmDenied from './TestRequestConfirmDenied';
+// import Option from './Option';
+// import Regresar from './Regresar';
+import TestOption from './TestOption';
+import TestRegresar from './TestRegresar';
 import Checkout from '../../image/svgs/checkout-ticket.svg';
 
 const Item = ({ object }) => (
@@ -168,17 +172,23 @@ const TestMain = ({
         </Col>
         <Col md={4} lg={4}>
           <ColCenter height="100px!important">
-            <Option
+            {/* <Option
+              toogle={toogleOption}
+              handleClickAprove={handleClickAprove}
+              handleClickDenied={handleClickDenied}
+            /> */}
+            <TestOption
               toogle={toogleOption}
               handleClickAprove={handleClickAprove}
               handleClickDenied={handleClickDenied}
             />
-            {/* <TestOption
-                toogle={toogleOption}
-                handleClickAprove={handleClickAprove}
-                handleClickDenied={handleClickDenied}
-              /> */}
-            <Regresar
+            {/* <Regresar
+              toogle={toogleBack}
+              autorizado={autorizado}
+              rechazado={rechazado}
+              goBack={goBack}
+            /> */}
+            <TestRegresar
               toogle={toogleBack}
               autorizado={autorizado}
               rechazado={rechazado}
@@ -188,12 +198,22 @@ const TestMain = ({
         </Col>
       </Row>
     </StatusContent>
-    <RequestConfirmAprove
+    {/* <RequestConfirmAprove
       toogle={toogleConfirmA}
       handleClickAN={handleClickAN}
       handleClickAY={handleClickAY}
     />
     <RequestConfirmDenied
+      toogle={toogleConfirmD}
+      handleClickDN={handleClickDN}
+      handleClickDY={handleClickDY}
+    /> */}
+    <TestRequestConfirmAprove
+      toogle={toogleConfirmA}
+      handleClickAN={handleClickAN}
+      handleClickAY={handleClickAY}
+    />
+    <TestRequestConfirmDenied
       toogle={toogleConfirmD}
       handleClickDN={handleClickDN}
       handleClickDY={handleClickDY}
