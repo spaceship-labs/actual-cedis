@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row } from 'antd';
 import { StatusIcon, StatusH3 } from './CancelRequest.style';
-import Autorizado from './Autorizado';
-import Cancelado from './Cancelado';
+import TestAutorizado from './TestAutorizado';
+import TestCancelado from './TestCancelado';
 import Transfer from '../../image/svgs/transfer.svg';
 
 const TestRegresar = ({ toogle, autorizado, rechazado, goBack }) => {
@@ -13,8 +13,8 @@ const TestRegresar = ({ toogle, autorizado, rechazado, goBack }) => {
   if (isToogled) {
     return (
       <div>
-        <Cancelado rechazado={Denied} />
-        <Autorizado autorizado={Aprove} />
+        <TestCancelado rechazado={Denied} />
+        <TestAutorizado autorizado={Aprove} />
         <br />
         <Row type="flex" justify="end" onClick={Back}>
           <StatusIcon
