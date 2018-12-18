@@ -6,7 +6,7 @@ import { pageSelector } from './selectors';
 
 export function* getOrdersSaga() {
   const page = yield select(pageSelector);
-  const { data: orders, total } = yield call(ordersSaga, page);
+  const { orders, total } = yield call(ordersSaga, page);
   yield put(containerActions.setTotal(total));
   yield put(containerActions.setOrders(orders));
 }

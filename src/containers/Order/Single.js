@@ -18,7 +18,7 @@ import {
   RowItem,
   ReasonCancel,
   Modal,
-  StateClr,
+  SendText,
 } from './single.style';
 import AntButton from '../../components/uielements/button';
 import { getOrder, createCancelRequest, showPopUp, hidePopUp } from './actions';
@@ -321,7 +321,7 @@ class OrderSingle extends Component {
                   onClick={this.handleArticleCancel}
                 >
                   <Icon type="right" />
-                  <p>ENVIAR SOLICITUD DE CANCELACION</p>
+                  <SendText>ENVIAR SOLICITUD DE CANCELACION</SendText>
                 </div>
               </div>
             </ReasonCancel>

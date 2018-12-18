@@ -236,3 +236,7 @@ export const ReasonCancel = styled.div`
     font-size: 15px;
   }
 `;
+
+export const SendText = styled.p`
+  cursor: pointer;
+`;
