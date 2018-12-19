@@ -19,6 +19,16 @@ import {
   ReasonCancel,
   Modal,
   SendText,
+  // JOE
+  StatusContent,
+  StatusH3,
+  StatusP,
+  StatusSpan,
+  StatusInput,
+  StatusRow,
+  ColEnd,
+  RequestIcon,
+  ColCenter,
 } from './single.style';
 import AntButton from '../../components/uielements/button';
 import { getOrder, createCancelRequest, showPopUp, hidePopUp } from './actions';
@@ -26,6 +36,62 @@ import selector from './selectors';
 import { antiBind } from '../../helpers/utils';
 
 const { Option } = Select;
+
+const Item = ({ item }) => <StatusH3 weight="bolder">{item}</StatusH3>;
+
+Item.defaultProps = {
+  description: 'Aqui va el producto',
+};
+
+const Codigo = ({ codigo }) => (
+  <StatusP weight="bolder">
+    Codigo: <StatusSpan weight="lighter">{codigo}</StatusSpan>
+  </StatusP>
+);
+
+Codigo.defaultProps = {
+  code: 'Aqui va el codigo',
+};
+
+const Color = ({ color }) => (
+  <StatusP weight="bolder">
+    Color: <StatusSpan weight="lighter">{color}</StatusSpan>
+  </StatusP>
+);
+
+Color.defaultProps = {
+  color: 'Aqui va el color',
+};
+
+const Cantidad = ({ quantity }) => (
+  <StatusP weight="normal" align="right" margin="0px">
+    {quantity}
+  </StatusP>
+);
+
+Cantidad.defaultProps = {
+  quantity: 'Aqui va la cantidad',
+};
+
+const Entrega = ({ delivery }) => (
+  <StatusP weight="normal" align="right" margin="0px">
+    {delivery}
+  </StatusP>
+);
+
+Entrega.defaultProps = {
+  delivery: 'Aqui va la fecha de entrega',
+};
+
+const Precio = ({ price }) => (
+  <StatusP weight="normal" align="right" margin="0px">
+    {price}
+  </StatusP>
+);
+
+Precio.defaultProps = {
+  price: 'Aqui va el precio',
+};
 
 class OrderSingle extends Component {
   constructor(props) {
@@ -144,6 +210,14 @@ class OrderSingle extends Component {
   }
 
   render() {
+    const object = {
+      description: { id: 1, value: 'holi' },
+      code: 23455,
+      colo: 'red',
+      quantity: 4,
+      delivery: '21/08/11',
+      price: '$45,000.00 MXN',
+    };
     const { firstLoad, reason, cancels } = this.state;
     if (firstLoad) return null;
     console.log(this.props);
@@ -185,7 +259,7 @@ class OrderSingle extends Component {
     const { address: deliveryAddress = '' } = order;
     return (
       <Container>
-        <CancelBanner>
+        {/* <CancelBanner>
           <Modal visible={visible} onCancel={this.handleCancel} footer={null}>
             <p className="title-cnl">
               <strong>DETALLE DE CANCELACIONES</strong> <span>#{folio}</span>
@@ -207,7 +281,7 @@ class OrderSingle extends Component {
               </Col>
             </Row>
           </Modal>
-        </CancelBanner>
+        </CancelBanner> */}
         <Seccion>
           <Order>
             <Row>
@@ -251,57 +325,121 @@ class OrderSingle extends Component {
             </OrderTextBlock>
           </Order>
         </Seccion>
-        <Seccion>
-          <h3>
-            <strong>
-              <i className="icon-checkout-ticket" /> ARTÍCULOS ADQUIRIDOS
-            </strong>
-          </h3>
-          <OrderItems>
-            <div>
-              <Row>
-                <Col span={this.state.showCancel ? 4 : 6}>Articulo</Col>
-                <Col span={this.state.showCancel ? 4 : 5}>CANTIDAD</Col>
-                <Col span={this.state.showCancel ? 6 : 7}>
-                  ENTREGA APROXIMADA
-                </Col>
-                <Col span={this.state.showCancel ? 4 : 5}>PRECIO</Col>
-                {this.state.showCancel && <Col span={3} />}
-                {this.state.showCancel && <Col span={3} />}
-              </Row>
-              {productos.map((item, index) => (
+        <div>
+          <StatusContent>
+            {productos.map((item, index) => (
+              <div>
+                <Row type="flex">
+                  <i className="icon-checkout-ticket" />
+                  <StatusH3 transform="uppercase" weight="bolder">
+                    Articulos Adquiridos
+                  </StatusH3>
+                </Row>
                 <RowItem key={item.id}>
-                  <Col span={this.state.showCancel ? 4 : 6}>
-                    {products[item.Product].code}
+                  <Col
+                    md={this.state.showCancel ? 6 : 12}
+                    lg={this.state.showCancel ? 10 : 12}
+                  >
+                    <ColEnd>
+                      <Item item={products[item.Product].name} />
+                      <Row type="flex">
+                        <RequestIcon
+                          type="file-unknown"
+                          width="30px"
+                          height="30px"
+                          font="25px"
+                          margin="0px 5px"
+                        />
+                        <Col>
+                          <Codigo codigo={products[item.Product].code} />
+                          <Color />
+                        </Col>
+                      </Row>
+                    </ColEnd>
                   </Col>
-                  <Col span={this.state.showCancel ? 4 : 6}>
-                    {products[item.Product].name}
+                  <Col
+                    md={this.state.showCancel ? 14 : 11}
+                    lg={this.state.showCancel ? 10 : 12}
+                  >
+                    <Row>
+                      <Col span={5}>
+                        <Col>
+                          <StatusP
+                            weight="bold"
+                            align="right"
+                            margin="0px 0px 28px 0px"
+                            transform="uppercase"
+                          >
+                            Cantidad
+                          </StatusP>
+                          <Cantidad quantity={item.quantity} />
+                        </Col>
+                      </Col>
+                      <Col span={11}>
+                        <Col>
+                          <StatusP
+                            weight="bold"
+                            align="right"
+                            margin="0px 0px 28px 0px"
+                            transform="uppercase"
+                          >
+                            Entrega aproximada
+                          </StatusP>
+                          <Entrega
+                            delivery={moment(item.shipDate).format(
+                              'DD/MM/YYYY'
+                            )}
+                          />
+                        </Col>
+                      </Col>
+                      <Col span={8}>
+                        <Col>
+                          <StatusP
+                            weight="bold"
+                            align="right"
+                            margin="0px 0px 28px 0px"
+                            transform="uppercase"
+                          >
+                            Precio
+                          </StatusP>
+                          <Precio
+                            price={numeral(item.total).format('$0,0.00')}
+                          />
+                        </Col>
+                      </Col>
+                    </Row>
                   </Col>
-                  <Col span={this.state.showCancel ? 4 : 5}>
-                    {item.quantity}
+                  <Col
+                    md={this.state.showCancel ? 4 : 1}
+                    lg={this.state.showCancel ? 4 : 1}
+                  >
+                    {this.state.showCancel && (
+                      <ColCenter height="100px!important">
+                        <Row type="flex" justify="center">
+                          <StatusInput
+                            type="number"
+                            name={item.id}
+                            value={cancels[item.id]}
+                            onChange={antiBind(this.handleItemNumber, index)}
+                            width="60px!important"
+                          />
+                          <StatusP
+                            color="red"
+                            transform="uppercase"
+                            margin="0px"
+                            align="center"
+                          >
+                            Piezas a cancelar
+                          </StatusP>
+                        </Row>
+                      </ColCenter>
+                    )}
                   </Col>
-                  <Col span={this.state.showCancel ? 6 : 7}>
-                    {moment(item.shipDate).format('DD/MM/YYYY')}
-                  </Col>
-                  <Col span={this.state.showCancel ? 4 : 5}>
-                    {numeral(item.total).format('$0,0.00')}
-                  </Col>
-                  {this.state.showCancel && (
-                    <Col className="Delete-items" span={3}>
-                      <Input
-                        type="number"
-                        name={item.id}
-                        value={cancels[item.id]}
-                        onChange={antiBind(this.handleItemNumber, index)}
-                      />
-                      <p>PIEZAS A CANCELAR</p>
-                    </Col>
-                  )}
                 </RowItem>
-              ))}
-            </div>
-          </OrderItems>
-        </Seccion>
+              </div>
+            ))}
+          </StatusContent>
+        </div>
         <Seccion>
           {this.state.showCancel && (
             <ReasonCancel>
@@ -344,16 +482,16 @@ class OrderSingle extends Component {
                   </p>
                   <p className="taxes">*Todos los montos incluyen impuestos</p>
                 </div>
-                <Row>
+                <StatusRow padding="10px 15px">
                   <Col span={4}>FORMA DE PAGO</Col>
                   <Col span={4}>FECHA</Col>
                   <Col span={4}>FOLIO</Col>
                   <Col span={4}>TIPO DE PAGO</Col>
                   <Col span={4}>TERMINAL</Col>
                   <Col span={4}>MONTO COBRADO</Col>
-                </Row>
+                </StatusRow>
                 {pagos.map((item, index) => (
-                  <Row key={item.id}>
+                  <StatusRow padding="0px 15px" key={item.id}>
                     <Col span={4}>{item.name}</Col>
                     <Col span={4}>{moment(createdAt).format('DD/MM/YYYY')}</Col>
                     <Col span={4}>{item.folio}</Col>
@@ -362,10 +500,15 @@ class OrderSingle extends Component {
                     <Col span={4}>
                       {numeral(item.ammount).format('$0,0.00')}
                     </Col>
-                  </Row>
+                  </StatusRow>
                 ))}
-                <Row className="venta">
-                  {/* <Col span={16} /> */}
+                {/* <Col span={16} /> */}
+                <StatusRow
+                  type="flex"
+                  justify="end"
+                  padding="10px 15px"
+                  bgcolor="#F8F8F8"
+                >
                   <Col span={4}>
                     <p>
                       <strong>SUBTOTAL COMPRA:</strong>
@@ -390,31 +533,31 @@ class OrderSingle extends Component {
                   <Col span={4}>
                     <p>
                       <strong>$</strong>
-                      {subtotal}
+                      {subtotal.toFixed(2)}
                     </p>
                     <p>
                       <strong>$</strong>
-                      {discount}
+                      {discount.toFixed(2)}
                     </p>
                     <p>
                       <strong>$</strong>
-                      {totalCompra}
+                      {totalCompra.toFixed(2)}
                     </p>
                     <p>
                       <strong>$</strong>
-                      {ammountPaid}
+                      {ammountPaid.toFixed(2)}
                     </p>
                     <p>
                       <strong>$</strong>
-                      {totalCompra - ammountPaid}
+                      {(totalCompra - ammountPaid).toFixed(2)}
                     </p>
                     <br />
                     <p>
                       <strong>$</strong>
-                      {balance}
+                      {balance.toFixed(2)}
                     </p>
                   </Col>
-                </Row>
+                </StatusRow>
               </div>
             </div>
           </OrderPago>

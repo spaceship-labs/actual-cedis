@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Row, Modal as modalCnl } from 'antd';
+import { Row, Col, Icon, Modal as modalCnl, Input } from 'antd';
 
 export const Container = styled.div`
   padding-left: 6%;
@@ -239,4 +239,93 @@ export const ReasonCancel = styled.div`
 
 export const SendText = styled.p`
   cursor: pointer;
+`;
+
+// /JOE////
+
+export const StatusContent = styled.div`
+  white-space: nowrap;
+  @media only screen and (max-width: 1036px) {
+    font-size: 12px;
+  }
+`;
+
+export const StatusIcon = styled.img`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  margin: ${props => props.margin};
+  cursor: ${props => props.cursor};
+  fill: ${props => props.fill};
+`;
+
+export const StatusH3 = styled.h3`
+  text-transform: ${props => props.transform};
+  font-weight: ${props => props.weight};
+  padding: ${props => props.padding};
+  margin: ${props => props.margin};
+  font-size: ${props => props.font};
+  cursor: ${props => props.cursor};
+  line-height: ${props => props.lheight};
+  color: ${props => props.color};
+  text-align: ${props => props.align};
+  white-space: ${props => props.space};
+  width: ${props => props.width};
+  text-decoration: ${props => props.decoration};
+  @media only screen and (max-width: 1036px) {
+  }
+`;
+
+export const ColEnd = styled(Col)`
+  display: flex !important;
+  justify-content: flex-end !important;
+  flex-direction: column !important;
+`;
+
+export const StatusP = styled.p`
+  text-transform: ${props => props.transform};
+  font-weight: ${props => props.weight};
+  padding: ${props => props.padding};
+  margin: ${props => props.margin};
+  font-size: ${props => props.font};
+  text-align: ${props => props.align};
+  color: ${props => props.color};
+  white-space: ${props => props.space};
+  cursor: ${props => props.cursor};
+  @media only screen and (max-width: 1036px) {
+  }
+`;
+
+export const RequestIcon = styled(Icon)`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  margin: ${props => props.margin};
+  font-size: ${props => props.font};
+  cursor: ${props => props.cursor};
+`;
+
+export const ColCenter = styled(Col)`
+  display: flex !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  height: ${props => props.height};
+  width: ${props => props.width};
+`;
+
+export const StatusSpan = styled.span`
+  text-transform: ${props => props.transform};
+  font-weight: ${props => props.weight};
+  padding: ${props => props.padding};
+  @media only screen and (max-width: 1036px) {
+    font-size: 12px;
+  }
+`;
+
+export const StatusInput = styled(Input)`
+  height: ${props => props.height};
+  width: ${props => props.width};
+`;
+
+export const StatusRow = styled(Row)`
+  padding: ${props => props.padding};
+  background-color: ${props => props.bgcolor};
 `;
