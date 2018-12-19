@@ -14,10 +14,6 @@ import {
 import TestOption from './TestOption';
 import TestRegresar from './TestRegresar/TestRegresar';
 import Checkout from '../../../image/svgs/checkout-ticket.svg';
-// import TestRequestConfirmAprove from './TestRequestConfirm/TestRequestConfirmAprove';
-// import TestRequestConfirmDenied from './TestRequestConfirm/TestRequestConfirmDenied';
-// import TestRequestAproveAll from './TestRequestConfirm/TestRequestAproveAll';
-// import TestRequestCancelAll from './TestRequestConfirm/TestRequestCancelAll';
 
 const Item = ({ object }) => (
   <StatusH3 weight="bolder">{object.description.value}</StatusH3>
@@ -86,18 +82,6 @@ const TestMain = ({
   autorizado,
   rechazado,
   goBack,
-  // toogleConfirmA,
-  // handleClickAN,
-  // handleClickAY,
-  // toogleConfirmD,
-  // handleClickDN,
-  // handleClickDY,
-  // toogleCAll,
-  // toogleDAll,
-  // handleClickCAllN,
-  // handleClickCAllY,
-  // handleClickDAllY,
-  // handleClickDAllN,
 }) => (
   <div>
     <StatusContent>
@@ -192,26 +176,6 @@ const TestMain = ({
         </Col>
       </Row>
     </StatusContent>
-    {/* <TestRequestConfirmAprove
-      toogle={toogleConfirmA}
-      handleClickAN={handleClickAN}
-      handleClickAY={handleClickAY}
-    />
-    <TestRequestConfirmDenied
-      toogle={toogleConfirmD}
-      handleClickDN={handleClickDN}
-      handleClickDY={handleClickDY}
-    />
-    <TestRequestAproveAll
-      toogle={toogleCAll}
-      handleClickCAllN={handleClickCAllN}
-      handleClickCAllY={handleClickCAllY}
-    />
-    <TestRequestCancelAll
-      toogle={toogleDAll}
-      handleClickDAllY={handleClickDAllY}
-      handleClickDAllN={handleClickDAllN}
-    /> */}
   </div>
 );
 

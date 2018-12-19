@@ -10,7 +10,6 @@ import TestRequestCancelAll from './TestMain/TestRequestConfirm/TestRequestCance
 
 const CancelContent = ({
   data,
-  // todes,
   toogleOption,
   handleClickAprove,
   handleClickDenied,
@@ -65,28 +64,6 @@ const CancelContent = ({
         />
       ))}
     </div>
-    {/* <TestMain
-      object={todes}
-      toogleOption={toogleOption}
-      handleClickAprove={handleClickAprove}
-      handleClickDenied={handleClickDenied}
-      toogleBack={toogleBack}
-      autorizado={autorizado}
-      rechazado={rechazado}
-      goBack={goBack}
-      toogleConfirmA={toogleConfirmA}
-      handleClickAN={handleClickAN}
-      handleClickAY={handleClickAY}
-      toogleConfirmD={toogleConfirmD}
-      handleClickDN={handleClickDN}
-      handleClickDY={handleClickDY}
-      toogleCAll={toogleCAll}
-      toogleDAll={toogleDAll}
-      handleClickCAllN={handleClickCAllN}
-      handleClickCAllY={handleClickCAllY}
-      handleClickDAllY={handleClickDAllY}
-      handleClickDAllN={handleClickDAllN}
-    /> */}
     <CambiosBar />
     <TestRequestConfirmAprove
       toogle={toogleConfirmA}

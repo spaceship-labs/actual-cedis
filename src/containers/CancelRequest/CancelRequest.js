@@ -205,7 +205,6 @@ class CancelRequest extends Component {
         <LayoutContent>
           <CancelContent
             data={data}
-            // todes={data}
             toogleOption={toogleOption}
             handleClickAprove={this.handleClickAprove}
             handleClickDenied={this.handleClickDenied}
