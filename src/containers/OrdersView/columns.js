@@ -49,6 +49,13 @@ const columns = [
     sorter: true,
   },
   {
+    title: 'Monto Cancelado',
+    key: 'montoCancelado',
+    width: 300,
+    render: object => renderCell(object, 'CurrencyCell', 'amountCanceled'),
+    sorter: true,
+  },
+  {
     title: 'Venta',
     key: 'venta',
     width: 300,
