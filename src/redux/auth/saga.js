@@ -16,7 +16,6 @@ function* onLogin(action) {
 }
 
 function* onLoginSuccess(action) {
-  console.log('Login SAGA');
   yield localStorage.setItem('id_token', action.payload.token);
   yield put(push('/dashboard'));
 }
