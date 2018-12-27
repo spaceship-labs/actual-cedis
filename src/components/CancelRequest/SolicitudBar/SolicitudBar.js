@@ -9,10 +9,10 @@ import {
   AllButton,
   StatusIcon,
   StatusSpan,
-} from './CancelRequest.style';
-import Trash from '../../image/svgs/trash.svg';
+} from '../CancelRequest.style';
+import Trash from '../../../image/svgs/trash.svg';
 
-const SolicitudBar = () => (
+const SolicitudBar = ({ handleClickAproveAll, handleClickDeniedAll }) => (
   <SolicitudContainer>
     <SolicitudItem type="flex" justify="start">
       <LogoCol span={2}>
@@ -39,6 +39,7 @@ const SolicitudBar = () => (
       <ButtonsCol md={8} lg={6}>
         <ColCenter>
           <AllButton
+            onClick={handleClickAproveAll}
             type="primary"
             size="default"
             color="white!important"
@@ -51,6 +52,7 @@ const SolicitudBar = () => (
         </ColCenter>
         <ColCenter>
           <AllButton
+            onClick={handleClickDeniedAll}
             type="danger"
             size="default"
             color="white!important"

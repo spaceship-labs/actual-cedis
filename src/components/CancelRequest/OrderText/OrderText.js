@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusH3, StatusP, TextBlock } from './CancelRequest.style';
+import { StatusH3, StatusP, TextBlock } from '../CancelRequest.style';
 
 const OrderText = () => (
   <TextBlock>

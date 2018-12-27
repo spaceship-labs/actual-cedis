@@ -4,7 +4,7 @@ import {
   SolicitudItem,
   AllButton,
   ColCenter,
-} from './CancelRequest.style';
+} from '../CancelRequest.style';
 
 const CambiosBar = () => (
   <BarChanges>
