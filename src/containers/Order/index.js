@@ -4,18 +4,10 @@ import authAction from '../../redux/auth/actions';
 import appActions from '../../redux/app/actions';
 import '../App/global.css';
 import SingleOrder from './Single';
-import LayoutContentWrapper from '../../components/utility/layoutWrapper';
-import LayoutContent from '../../components/utility/layoutContent';
 
 const { logout } = authAction;
 const { toggleAll } = appActions;
-export const App = () => (
-  <LayoutContentWrapper style={{ height: 'auto' }}>
-    <LayoutContent>
-      <SingleOrder />
-    </LayoutContent>
-  </LayoutContentWrapper>
-);
+export const App = () => <SingleOrder />;
 
 const mapStateToProps = state => {
   const {

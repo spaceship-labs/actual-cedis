@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Icon, Select, Input } from 'antd';
 import {
-  Container,
   Seccion,
-  OrderItems,
-  OrderPago,
-  OrderEnvio,
-  Sap,
-  Asesor,
   CancelBanner,
-  RowItem,
-  ReasonCancel,
   Modal,
   TxtStrong,
   TxtData,
@@ -21,14 +12,32 @@ import { getOrder } from './actions';
 import selector from './selectors';
 // import Title from 'antd/lib/skeleton/Avatar';
 import OrderModal from '../../components/SingleOrder/modal';
-import { modaldata } from './fakeData';
-import CnlActiv from '../../components/SingleOrder/cnlAct';
+import {
+  modaldata,
+  dataorder,
+  articulos,
+  modopay,
+  saporder,
+  shippingdata,
+  asesordata,
+} from './fakeData';
+import LayoutContentWrapper from '../../components/utility/layoutWrapper';
+import LayoutContent from '../../components/utility/layoutContent';
+import CancelActivity from '../../components/SingleOrder/cancelActivity';
+import NumberOrder from '../../components/SingleOrder/numberOrder';
+import ItemsPurchased from '../../components/SingleOrder/itemsPurchased';
+import MotivoCancelacion from '../../components/SingleOrder/motivo';
+import Paymode from '../../components/SingleOrder/paymode';
+import SapDocuments from '../../components/SingleOrder/sapDocuments';
+import ShippingOrder from '../../components/SingleOrder/shippingOrder';
+import Advisor from '../../components/SingleOrder/advisor';
 // import antiBind from './../../components/services/utils';
 class OrderSingle extends Component {
   constructor(props) {
     super(props);
     this.showpopup = this.showpopup.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.stateCancel = this.stateCancel.bind(this);
     this.state = {
       visible: false,
       showCancel: false,
@@ -47,6 +56,13 @@ class OrderSingle extends Component {
     });
   };
 
+  stateCancel = () => {
+    const { showCancel } = this.state;
+    this.setState({
+      showCancel: !showCancel,
+    });
+  };
+
   render() {
     const data = {
       VALOR: '017588',
@@ -54,277 +70,49 @@ class OrderSingle extends Component {
       E_Mail: 'yupit@spaceshiplabs.com',
       Store_name: 'yupitslabs',
     };
-    const { Option } = Select;
-    const textarea = Input;
     const { visible, showCancel } = this.state;
-
     return (
-      <Container>
-        <CancelBanner>
-          <TxtStrong>
-            ESTATUS DE CANCELACIONES{' '}
-            <TxtData onClick={this.showpopup}>#{data.VALOR}</TxtData> HAZ CLICK
-            SOBRE LA ORDEN PARA VER LOS DETALLES
-          </TxtStrong>
-          <Modal visible={visible} onCancel={this.handleCancel} footer={null}>
-            <OrderModal modaldata={modaldata} order={data.VALOR} />
-          </Modal>
-        </CancelBanner>
-        <Seccion>
-          <CnlActiv />
-        </Seccion>
-        <Seccion>
-          <h3>
-            <strong>
-              <i className="icon-checkout-ticket" /> ARTÍCULOS ADQUIRIDOS
-            </strong>
-          </h3>
-          <OrderItems>
-            <div>
-              <Row>
-                <Col span={showCancel ? 4 : 6}>Articulo</Col>
-                <Col span={showCancel ? 4 : 5}>CANTIDAD</Col>
-                <Col span={showCancel ? 6 : 7}>ENTREGA APROXIMADA</Col>
-                <Col span={showCancel ? 4 : 5}>PRECIO</Col>
-                {showCancel && <Col span={3} />}
-                {showCancel && <Col span={3} />}
-              </Row>
-              <RowItem>
-                <Col span={showCancel ? 4 : 6}>h</Col>
-                <Col span={showCancel ? 4 : 5}>1</Col>
-                <Col span={showCancel ? 6 : 7}>21/oct/2018</Col>
-                <Col span={showCancel ? 4 : 5}>$3,0025</Col>
-                {showCancel && (
-                  <Col className="Delete-items trash" span={3}>
-                    <Icon type="delete" />
-                    <p>CANCELAR ARTICULO</p>
-                  </Col>
-                )}
-                {showCancel && (
-                  <Col className="Delete-items" span={3}>
-                    <Select defaultValue="Option1-1">
-                      <Option value="Option1-1">1</Option>
-                      <Option value="Option1-2">2</Option>
-                    </Select>
-                    <p>PIEZAS A CANCELAR</p>
-                  </Col>
-                )}
-              </RowItem>
-            </div>
-          </OrderItems>
-        </Seccion>
-        <Seccion>
+      <LayoutContentWrapper style={{ height: 'auto' }}>
+        <LayoutContent>
+          <CancelBanner>
+            <TxtStrong>
+              ESTATUS DE CANCELACIONES{' '}
+              <TxtData onClick={this.showpopup}>#{data.VALOR}</TxtData> HAZ
+              CLICK SOBRE LA ORDEN PARA VER LOS DETALLES
+            </TxtStrong>
+            <Modal visible={visible} onCancel={this.handleCancel} footer={null}>
+              <OrderModal modaldata={modaldata} order={data.VALOR} />
+            </Modal>
+          </CancelBanner>
+          <CancelActivity
+            stateCancel={this.stateCancel}
+            dataorder={dataorder}
+          />
+          <Seccion>
+            <NumberOrder dataorder={dataorder} showCancel={showCancel} />
+          </Seccion>
+          <Seccion>
+            <ItemsPurchased showCancel={showCancel} articulos={articulos} />
+          </Seccion>
           {showCancel && (
-            <ReasonCancel>
-              <p>
-                <strong>MOTIVO DE CANCELACION: </strong>
-              </p>
-              <div className="area-cancel">
-                <div className="input-tex-area">
-                  <textarea row={8} />
-                </div>
-                <div className="btn-send-arrow">
-                  <Icon type="right" />
-                  <p>ENVIAR SOLICITUD DE CANCELACION</p>
-                </div>
-              </div>
-            </ReasonCancel>
+            <Seccion>
+              <MotivoCancelacion />
+            </Seccion>
           )}
-          <h3>
-            <strong>
-              <i className="icon-metodo-pago" /> PAGOS
-            </strong>
-          </h3>
-          <OrderPago>
-            <div>
-              <div>
-                <div>
-                  <strong>FORMA DE PAGO</strong>
-                </div>
-                <Row>
-                  <Col span={4}>FORMA DE PAGO</Col>
-                  <Col span={4}>FECHA</Col>
-                  <Col span={4}>FOLIO</Col>
-                  <Col span={4}>TIPO DE PAGO</Col>
-                  <Col span={4}>TERMINAL</Col>
-                  <Col span={4}>MONTO COBRADO</Col>
-                </Row>
-                <Row className="venta">
-                  <Col span={16}>
-                    <p className="taxes">
-                      *Todos los montos incluyen impuestos
-                    </p>
-                  </Col>
-                  <Col span={4}>
-                    <p>
-                      <strong>SUBTOTAL COMPRA:</strong>
-                    </p>
-                    <p>
-                      <strong>DESCUENTOS COMPRA:</strong>
-                    </p>
-                    <p>
-                      <strong>TOTAL COMPRA:</strong>
-                    </p>
-                    <p>
-                      <strong>TOTAL PAGADO:</strong>
-                    </p>
-                    <p>
-                      <strong>SALDO:</strong>
-                    </p>
-                    <br />
-                    <p>
-                      <strong>SALDO CLIENTE:</strong>
-                    </p>
-                  </Col>
-                  <Col span={4}>
-                    <p>
-                      <strong>$</strong>
-                    </p>
-                    <p>
-                      <strong>$</strong>
-                    </p>
-                    <p>
-                      <strong>$</strong>
-                    </p>
-                    <p>
-                      <strong>$</strong>
-                    </p>
-                    <p>
-                      <strong>$</strong>
-                    </p>
-                    <br />
-                    <p>
-                      <strong>$</strong>
-                    </p>
-                  </Col>
-                </Row>
-              </div>
-            </div>
-          </OrderPago>
-        </Seccion>
-        <Seccion>
-          <h3>
-            <strong>Documentos SAP</strong>
-          </h3>
-          <Sap>
-            <ul>
-              <li>
-                <p>
-                  <strong>Factura de deudores SAP</strong>:{' '}
-                </p>
-                <p>
-                  <strong>Pagos</strong>:
-                </p>
-                <ul>
-                  <li>1015059</li>
-                </ul>
-              </li>
-            </ul>
-          </Sap>
-        </Seccion>
-        <Seccion>
-          <h3>
-            <strong>
-              <i className="icon-envio" /> ENVÍO
-            </strong>
-          </h3>
-          <OrderEnvio>
-            <div>
-              <div>
-                <Row>
-                  <Col span={12}>
-                    <p>
-                      <strong>Email: </strong>{' '}
-                    </p>
-                    <p>
-                      <strong>Télefono: </strong>{' '}
-                    </p>
-                    <p>
-                      <strong>Celular: </strong>{' '}
-                    </p>
-                    <p>
-                      <strong>Calle: </strong>{' '}
-                    </p>
-                    <p>
-                      <strong>No. exterior: </strong>{' '}
-                    </p>
-                    <p>
-                      <strong>No. interior: </strong>{' '}
-                    </p>
-                    <p>
-                      <strong>Colonia: </strong>{' '}
-                    </p>
-                  </Col>
-                  <Col span={12}>
-                    <p>
-                      <strong>Municipio: </strong>
-                    </p>
-                    <p>
-                      <strong>Ciudad: </strong>
-                    </p>
-                    <p>
-                      <strong>Estado: </strong>
-                    </p>
-                    <p>
-                      <strong>C.P.: </strong>
-                    </p>
-                    <p>
-                      <strong>Entre calle: </strong>
-                    </p>
-                    <p>
-                      <strong>Y calle: </strong>
-                    </p>
-                    <p>
-                      <strong>Referencias: </strong>
-                    </p>
-                  </Col>
-                </Row>
-                <p>
-                  El personal de entrega le estará contactando vía telefónica en
-                  varias ocasiones:
-                </p>
-                <ul>
-                  <li>
-                    <strong>Coordinación de la fecha de entrega:</strong> En los
-                    siguientes 24 horas hábiles después de la compra.
-                  </li>
-                  <li>
-                    <strong>Coordinación de la hora de entrega:</strong> Mínimo
-                    24 horas antes de la entrega.
-                  </li>
-                  <li>
-                    <strong>Aviso de la llegada de la unidad de entrega</strong>{' '}
-                    1 hora antes de la entrega
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </OrderEnvio>
-        </Seccion>
-        <Seccion>
-          <h3>
-            <strong>
-              <i className="icon-vendedor" /> ASESOR DE INTERIORES
-            </strong>
-          </h3>
-          <Asesor>
-            <div>
-              <p>
-                <strong>Nombre: </strong>
-              </p>
-              <p>
-                <strong>Teléfono: </strong>
-              </p>
-              <p>
-                <strong>Celular: </strong>
-              </p>
-              <p>
-                <strong>Email:</strong>
-              </p>
-            </div>
-          </Asesor>
-        </Seccion>
-      </Container>
+          <Seccion>
+            <Paymode modopay={modopay} />
+          </Seccion>
+          <Seccion>
+            <SapDocuments saporder={saporder} />
+          </Seccion>
+          <Seccion>
+            <ShippingOrder shippingdata={shippingdata} />
+          </Seccion>
+          <Seccion>
+            <Advisor asesordata={asesordata} />
+          </Seccion>
+        </LayoutContent>
+      </LayoutContentWrapper>
     );
   }
 }

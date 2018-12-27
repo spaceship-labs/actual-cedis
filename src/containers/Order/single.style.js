@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { Row, Col, Modal as modalCnl, Button } from 'antd';
 
-export const Container = styled.div`
-  padding-left: 6%;
-  padding-right: 60px;
-  padding-top: 15px;
-  margin: 40px auto;
-  width: 100%;
-  background: white;
-`;
+// export const Container = styled.div`
+//   padding-left: 6%;
+//   padding-right: 60px;
+//   padding-top: 15px;
+//   margin: 40px auto;
+//   width: 100%;
+//   background: white;
+// `;
 
 export const Seccion = styled.div`
   border-bottom: 1px solid #000;
@@ -40,6 +40,8 @@ export const Order = styled.div`
 
   .ant-row {
     background: #eaecef;
+    margin-top: 10px;
+    padding: 10px;
   }
 `;
 
@@ -71,18 +73,24 @@ export const OrderItems = styled.div`
   padding: 4px 12px;
   text-align: right;
 `;
+export const Rowpay = styled(Row)`
+  line-height: 0%;
+  text-align: right;
+`;
+export const RowSale = styled(Row)`
+  padding: 10px 0px;
+  background: #eaecef;
+`;
+export const RowTaxes = styled(Row)`
+  text-align: left;
+  margin-top: 50%;
+  padding: 5% 0;
+`;
 export const OrderPago = styled.div`
   margin: 25px 0px;
   padding: 4px 12px;
-
-  .venta {
-    padding: 10px 0px;
-    background: #eaecef;
-  }
-  .taxes {
-    text-align: left;
-    margin-top: 10px;
-    padding: 5% 0;
+  .ant-row {
+    margin: 20px 0px;
   }
   p {
     margin: 4px 0;
@@ -113,7 +121,6 @@ export const Asesor = styled.div`
 `;
 export const CancelBanner = styled.div`
   width: 100%;
-  height: 15%;
   text-align: center;
   background: #bf0101;
   color: white;
@@ -121,6 +128,7 @@ export const CancelBanner = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 20px;
+  padding: 10px 0px;
   p {
     margin: 0px;
   }
@@ -154,52 +162,68 @@ export const StateClr = styled.p`
   margin-right: 20px;
   color: ${({ auth }) => stateColor[auth]};
 `;
+export const DeleteItems = styled(Row)`
+  color: red;
+  text-align: center;
+  font-size: 25px;
+`;
+export const CursorPointer = styled.div`
+  cursor: pointer;
+`;
 export const RowItem = styled(Row)`
   margin: 25px 0px;
   display: flex !important;
   justify-content: center;
   align-items: center;
-  .Delete-items {
-    color: red;
-    text-align: center;
-  }
-  .Delete-items .trash {
-    font-size: 25px;
-  }
+  border-bottom: 1px solid #d8d8d8;
   .Delete-iems p {
     font-size: 10px;
   }
   .anticon {
-    font-size: px;
+    font-size: 10px;
+  }
+  p {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+  img {
+    width: 20px;
+    height: 25px;
   }
 `;
 
 export const ReasonCancel = styled.div`
   margin: 25px 0px;
   width: 100%;
+  height: 200px;
   textarea {
     width: 80%;
     height: 150px;
     float: left;
     display: block;
   }
-  .btn-send-arrow {
-    float: left;
-    display: block;
-    height: 150px;
-    width: 20%;
-    text-align: center;
-    color: green;
-    margin-top: 10px;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-  }
-  .btn-send-arrow svg {
+`;
+
+export const SubmitMsj = styled.div`
+  float: left;
+  display: block;
+  height: 150px;
+  width: 20%;
+  text-align: center;
+  color: green;
+  margin-top: 10px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  svg {
     font-size: 25px;
   }
-  .btn-send-arrow p {
+  p {
     text-decoration: underline;
     font-size: 15px;
   }
+`;
+export const WayToPay = styled.div`
+  margin: 25px 0px;
+  width: 100%;
 `;
