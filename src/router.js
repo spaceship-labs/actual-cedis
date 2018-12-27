@@ -34,7 +34,7 @@ const PublicRoutes = ({ history, isLoggedIn }) => (
       <Route
         exact
         path="/OrderSingle"
-        component={asyncComponent(() => import('./containers/Order/index'))}
+        component={asyncComponent(() => import('./containers/Order/Single'))}
       />
       <Route
         exact

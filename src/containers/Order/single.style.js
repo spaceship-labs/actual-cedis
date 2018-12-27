@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { Row, Col, Modal as modalCnl, Button } from 'antd';
 
-export const Container = styled.div`
-  padding-left: 6%;
-  padding-right: 60px;
-  padding-top: 15px;
-  margin: 40px auto;
-  width: 100%;
-  background: white;
-`;
+// export const Container = styled.div`
+//   padding-left: 6%;
+//   padding-right: 60px;
+//   padding-top: 15px;
+//   margin: 40px auto;
+//   width: 100%;
+//   background: white;
+// `;
 
 export const Seccion = styled.div`
   border-bottom: 1px solid #000;
@@ -121,7 +121,6 @@ export const Asesor = styled.div`
 `;
 export const CancelBanner = styled.div`
   width: 100%;
-  height: 15%;
   text-align: center;
   background: #bf0101;
   color: white;
@@ -129,6 +128,7 @@ export const CancelBanner = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 20px;
+  padding: 10px 0px;
   p {
     margin: 0px;
   }
