@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import columns from './columns';
 import { containerSelector } from './selectors';
-import { changePage, getCancelRequests } from './actions';
 import CancelRequestsListStyled from '../../components/CancelRequestsList';
+import dispatcher from './dispatcher';
 
 class CancelRequestsList extends Component {
   componentDidMount() {
@@ -28,10 +27,7 @@ class CancelRequestsList extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ changePage, getCancelRequests }, dispatch);
-
 export default connect(
   containerSelector,
-  mapDispatchToProps
+  dispatcher
 )(CancelRequestsList);

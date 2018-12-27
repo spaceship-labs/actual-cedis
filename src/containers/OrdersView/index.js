@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import columns from './columns';
 import { containerSelector } from './selectors';
-import actions from './actions';
+import dispatcher from './dispatcher';
 import OrdersViewStyled from '../../components/OrdersView';
 
 class OrdersView extends Component {
@@ -28,12 +27,7 @@ class OrdersView extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  const { changePage, getOrders } = actions;
-  return bindActionCreators({ changePage, getOrders }, dispatch);
-};
-
 export default connect(
   containerSelector,
-  mapDispatchToProps
+  dispatcher
 )(OrdersView);

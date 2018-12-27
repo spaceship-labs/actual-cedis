@@ -1,18 +1,15 @@
-import { takeLatest, call, put, select } from 'redux-saga/effects';
-// import { listsActions, objectsActions } from '../../redux/actions';
-import { alertsSaga } from '../../redux/lists/sagas';
+import { takeLatest, put, select } from 'redux-saga/effects';
+import alertsActions from '../../redux/lists/alerts/actions';
 import containerActions from './actions';
 import { pageSelector } from './selectors';
 
 export function* getAlertsSaga() {
   const page = yield select(pageSelector);
-  const { data: alerts, total } = yield call(alertsSaga, page);
-  yield put(containerActions.setTotal(total));
-  yield put(containerActions.setAlerts(alerts));
+  yield put(alertsActions.getAlerts(page));
 }
 
 export function* changePageSaga({ payload: page }) {
-  yield put(containerActions.setPage(page));
+  yield put(alertsActions.setPage(page));
 }
 
 export default function* AlertsSaga() {
