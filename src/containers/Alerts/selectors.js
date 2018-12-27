@@ -1,10 +1,10 @@
-export const pageSelector = ({ containers: { Alerts } }) => Alerts.page;
-export const totalSelector = ({ containers: { Alerts } }) => Alerts.total;
-export const alertsSelector = ({ containers: { Alerts } }) => Alerts.entries;
-export const containerSelector = ({ containers: { Alerts } }) => {
-  const { entries: orders, page: current, total } = Alerts;
+export const pageSelector = ({ lists: { alerts } }) => alerts.page;
+export const totalSelector = ({ lists: { alerts } }) => alerts.total;
+export const alertsSelector = ({ lists: { alerts } }) => alerts.entries;
+export const containerSelector = ({ lists }) => {
+  const { entries: alerts, page: current, total } = lists.alerts;
   const pagination = { total, current };
-  return { orders, pagination };
+  return { alerts, pagination };
 };
 
 export default {

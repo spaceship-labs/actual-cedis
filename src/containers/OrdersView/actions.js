@@ -2,29 +2,8 @@ import { createActions } from 'ractionx';
 
 const prefix = '@actual/cedis/containers/OrdersView';
 
-export const types = [
-  'CHANGE_PAGE',
-  'GET_ORDERS',
-  'SET_ORDERS',
-  'SET_PAGE',
-  'SET_TOTAL',
-  'SET_PAGINATION',
-];
+export const types = ['GET_ORDERS', 'CHANGE_PAGE'];
 
-const {
-  changePage,
-  getOrders,
-  setOrders,
-  setPage,
-  setTotal,
-  setPagination,
-} = createActions(prefix, types);
+const { changePage, getOrders } = createActions(prefix, types);
 
-export default {
-  changePage,
-  getOrders,
-  setOrders,
-  setPage,
-  setTotal,
-  setPagination,
-};
+export default { changePage, getOrders };

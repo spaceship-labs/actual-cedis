@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import columns from './columns';
 import { containerSelector } from './selectors';
-import actions from './actions';
+import dispatcher from './dispatcher';
 import AlertsListStyled from '../../components/Alerts';
 
 class AlertsList extends Component {
@@ -28,12 +27,7 @@ class AlertsList extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  const { changePage, getAlerts } = actions;
-  return bindActionCreators({ changePage, getAlerts }, dispatch);
-};
-
 export default connect(
   containerSelector,
-  mapDispatchToProps
+  dispatcher
 )(AlertsList);

@@ -1,26 +1,21 @@
-import { takeLatest, call, put, select } from 'redux-saga/effects';
-import { cancelsSaga } from '../../redux/lists/sagas';
-import {
-  setTotal,
-  setCancelRequests,
-  setPage,
-  getCancelRequests,
-  changePage,
-} from './actions';
+import { takeLatest, put, select } from 'redux-saga/effects';
+import cancelRequestsActions from '../../redux/lists/cancelRequests/actions';
+import containerActions from './actions';
 import { pageSelector } from './selectors';
 
 export function* getCancelRequestsSaga() {
   const page = yield select(pageSelector);
-  const { data: cancelRequests, total } = yield call(cancelsSaga, page);
-  yield put(setTotal(total));
-  yield put(setCancelRequests(cancelRequests));
+  yield put(cancelRequestsActions.getCancelRequests(page));
 }
 
 export function* changePageSaga({ payload: page }) {
-  yield put(setPage(page));
+  yield put(cancelRequestsActions.setPage(page));
 }
 
-export default function* OrdersViewSaga() {
-  yield takeLatest(getCancelRequests.type, getCancelRequestsSaga);
-  yield takeLatest(changePage.type, changePageSaga);
+export default function* CancelRequestsSaga() {
+  yield takeLatest(
+    containerActions.getCancelRequests.type,
+    getCancelRequestsSaga
+  );
+  yield takeLatest(containerActions.changePage.type, changePageSaga);
 }

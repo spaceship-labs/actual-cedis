@@ -1,10 +1,9 @@
 import clone from 'clone';
-import { renderCell } from '../../components/TableList/helperCells';
+import { renderCell, LinkCell } from '../../components/TableList/helperCells';
 
 const statusText = {
-  paid: 'Pagado',
-  canceled: 'Cancelado',
-  partiallyCanceled: 'Parcialmente Cancelado',
+  pending: 'Pendiente',
+  reviewed: 'Revisado',
 };
 /*
 ESTE ES EL BUENO:
@@ -26,14 +25,14 @@ const columns = [
     title: 'Folio',
     key: 'folio',
     width: 300,
-    render: object => renderCell(object.Order, 'TextCell'),
+    render: object => renderCell(object.Order, 'TextCell', 'folio'),
     sorter: true,
   },
   {
     title: 'Motivos',
     key: 'status',
     width: 300,
-    render: object => renderCell(object, 'TextCell'),
+    render: object => renderCell(object, 'TextCell', 'reason'),
     sorter: true,
   },
   {
@@ -42,6 +41,12 @@ const columns = [
     width: 300,
     render: object => renderCell(statusText[object.status], 'TextCell'),
     sorter: true,
+  },
+  {
+    title: 'Acceder',
+    key: 'id',
+    render: object =>
+      LinkCell('Acceder', `/dashboard/cancel-request/${object.id}`),
   },
 ];
 

@@ -1,30 +1,9 @@
 import { createActions } from 'ractionx';
 
-const prefix = '@actual/cedis/containers/OrdersView/';
+const prefix = '@actual/cedis/containers/Alerts/';
 
-const types = [
-  'CHANGE_PAGE',
-  'GET_ALERTS',
-  'SET_ALERTS',
-  'SET_PAGE',
-  'SET_TOTAL',
-  'SET_PAGINATION',
-];
+const types = ['CHANGE_PAGE', 'GET_ALERTS'];
 
-const {
-  changePage,
-  getAlerts,
-  setAlerts,
-  setPage,
-  setTotal,
-  setPagination,
-} = createActions(prefix, types);
+const { changePage, getAlerts } = createActions(prefix, types);
 
-export default {
-  changePage,
-  getAlerts,
-  setAlerts,
-  setPage,
-  setTotal,
-  setPagination,
-};
+export default { changePage, getAlerts };
