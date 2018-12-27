@@ -1,6 +1,5 @@
 import app from './app/actions';
 import auth from './auth/actions';
-import lists from './lists/actions';
 import objects from './objects/actions';
 
 export const appActions = { ...app };
