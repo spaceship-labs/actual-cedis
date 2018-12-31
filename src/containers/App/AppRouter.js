@@ -29,7 +29,9 @@ const routes = [
   },
   {
     path: 'cancel-request/:id',
-    component: asyncComponent(() => import('../CancelRequest/CancelRequest')),
+    component: asyncComponent(() =>
+      import('../CancelRequest/old/CancelRequest')
+    ),
   },
 ];
 

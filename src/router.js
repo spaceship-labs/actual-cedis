@@ -40,7 +40,7 @@ const PublicRoutes = ({ history, isLoggedIn }) => (
         exact
         path="/requestList"
         component={asyncComponent(() =>
-          import('./containers/CancelRequest/CancelRequest')
+          import('./containers/CancelRequest/old/CancelRequest')
         )}
       />
       <RestrictedRoute
