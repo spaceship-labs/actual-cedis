@@ -1,18 +1,18 @@
 export const requestSelector = ({ containers }) =>
-  containers.CancelRequest.request;
+  containers.CancelRequestOld.request;
 
 export const statusSelector = ({ containers }) =>
-  containers.CancelRequest.status;
+  containers.CancelRequestOld.status;
 
 export const acceptedSelector = ({ containers }) =>
-  containers.CancelRequest.accepted;
+  containers.CancelRequestOld.accepted;
 
 export const rejectedSelector = ({ containers }) =>
-  containers.CancelRequest.rejected;
+  containers.CancelRequestOld.rejected;
 
 export const propsSelector = ({ containers }) => {
   const {
-    CancelRequest: {
+    CancelRequestOld: {
       request,
       accepted: acceptedElements,
       rejected: rejectedElements,

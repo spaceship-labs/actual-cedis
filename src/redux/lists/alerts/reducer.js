@@ -1,7 +1,7 @@
 import actions from './actions';
 import shape from '../shape';
 
-export default function ordersReducer(state = shape, { type, payload }) {
+export default function alertsReducer(state = shape, { type, payload }) {
   switch (type) {
     case actions.setAlerts.type:
       return { ...state, entries: payload };

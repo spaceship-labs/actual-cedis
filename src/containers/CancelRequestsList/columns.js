@@ -30,7 +30,7 @@ const columns = [
   },
   {
     title: 'Motivos',
-    key: 'status',
+    key: 'reason',
     width: 300,
     render: object => renderCell(object, 'TextCell', 'reason'),
     sorter: true,
