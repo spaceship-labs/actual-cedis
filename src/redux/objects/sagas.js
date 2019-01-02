@@ -8,7 +8,7 @@ export function* orderSaga(orderId) {
 }
 
 export function* getCancelSaga({ payload: cancelId }) {
-  const { data: cancelOrder } = yield call(api.cancel.get, { id: cancelId });
+  const { data: cancelOrder } = yield call(api.cancel.get, cancelId);
   yield put(actions.setCancel(cancelOrder));
 }
 
@@ -18,7 +18,7 @@ export function* updateCancelSaga({ payload }) {
   return cancelOrder;
 }
 
-export default function* listsSagas() {
+export default function* objectsSagas() {
   yield takeLatest(actions.getOrder.type, orderSaga);
   yield takeLatest(actions.getCancel.type, getCancelSaga);
   yield takeLatest(actions.updateCancel.type, updateCancelSaga);
