@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
   Seccion,
@@ -8,19 +7,10 @@ import {
   TxtStrong,
   TxtData,
 } from './single.style';
-import { getOrder } from './actions';
-import selector from './selectors';
+
 // import Title from 'antd/lib/skeleton/Avatar';
 import OrderModal from '../../components/SingleOrder/modal';
-import {
-  modaldata,
-  dataorder,
-  articulos,
-  modopay,
-  saporder,
-  shippingdata,
-  asesordata,
-} from './fakeData';
+import { modaldata, articulos, asesordata } from './fakeData';
 import LayoutContentWrapper from '../../components/utility/layoutWrapper';
 import LayoutContent from '../../components/utility/layoutContent';
 import CancelActivity from '../../components/SingleOrder/cancelActivity';
@@ -31,7 +21,10 @@ import Paymode from '../../components/SingleOrder/paymode';
 import SapDocuments from '../../components/SingleOrder/sapDocuments';
 import ShippingOrder from '../../components/SingleOrder/shippingOrder';
 import Advisor from '../../components/SingleOrder/advisor';
+import dispatch from './dispacher';
+import { containerSelector } from './selectors';
 // import antiBind from './../../components/services/utils';
+
 class OrderSingle extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +35,16 @@ class OrderSingle extends Component {
       visible: false,
       showCancel: false,
     };
+  }
+
+  componentDidMount() {
+    const {
+      match: {
+        params: { id },
+      },
+      getOrder,
+    } = this.props;
+    getOrder(id);
   }
 
   showpopup = () => {
@@ -64,32 +67,32 @@ class OrderSingle extends Component {
   };
 
   render() {
-    const data = {
-      VALOR: '017588',
-      name: 'Fernando Marquez',
-      E_Mail: 'yupit@spaceshiplabs.com',
-      Store_name: 'yupitslabs',
-    };
+    const { order } = this.props;
+    const { folio, Broker, OrderCancelations } = order;
     const { visible, showCancel } = this.state;
+    if (!folio) return <div>Loading...</div>;
     return (
       <LayoutContentWrapper style={{ height: 'auto' }}>
         <LayoutContent>
-          <CancelBanner>
-            <TxtStrong>
-              ESTATUS DE CANCELACIONES{' '}
-              <TxtData onClick={this.showpopup}>#{data.VALOR}</TxtData> HAZ
-              CLICK SOBRE LA ORDEN PARA VER LOS DETALLES
-            </TxtStrong>
-            <Modal visible={visible} onCancel={this.handleCancel} footer={null}>
-              <OrderModal modaldata={modaldata} order={data.VALOR} />
-            </Modal>
-          </CancelBanner>
-          <CancelActivity
-            stateCancel={this.stateCancel}
-            dataorder={dataorder}
-          />
+          {OrderCancelations && (
+            <CancelBanner>
+              <TxtStrong>
+                ESTATUS DE CANCELACIONES{' '}
+                <TxtData onClick={this.showpopup}>#{folio}</TxtData> HAZ CLICK
+                SOBRE LA ORDEN PARA VER LOS DETALLES
+              </TxtStrong>
+              <Modal
+                visible={visible}
+                onCancel={this.handleCancel}
+                footer={null}
+              >
+                <OrderModal modaldata={modaldata} order={folio} />
+              </Modal>
+            </CancelBanner>
+          )}
+          <CancelActivity stateCancel={this.stateCancel} dataorder={order} />
           <Seccion>
-            <NumberOrder dataorder={dataorder} showCancel={showCancel} />
+            <NumberOrder dataorder={order} showCancel={showCancel} />
           </Seccion>
           <Seccion>
             <ItemsPurchased showCancel={showCancel} articulos={articulos} />
@@ -100,27 +103,26 @@ class OrderSingle extends Component {
             </Seccion>
           )}
           <Seccion>
-            <Paymode modopay={modopay} />
+            <Paymode dataorder={order} />
           </Seccion>
           <Seccion>
-            <SapDocuments saporder={saporder} />
+            <SapDocuments dataorder={order} />
           </Seccion>
           <Seccion>
-            <ShippingOrder shippingdata={shippingdata} />
+            <ShippingOrder shippingdata={order} />
           </Seccion>
-          <Seccion>
-            <Advisor asesordata={asesordata} />
-          </Seccion>
+          {Broker && (
+            <Seccion>
+              <Advisor asesordata={asesordata} />
+            </Seccion>
+          )}
         </LayoutContent>
       </LayoutContentWrapper>
     );
   }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getOrder }, dispatch);
-
 export default connect(
-  selector,
-  mapDispatchToProps
+  containerSelector,
+  dispatch
 )(OrderSingle);

@@ -1,10 +1,10 @@
-import { call, takeLatest } from 'redux-saga/effects';
+import { call, takeLatest, put } from 'redux-saga/effects';
 import actions from './actions';
 import api from '../../services/api';
 
-export function* orderSaga(orderId) {
-  const order = yield call(api.orders.findById, orderId);
-  return order;
+export function* orderSaga({ payload: orderId }) {
+  const { data: order } = yield call(api.orders.findById, orderId);
+  yield put(actions.setOrder(order));
 }
 
 export function* getCancelSaga(cancelId) {
@@ -23,7 +23,7 @@ export function* updateCancelSaga({ payload }) {
   return cancelOrder;
 }
 
-export default function* listsSagas() {
+export default function* objectsSagas() {
   yield takeLatest(actions.getOrder.type, orderSaga);
   yield takeLatest(actions.getCancel.type, getCancelSaga);
   yield takeLatest(actions.createCancel.type, createCancelSaga);

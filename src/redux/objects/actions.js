@@ -2,11 +2,26 @@ import { createActions } from 'ractionx';
 
 const prefix = '@actual/cedis/objects';
 
-const types = ['GET_ORDER', 'GET_CANCEL', 'CREATE_CANCEL', 'UPDATE_CANCEL'];
+const types = [
+  'GET_ORDER',
+  'SET_ORDER',
+  'GET_CANCEL',
+  'CREATE_CANCEL',
+  'UPDATE_CANCEL',
+];
 
-const { getOrder, getCancel, createCancel, updateCancel } = createActions(
-  prefix,
-  types
-);
+const {
+  getOrder,
+  setOrder,
+  getCancel,
+  createCancel,
+  updateCancel,
+} = createActions(prefix, types);
 
-export default { getOrder, getCancel, createCancel, updateCancel };
+export default {
+  getOrder,
+  setOrder,
+  getCancel,
+  createCancel,
+  updateCancel,
+};

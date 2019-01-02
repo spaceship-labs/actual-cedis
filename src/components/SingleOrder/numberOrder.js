@@ -3,7 +3,10 @@ import { OrderTextBlock } from '../../containers/Order/single.style';
 import CancelAllButton from './cancelAllButton';
 
 const NumberOrder = ({
-  dataorder: { name, E_Mail: email, Store_name: storename },
+  dataorder: {
+    Client: { CardName, E_Mail: email },
+    Store: { name },
+  },
   showCancel,
 }) => (
   <OrderTextBlock>
@@ -11,7 +14,7 @@ const NumberOrder = ({
       <strong>¡GRACIAS POR SU COMPRA!</strong>
     </h3>
     <p>
-      Estimado<strong> {name}</strong>
+      Estimado<strong> {CardName}</strong>
     </p>
     <p>
       Su compra ha sido procesada y en breve estará recibiendo su confirmación
@@ -20,7 +23,7 @@ const NumberOrder = ({
     </p>
 
     <p>
-      <strong>Tienda: </strong> {storename}
+      <strong>Tienda: </strong> {name}
     </p>
     <CancelAllButton showCancel={showCancel} />
   </OrderTextBlock>

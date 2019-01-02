@@ -4,20 +4,20 @@ import { OrderEnvio } from '../../containers/Order/single.style';
 
 const ShippingOrder = ({
   shippingdata: {
-    Email,
-    Télefono,
-    Celular,
-    Calle,
-    Noexterior,
-    Nointerior,
-    Colonia,
-    Municipio,
-    Ciudad,
-    Estado,
-    CP,
-    Entrecalle,
-    calle,
-    Referencias,
+    E_Mail: Email,
+    Tel1: Tel,
+    Cellolar: Cel,
+    address,
+    U_Noexterior: noExt,
+    U_Nointerior: noInt,
+    U_Colonia: District,
+    U_Mpio: Tow,
+    U_Ciudad: City,
+    U_Estado: State,
+    U_CP: PostalCode,
+    U_Entrecalle: BetStreet,
+    U_Ycalle: BetStreet2,
+    U_Notes1: Reference,
   },
 }) => (
   <div>
@@ -35,52 +35,52 @@ const ShippingOrder = ({
                 <strong>Email: </strong> {`${Email || 'N/A'}`}
               </p>
               <p>
-                <strong>Télefono: </strong> {`${Télefono || 'N/A'}`}
+                <strong>Télefono: </strong> {`${Tel || 'N/A'}`}
               </p>
               <p>
-                <strong>Celular: </strong> {`${Celular || 'N/A'}`}
+                <strong>Celular: </strong> {`${Cel || 'N/A'}`}
               </p>
               <p>
-                <strong>Calle: </strong> {`${Calle || 'N/A'}`}
+                <strong>Calle: </strong> {`${address || 'N/A'}`}
               </p>
               <p>
-                <strong>No. exterior: </strong> {`${Noexterior || 'N/A'}`}
+                <strong>No. exterior: </strong> {`${noExt || 'N/A'}`}
               </p>
               <p>
-                <strong>No. interior: </strong> {`${Nointerior || 'N/A'}`}
+                <strong>No. interior: </strong> {`${noInt || 'N/A'}`}
               </p>
               <p>
-                <strong>Colonia: </strong> {`${Colonia || 'N/A'}`}
+                <strong>Colonia: </strong> {`${District || 'N/A'}`}
               </p>
             </Col>
             <Col span={12}>
               <p>
                 <strong>Municipio: </strong>
-                {`${Municipio || 'N/A'}`}
+                {`${Tow || 'N/A'}`}
               </p>
               <p>
                 <strong>Ciudad: </strong>
-                {`${Ciudad || 'N/A'}`}
+                {`${City || 'N/A'}`}
               </p>
               <p>
                 <strong>Estado: </strong>
-                {`${Estado || 'N/A'}`}
+                {`${State || 'N/A'}`}
               </p>
               <p>
                 <strong>C.P.: </strong>
-                {`${CP || 'N/A'}`}
+                {`${PostalCode || 'N/A'}`}
               </p>
               <p>
                 <strong>Entre calle: </strong>
-                {`${Entrecalle || 'N/A'}`}
+                {`${BetStreet || 'N/A'}`}
               </p>
               <p>
                 <strong>Y calle: </strong>
-                {`${calle || 'N/A'}`}
+                {`${BetStreet2 || 'N/A'}`}
               </p>
               <p>
                 <strong>Referencias: </strong>
-                {`${Referencias || 'N/A'}`}
+                {`${Reference || 'N/A'}`}
               </p>
             </Col>
           </Row>
