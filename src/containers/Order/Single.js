@@ -31,9 +31,11 @@ class OrderSingle extends Component {
     this.showpopup = this.showpopup.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.stateCancel = this.stateCancel.bind(this);
+    this.cancelquantity = this.cancelquantity.bind(this);
     this.state = {
       visible: false,
       showCancel: false,
+      quantitycancel: 0,
     };
   }
 
@@ -53,6 +55,12 @@ class OrderSingle extends Component {
     });
   };
 
+  cancelquantity = ({ quantity }) => {
+    this.setState({
+      quantitycancel: quantity,
+    });
+  };
+
   handleCancel = () => {
     this.setState({
       visible: false,
@@ -69,7 +77,7 @@ class OrderSingle extends Component {
   render() {
     const { order } = this.props;
     const { folio, Broker, OrderCancelations } = order;
-    const { visible, showCancel } = this.state;
+    const { visible, showCancel, quantitycancel } = this.state;
     if (!folio) return <div>Loading...</div>;
     return (
       <LayoutContentWrapper style={{ height: 'auto' }}>
@@ -95,11 +103,15 @@ class OrderSingle extends Component {
             <NumberOrder dataorder={order} showCancel={showCancel} />
           </Seccion>
           <Seccion>
-            <ItemsPurchased showCancel={showCancel} articulos={articulos} />
+            <ItemsPurchased
+              showCancel={showCancel}
+              articulos={articulos}
+              cancelquantity={this.cancelquantity}
+            />
           </Seccion>
           {showCancel && (
             <Seccion>
-              <MotivoCancelacion />
+              <MotivoCancelacion quantitycancel={quantitycancel} />
             </Seccion>
           )}
           <Seccion>

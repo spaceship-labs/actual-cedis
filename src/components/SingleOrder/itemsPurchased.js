@@ -9,7 +9,7 @@ import {
 } from '../../containers/Order/single.style';
 
 const { Option } = Select;
-const ItemsPurchased = ({ showCancel, articulos }) => (
+const ItemsPurchased = ({ showCancel, articulos, cancelquantity }) => (
   <div>
     <h3>
       <strong>
@@ -81,7 +81,12 @@ const ItemsPurchased = ({ showCancel, articulos }) => (
                   <DeleteItems span={6}>
                     <Select defaultValue={0}>
                       {[...Array(cantidad + 1)].map((x, i) => (
-                        <Option value={`value-${i}`}>{i}</Option>
+                        <Option
+                          value={`value-${i}`}
+                          onChange={cancelquantity(i)}
+                        >
+                          {i}
+                        </Option>
                       ))}
                     </Select>
                     <p>PIEZAS A CANCELAR</p>
