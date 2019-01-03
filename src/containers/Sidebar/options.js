@@ -11,18 +11,18 @@ const options = [
   },
   {
     key: 'orders',
-    label: 'Orders List',
-    leftIcon: 'ion-document',
+    label: 'Ordenes',
+    leftIcon: 'file-text',
   },
   {
     key: 'cancel-requests',
     label: 'Cancelaciones',
-    leftIcon: 'ion-document',
+    leftIcon: 'file-excel',
   },
   {
     key: 'alerts',
     label: 'Alertas',
-    leftIcon: 'ion-document',
+    leftIcon: 'exclamation-circle',
   },
 ];
 export default options;

@@ -12,7 +12,6 @@ import config, {
 } from './containers/LanguageSwitcher/config';
 import { themeConfig } from './settings';
 import DashAppHolder from './dashAppStyle';
-import Boot from './redux/boot';
 
 const currentAppLocale =
   AppLocale[getCurrentLanguage(config.defaultLanguage || 'english').locale];
@@ -33,9 +32,6 @@ const DashApp = () => (
     </IntlProvider>
   </LocaleProvider>
 );
-Boot()
-  .then(() => DashApp())
-  .catch(error => console.error(error));
 
 export default DashApp;
 export { AppLocale };

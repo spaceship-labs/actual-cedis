@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import clone from 'clone';
 import { Link } from 'react-router-dom';
-import { Layout } from 'antd';
+import { Layout, Icon } from 'antd';
 import options from './options';
 import Scrollbars from '../../components/utility/customScrollBar';
 import Menu from '../../components/uielements/menu';
@@ -99,7 +99,7 @@ class Sidebar extends Component {
       <Menu.Item key={key}>
         <Link to={`/dashboard/${key}`}>
           <span className="isoMenuHolder" style={submenuColor}>
-            <i className={leftIcon} />
+            <Icon type={leftIcon} />
             <span className="nav-text">
               <IntlMessages id={label} />
             </span>

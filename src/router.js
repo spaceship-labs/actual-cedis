@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { connect } from 'react-redux';
 import App from './containers/App/App'; // eslint-disable-line
 import asyncComponent from './helpers/AsyncFunc';
@@ -34,7 +34,7 @@ const PublicRoutes = ({ history, isLoggedIn }) => (
       <Route
         exact
         path="/OrderSingle"
-        component={asyncComponent(() => import('./containers/Order/index'))}
+        component={asyncComponent(() => import('./containers/Order/Single'))}
       />
       <Route
         exact
@@ -51,6 +51,7 @@ const PublicRoutes = ({ history, isLoggedIn }) => (
     </div>
   </ConnectedRouter>
 );
+
 export default connect(() => ({
   isLoggedIn: isAuthenticated(),
 }))(PublicRoutes);

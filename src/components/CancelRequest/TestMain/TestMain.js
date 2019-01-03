@@ -9,12 +9,11 @@ import {
   StatusContent,
   RequestIcon,
   StatusIcon,
-} from './CancelRequest.style';
-import RequestConfirmAprove from './RequestConfirmAprove';
-import RequestConfirmDenied from './RequestConfirmDenied';
-import Option from './Option';
-import Regresar from './Regresar';
-import Checkout from '../../image/svgs/checkout-ticket.svg';
+} from '../CancelRequest.style';
+
+import TestOption from './TestOption';
+import TestRegresar from './TestRegresar/TestRegresar';
+import Checkout from '../../../image/svgs/checkout-ticket.svg';
 
 const Item = ({ object }) => (
   <StatusH3 weight="bolder">{object.description.value}</StatusH3>
@@ -83,12 +82,6 @@ const TestMain = ({
   autorizado,
   rechazado,
   goBack,
-  toogleConfirmA,
-  handleClickAN,
-  handleClickAY,
-  toogleConfirmD,
-  handleClickDN,
-  handleClickDY,
 }) => (
   <div>
     <StatusContent>
@@ -168,17 +161,12 @@ const TestMain = ({
         </Col>
         <Col md={4} lg={4}>
           <ColCenter height="100px!important">
-            <Option
+            <TestOption
               toogle={toogleOption}
               handleClickAprove={handleClickAprove}
               handleClickDenied={handleClickDenied}
             />
-            {/* <TestOption
-                toogle={toogleOption}
-                handleClickAprove={handleClickAprove}
-                handleClickDenied={handleClickDenied}
-              /> */}
-            <Regresar
+            <TestRegresar
               toogle={toogleBack}
               autorizado={autorizado}
               rechazado={rechazado}
@@ -188,16 +176,6 @@ const TestMain = ({
         </Col>
       </Row>
     </StatusContent>
-    <RequestConfirmAprove
-      toogle={toogleConfirmA}
-      handleClickAN={handleClickAN}
-      handleClickAY={handleClickAY}
-    />
-    <RequestConfirmDenied
-      toogle={toogleConfirmD}
-      handleClickDN={handleClickDN}
-      handleClickDY={handleClickDY}
-    />
   </div>
 );
 

@@ -13,7 +13,12 @@ import {
 import Trash from '../../image/svgs/trash.svg';
 import { antiBind } from '../../helpers/utils';
 
-const SolicitudBar = ({ folio, buttonsCb }) => (
+const SolicitudBar = ({
+  handleClickAproveAll,
+  handleClickDeniedAll,
+  folio,
+  buttonsCb,
+}) => (
   <SolicitudContainer>
     <SolicitudItem type="flex" justify="start">
       <LogoCol span={2}>
@@ -40,6 +45,7 @@ const SolicitudBar = ({ folio, buttonsCb }) => (
       <ButtonsCol md={8} lg={6}>
         <ColCenter>
           <AllButton
+            onClick={handleClickAproveAll}
             type="primary"
             size="default"
             color="white!important"
@@ -53,6 +59,7 @@ const SolicitudBar = ({ folio, buttonsCb }) => (
         </ColCenter>
         <ColCenter>
           <AllButton
+            onClick={handleClickDeniedAll}
             type="danger"
             size="default"
             color="white!important"
