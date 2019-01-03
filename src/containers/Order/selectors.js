@@ -1,7 +1,14 @@
 export const orderSelector = ({ objects }) => objects.order;
 export const loadingSelector = ({ objects }) => objects.loading;
-export const containerSelector = ({ objects }) => {
+export const productSelector = ({ lists: { products } }) => products;
+export const containerSelector = ({ objects, lists }) => {
   const { order, loading } = objects;
-  return { order, loading };
+  const { products } = lists;
+  return { order, loading, products };
 };
-export default { orderSelector, loadingSelector, containerSelector };
+export default {
+  orderSelector,
+  loadingSelector,
+  productSelector,
+  containerSelector,
+};

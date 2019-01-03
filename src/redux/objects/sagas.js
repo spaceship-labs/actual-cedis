@@ -1,9 +1,13 @@
 import { call, takeLatest, put } from 'redux-saga/effects';
 import actions from './actions';
+import productActions from '../lists/products/actions';
 import api from '../../services/api';
 
 export function* orderSaga({ payload: orderId }) {
   const { data: order } = yield call(api.orders.findById, orderId);
+  const { Details } = order;
+  const productsId = Details.map(item => item.Product);
+  yield put(productActions.getProducts(productsId));
   yield put(actions.setOrder(order));
 }
 

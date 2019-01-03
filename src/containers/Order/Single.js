@@ -10,7 +10,7 @@ import {
 
 // import Title from 'antd/lib/skeleton/Avatar';
 import OrderModal from '../../components/SingleOrder/modal';
-import { modaldata, articulos, asesordata } from './fakeData';
+import { modaldata, asesordata } from './fakeData';
 import LayoutContentWrapper from '../../components/utility/layoutWrapper';
 import LayoutContent from '../../components/utility/layoutContent';
 import CancelActivity from '../../components/SingleOrder/cancelActivity';
@@ -75,7 +75,7 @@ class OrderSingle extends Component {
   };
 
   render() {
-    const { order } = this.props;
+    const { order, products } = this.props;
     const { folio, Broker, OrderCancelations } = order;
     const { visible, showCancel, quantitycancel } = this.state;
     if (!folio) return <div>Loading...</div>;
@@ -105,7 +105,8 @@ class OrderSingle extends Component {
           <Seccion>
             <ItemsPurchased
               showCancel={showCancel}
-              articulos={articulos}
+              products={products}
+              order={order}
               cancelquantity={this.cancelquantity}
             />
           </Seccion>
