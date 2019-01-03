@@ -1,6 +1,8 @@
 import { call, takeLatest, put } from 'redux-saga/effects';
 import actions from './actions';
+import productsActions from '../lists/products/actions';
 import api from '../../services/api';
+import { arrayToObject, extractKeyValues } from '../../helpers/dataStructures';
 
 export function* orderSaga(orderId) {
   const order = yield call(api.orders.findById, orderId);
@@ -9,7 +11,18 @@ export function* orderSaga(orderId) {
 
 export function* getCancelSaga({ payload: cancelId }) {
   const { data: cancelOrder } = yield call(api.cancel.get, cancelId);
-  yield put(actions.setCancel(cancelOrder));
+
+  const productsId = yield call(
+    extractKeyValues,
+    cancelOrder.Details,
+    'Product',
+    false
+  );
+  yield put(productsActions.getProducts(productsId));
+
+  const Details = yield call(arrayToObject, cancelOrder.Details, 'id');
+
+  yield put(actions.setCancel({ ...cancelOrder, Details }));
 }
 
 export function* updateCancelSaga({ payload }) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import dispatcher from './dispatcher';
 import selectors from './selectors';
-// import CancelRequestView from '../../components/CancelRequest';
+import CancelRequestView from '../../components/CancelRequest';
 
 class CancelRequest extends Component {
   componentDidMount() {
@@ -17,8 +17,11 @@ class CancelRequest extends Component {
   }
 
   render() {
-    // return <CancelRequestView {...this.props} />;
-    return <div>Loading...</div>;
+    const {
+      cancelRequest: { id },
+    } = this.props;
+
+    return id ? <CancelRequestView {...this.props} /> : null;
   }
 }
 

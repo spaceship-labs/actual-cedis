@@ -11,8 +11,9 @@ import {
   StatusSpan,
 } from './CancelRequest.style';
 import Trash from '../../image/svgs/trash.svg';
+import { antiBind } from '../../helpers/utils';
 
-const SolicitudBar = () => (
+const SolicitudBar = ({ folio, buttonsCb }) => (
   <SolicitudContainer>
     <SolicitudItem type="flex" justify="start">
       <LogoCol span={2}>
@@ -33,7 +34,7 @@ const SolicitudBar = () => (
           transform="uppercase"
           padding="0px 0px 0px 10px"
         >
-          Ninguna solicitud pendiente
+          {folio}
         </StatusSpan>
       </TextCol>
       <ButtonsCol md={8} lg={6}>
@@ -45,6 +46,7 @@ const SolicitudBar = () => (
             transform="uppercase"
             bgcolor="#33BA2C!important"
             font="10px!important"
+            onClick={antiBind(buttonsCb, 'authorized')}
           >
             <strong> Autorizar todo</strong>
           </AllButton>
@@ -57,6 +59,7 @@ const SolicitudBar = () => (
             transform="uppercase"
             bgcolor="#C82828!important"
             font="10px!important"
+            onClick={antiBind(buttonsCb, 'rejected')}
           >
             <strong> Rechazar todo</strong>
           </AllButton>

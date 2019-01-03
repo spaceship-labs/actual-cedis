@@ -44,4 +44,8 @@ export default {
   alerts: {
     list: params => get('/alert', { params }),
   },
+  products: {
+    list: ids =>
+      post('/product/multiplefindbyids', { ids, populate_fields: [] }),
+  },
 };

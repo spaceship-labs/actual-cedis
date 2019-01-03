@@ -7,7 +7,7 @@ const initialState = {
 function objectsReducer(state = initialState, { type, payload }) {
   switch (type) {
     case actions.setCancel.type:
-      return { ...state, cancel: payload };
+      return { ...state, cancelRequest: payload };
     default:
       return state;
   }
