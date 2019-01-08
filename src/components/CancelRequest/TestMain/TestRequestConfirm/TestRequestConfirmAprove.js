@@ -7,7 +7,7 @@ import {
   AllButton,
 } from '../../CancelRequest.style';
 
-const TestRequestConfirmAprove = ({ show, cancelCb }) =>
+const TestRequestConfirmAprove = ({ show, cancelCb, acceptCb }) =>
   show ? (
     <StatusPop width="100px" height="auto">
       <ItemCol>
@@ -45,6 +45,7 @@ const TestRequestConfirmAprove = ({ show, cancelCb }) =>
               transform="uppercase"
               bgcolor="#33BA2C!important"
               font="10px!important"
+              onClick={acceptCb}
             >
               Aceptar
             </AllButton>

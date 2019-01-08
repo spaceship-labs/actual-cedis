@@ -16,6 +16,10 @@ class CancelRequest extends Component {
     getCancelRequest(id);
   }
 
+  componentDidCatch(err) {
+    console.log('Cached Error: ', err);
+  }
+
   render() {
     const {
       cancelRequest: { id },

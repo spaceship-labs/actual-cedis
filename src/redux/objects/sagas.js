@@ -26,9 +26,21 @@ export function* getCancelSaga({ payload: cancelId }) {
 }
 
 export function* updateCancelSaga({ payload }) {
-  const { cancelOrderId: id, ...params } = payload;
-  const { data: cancelOrder } = yield call(api.cancel.update, { id, params });
-  return cancelOrder;
+  try {
+    const {
+      params: { id, ...params },
+    } = payload;
+    console.log('********');
+    console.log(id, params);
+    console.log('********');
+    // const { data: cancelOrder } = yield call(api.cancel.update, { id, params });
+    yield call(api.cancel.update, { id, ...params });
+    // yield put(actions.setCancel(cancelOrder));
+    alert('Solicitud Procesada con exito');
+  } catch (err) {
+    console.log(err);
+    throw new Error('API Error');
+  }
 }
 
 export default function* objectsSagas() {

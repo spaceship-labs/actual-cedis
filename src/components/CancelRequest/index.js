@@ -105,6 +105,7 @@ class CancelRequest extends Component {
       cancelRequest: { id },
     } = this.props;
     updateCancel({ id, answers, requestStatus });
+    this.hideConfirmDialog();
   };
 
   render() {

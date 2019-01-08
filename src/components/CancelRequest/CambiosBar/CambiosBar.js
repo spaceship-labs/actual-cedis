@@ -6,7 +6,7 @@ import {
   ColCenter,
 } from '../CancelRequest.style';
 
-const CambiosBar = buttonCb => (
+const CambiosBar = ({ buttonCb }) => (
   <BarChanges>
     <SolicitudItem type="flex" justify="end">
       <ColCenter>

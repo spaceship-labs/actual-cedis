@@ -39,7 +39,7 @@ export default {
     create: ({ orderId, ...params }) =>
       post(`/cancel/${orderId}/order`, params),
     get: orderId => get(`/cancel/${orderId}/order`),
-    update: ({ orderId, ...params }) => put(`/cancel/${orderId}/order`, params),
+    update: ({ id, ...params }) => put(`/cancel/${id}/order`, params),
   },
   alerts: {
     list: params => get('/alert', { params }),
