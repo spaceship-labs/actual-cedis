@@ -6,7 +6,7 @@ import {
   ColCenter,
 } from '../CancelRequest.style';
 
-const CambiosBar = () => (
+const CambiosBar = buttonCb => (
   <BarChanges>
     <SolicitudItem type="flex" justify="end">
       <ColCenter>
@@ -17,6 +17,7 @@ const CambiosBar = () => (
           transform="uppercase"
           bgcolor="black!important"
           font="12px!important"
+          onClick={buttonCb}
         >
           <strong>GUARDAR CAMBIOS</strong>
         </AllButton>

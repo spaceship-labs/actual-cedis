@@ -9,16 +9,13 @@ import {
   AllButton,
   StatusIcon,
   StatusSpan,
-} from './CancelRequest.style';
-import Trash from '../../image/svgs/trash.svg';
-import { antiBind } from '../../helpers/utils';
+} from '../CancelRequest.style';
+import Trash from '../../../image/svgs/trash.svg';
+import utils from '../../../helpers/utils';
 
-const SolicitudBar = ({
-  handleClickAproveAll,
-  handleClickDeniedAll,
-  folio,
-  buttonsCb,
-}) => (
+const { antiBind } = utils;
+
+const SolicitudBar = ({ folio, buttonsCb }) => (
   <SolicitudContainer>
     <SolicitudItem type="flex" justify="start">
       <LogoCol span={2}>
@@ -45,7 +42,6 @@ const SolicitudBar = ({
       <ButtonsCol md={8} lg={6}>
         <ColCenter>
           <AllButton
-            onClick={handleClickAproveAll}
             type="primary"
             size="default"
             color="white!important"
@@ -59,7 +55,6 @@ const SolicitudBar = ({
         </ColCenter>
         <ColCenter>
           <AllButton
-            onClick={handleClickDeniedAll}
             type="danger"
             size="default"
             color="white!important"
