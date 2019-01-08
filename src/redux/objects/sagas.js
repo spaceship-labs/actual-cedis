@@ -27,15 +27,9 @@ export function* getCancelSaga({ payload: cancelId }) {
 
 export function* updateCancelSaga({ payload }) {
   try {
-    const {
-      params: { id, ...params },
-    } = payload;
-    console.log('********');
-    console.log(id, params);
-    console.log('********');
-    // const { data: cancelOrder } = yield call(api.cancel.update, { id, params });
-    yield call(api.cancel.update, { id, ...params });
-    // yield put(actions.setCancel(cancelOrder));
+    const { params } = payload;
+    const { data: cancelOrder } = yield call(api.cancel.update, { ...params });
+    yield put(actions.getCancel(cancelOrder.id));
     alert('Solicitud Procesada con exito');
   } catch (err) {
     console.log(err);
