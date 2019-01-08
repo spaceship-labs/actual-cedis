@@ -54,6 +54,7 @@ const ArticleRow = ({
   reject,
   unSet,
   options,
+  requestStatus,
 }) => (
   <StatusContent>
     <Row>
@@ -82,13 +83,18 @@ const ArticleRow = ({
         </Row>
       </Col>
       <Col md={4} lg={4}>
-        <ColCenter>
-          {!options ? (
-            <TestOption handleClickAprove={accept} handleClickDenied={reject} />
-          ) : (
-            <TestRegresar clickCb={unSet} />
-          )}
-        </ColCenter>
+        {requestStatus === 'pending' ? (
+          <ColCenter>
+            {!options ? (
+              <TestOption
+                handleClickAprove={accept}
+                handleClickDenied={reject}
+              />
+            ) : (
+              <TestRegresar clickCb={unSet} />
+            )}
+          </ColCenter>
+        ) : null}
       </Col>
     </Row>
   </StatusContent>

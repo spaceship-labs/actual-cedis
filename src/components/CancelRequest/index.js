@@ -77,7 +77,7 @@ class CancelRequest extends Component {
 
   renderArticle = cancelDetail => {
     const {
-      cancelRequest: { Details: details },
+      cancelRequest: { Details: details, status },
       products,
     } = this.props;
     const { answers } = this.state;
@@ -94,6 +94,7 @@ class CancelRequest extends Component {
         accept={antiBind(this.answerRequest, id, true)}
         reject={antiBind(this.answerRequest, id, false)}
         unSet={antiBind(this.unsetAnswer, id)}
+        requestStatus={status}
       />
     );
   };
@@ -115,12 +116,17 @@ class CancelRequest extends Component {
     const {
       CancelationDetails: cancelDetails,
       Order: { folio },
+      status,
     } = request;
     const { showDialog } = this.state;
     return (
       <LayoutContentWrapper style={{ height: 'auto' }}>
         <LayoutContent>
-          <SolicitudBar folio={folio} buttonsCb={this.allButton} />
+          <SolicitudBar
+            folio={folio}
+            buttonsCb={this.allButton}
+            status={status}
+          />
           <OrderText>{request.reason}</OrderText>
           <HeaderRow />
           {cancelDetails.map(this.renderArticle)}
