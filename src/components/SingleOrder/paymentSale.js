@@ -4,7 +4,13 @@ import Numeral from 'numeral';
 import { Rowpay, RowSale, RowTaxes } from '../../containers/Order/single.style';
 
 const PaymentSale = ({
-  money: { subcompra, descuento, totalcomp, totalpag, saldo, saldoCliente },
+  totalPayment: {
+    subtotal,
+    discount,
+    total,
+    ammountPaid,
+    Client: { Balance },
+  },
 }) => (
   <div>
     <RowSale>
@@ -36,23 +42,23 @@ const PaymentSale = ({
       </Col>
       <Col xs={5} sm={4} md={6} lg={8} xl={4}>
         <Rowpay>
-          <strong>{Numeral(subcompra).format('$0,0.00')}</strong>
+          <strong>{Numeral(subtotal).format('$0,0.00')}</strong>
         </Rowpay>
         <Rowpay>
-          <strong>{Numeral(descuento).format('$0,0.00')}</strong>
+          <strong>{Numeral(discount).format('$0,0.00')}</strong>
         </Rowpay>
         <Rowpay>
-          <strong>{Numeral(totalcomp).format('$0,0.00')}</strong>
+          <strong>{Numeral(total).format('$0,0.00')}</strong>
         </Rowpay>
         <Rowpay>
-          <strong>{Numeral(totalpag).format('$0,0.00')}</strong>
+          <strong>{Numeral(ammountPaid).format('$0,0.00')}</strong>
         </Rowpay>
         <Rowpay>
-          <strong>{Numeral(saldo).format('$0,0.00')}</strong>
+          <strong>{Numeral(total - ammountPaid).format('$0,0.00')}</strong>
         </Rowpay>
         <br />
         <Rowpay>
-          <strong>{Numeral(saldoCliente).format('$0,0.00')}</strong>
+          <strong>{Numeral(Balance).format('$0,0.00')}</strong>
         </Rowpay>
       </Col>
     </RowSale>

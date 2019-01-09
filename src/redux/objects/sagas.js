@@ -4,9 +4,12 @@ import productsActions from '../lists/products/actions';
 import api from '../../services/api';
 import { arrayToObject, extractKeyValues } from '../../helpers/dataStructures';
 
-export function* orderSaga(orderId) {
-  const order = yield call(api.orders.findById, orderId);
-  return order;
+export function* orderSaga({ payload: orderId }) {
+  const { data: order } = yield call(api.orders.findById, orderId);
+  const { Details } = order;
+  const productsId = Details.map(item => item.Product);
+  yield put(productsActions.getProducts(productsId));
+  yield put(actions.setOrder(order));
 }
 
 export function* getCancelSaga({ payload: cancelId }) {
@@ -21,8 +24,22 @@ export function* getCancelSaga({ payload: cancelId }) {
   yield put(productsActions.getProducts(productsId));
 
   const Details = yield call(arrayToObject, cancelOrder.Details, 'id');
-
   yield put(actions.setCancel({ ...cancelOrder, Details }));
+}
+
+export function* createCancelSaga({ payload }) {
+  const { orderId, cancelAll, details, reason } = payload;
+  try {
+    yield call(api.cancel.create, {
+      orderId,
+      cancelAll,
+      details,
+      reason,
+    });
+    alert('Solicitud de cancelación exitosa');
+  } catch (e) {
+    alert('Error al generar la cancelación');
+  }
 }
 
 export function* updateCancelSaga({ payload }) {

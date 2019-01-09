@@ -1,21 +1,21 @@
 import React from 'react';
 import { Sap } from '../../containers/Order/single.style';
 
-const SapDocuments = ({ saporder }) => (
+const SapDocuments = ({ dataorder: { OrdersSap } }) => (
   <div>
     <h3>
       <strong>Documentos SAP</strong>
     </h3>
     <Sap>
       <ul>
-        {saporder.map(item => (
-          <li>
+        {OrdersSap.map(({ document, invoiceSap, id }) => (
+          <li key={id}>
             <p>
-              <strong>Orden SAP:</strong> {item.document}
+              <strong>Orden SAP:</strong> {document}
             </p>
             <p>
               <strong>Factura de deudores SAP:</strong>{' '}
-              {`${item.invoiceSap || 'N/A'}`}
+              {`${invoiceSap || 'N/A'}`}
             </p>
           </li>
         ))}
