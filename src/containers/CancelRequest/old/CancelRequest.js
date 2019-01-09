@@ -10,9 +10,9 @@ import {
   updateCancelRequest,
   setStatus,
 } from './actions';
-import LayoutContentWrapper from '../../components/utility/layoutWrapper';
-import LayoutContent from '../../components/utility/layoutContent';
-import CancelContent from '../../components/CancelRequest/CancelContent';
+import LayoutContentWrapper from '../../../components/utility/layoutWrapper';
+import LayoutContent from '../../../components/utility/layoutContent';
+import CancelContent from '../../../components/CancelRequest/CancelContent';
 import { propsSelector } from './selectors';
 
 class CancelRequest extends Component {

@@ -1,6 +1,6 @@
 /**
  * @function arrayToObject
- * @param {Array[Object]} arr Array to convert
+ * @param {Array} arr Array to convert
  * @param {String} key Key of the object to use the value as the key for the object.
  * @param {Boolean} tolerance Flag to overwrite the value of the key to the last object with the same value.
  * @description Converts an array of objects with a key in common to an object with all the elements of

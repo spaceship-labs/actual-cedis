@@ -11,8 +11,9 @@ import {
   StatusSpan,
 } from '../CancelRequest.style';
 import Trash from '../../../image/svgs/trash.svg';
+import { antiBind } from '../../../helpers/utils';
 
-const SolicitudBar = ({ handleClickAproveAll, handleClickDeniedAll }) => (
+const SolicitudBar = ({ folio, buttonsCb, status }) => (
   <SolicitudContainer>
     <SolicitudItem type="flex" justify="start">
       <LogoCol span={2}>
@@ -33,36 +34,40 @@ const SolicitudBar = ({ handleClickAproveAll, handleClickDeniedAll }) => (
           transform="uppercase"
           padding="0px 0px 0px 10px"
         >
-          Ninguna solicitud pendiente
+          {folio}
         </StatusSpan>
       </TextCol>
       <ButtonsCol md={8} lg={6}>
-        <ColCenter>
-          <AllButton
-            onClick={handleClickAproveAll}
-            type="primary"
-            size="default"
-            color="white!important"
-            transform="uppercase"
-            bgcolor="#33BA2C!important"
-            font="10px!important"
-          >
-            <strong> Autorizar todo</strong>
-          </AllButton>
-        </ColCenter>
-        <ColCenter>
-          <AllButton
-            onClick={handleClickDeniedAll}
-            type="danger"
-            size="default"
-            color="white!important"
-            transform="uppercase"
-            bgcolor="#C82828!important"
-            font="10px!important"
-          >
-            <strong> Rechazar todo</strong>
-          </AllButton>
-        </ColCenter>
+        {status === 'pending'
+          ? [
+              <ColCenter>
+                <AllButton
+                  type="primary"
+                  size="default"
+                  color="white!important"
+                  transform="uppercase"
+                  bgcolor="#33BA2C!important"
+                  font="10px!important"
+                  onClick={antiBind(buttonsCb, 'authorized')}
+                >
+                  <strong> Autorizar todo</strong>
+                </AllButton>
+              </ColCenter>,
+              <ColCenter>
+                <AllButton
+                  type="danger"
+                  size="default"
+                  color="white!important"
+                  transform="uppercase"
+                  bgcolor="#C82828!important"
+                  font="10px!important"
+                  onClick={antiBind(buttonsCb, 'rejected')}
+                >
+                  <strong> Rechazar todo</strong>
+                </AllButton>
+              </ColCenter>,
+            ]
+          : null}
       </ButtonsCol>
     </SolicitudItem>
   </SolicitudContainer>

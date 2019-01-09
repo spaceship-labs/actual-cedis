@@ -1,12 +1,19 @@
 import actions from './actions';
 
-const initialState = { order: {} };
+const initialState = {
+  cancelRequest: {},
+  order: {}
+};
 
-export default function orderReducer(state = initialState, { type, payload }) {
+function objectsReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case actions.setCancel.type:
+      return { ...state, cancelRequest: payload };
     case actions.setOrder.type:
       return { ...state, order: payload, loading: false };
     default:
       return state;
   }
 }
+
+export default objectsReducer;

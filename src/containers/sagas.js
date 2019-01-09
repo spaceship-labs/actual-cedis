@@ -3,7 +3,8 @@ import ordersContainer from './OrdersView/sagas';
 import orderContainer from './Order/sagas';
 import alertsList from './Alerts/sagas';
 import cancelResquestsList from './CancelRequestsList/sagas';
-import cancelrequestDetail from './CancelRequest/sagas';
+import cancelRequest from './CancelRequest/sagas';
+import cancelrequestDetail from './CancelRequest/old/sagas';
 
 export default function* rootSaga() {
   yield all([
@@ -11,6 +12,7 @@ export default function* rootSaga() {
     orderContainer(),
     alertsList(),
     cancelResquestsList(),
+    cancelRequest(),
     cancelrequestDetail(),
   ]);
 }

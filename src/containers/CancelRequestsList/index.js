@@ -7,12 +7,12 @@ import dispatcher from './dispatcher';
 
 class CancelRequestsList extends Component {
   componentDidMount() {
-    const { getCancelRequests } = this.props; // eslint-disable-line
+    const { getCancelRequests } = this.props;
     getCancelRequests();
   }
 
   render() {
-    const { pagination, changePage } = this.props; // eslint-disable-line
+    const { pagination, changePage } = this.props;
     const newProps = {
       ...this.props,
       pagination: { ...pagination, onChange: changePage },

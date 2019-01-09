@@ -28,8 +28,14 @@ const routes = [
     component: asyncComponent(() => import('../Order/Single')),
   },
   {
+    path: 'cancel-request-old/:id',
+    component: asyncComponent(() =>
+      import('../CancelRequest/old/CancelRequest')
+    ),
+  },
+  {
     path: 'cancel-request/:id',
-    component: asyncComponent(() => import('../CancelRequest/CancelRequest')),
+    component: asyncComponent(() => import('../CancelRequest')),
   },
 ];
 
