@@ -1,58 +1,50 @@
-import { all, takeEvery, put, fork } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
-import { getToken, clearToken } from '../../helpers/utility';
+import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import actions from './actions';
+import api from '../../services/api';
+import { logout as authLogout } from '../../services/auth';
 
-const fakeApiCall = true; // auth0 or express JWT
+function* onLogin(action) {
+  try {
+    yield put(actions.setLoading(true));
+    const { data } = yield call(api.login.do, action.payload);
+    yield put(actions.loginSuccess(data));
+  } catch (e) {
+    yield put(actions.setLoading(false));
+    yield put(actions.loginError(e));
+  }
+}
+
+function* onLoginSuccess(action) {
+  yield localStorage.setItem('id_token', action.payload.token);
+  yield put(push('/dashboard'));
+}
+
+function* onLoginError() {} // eslint-disable-line
+
+function* onLogout() {
+  yield authLogout();
+}
 
 export function* loginRequest() {
-  yield takeEvery('LOGIN_REQUEST', function*() {
-    if (fakeApiCall) {
-      yield put({
-        type: actions.LOGIN_SUCCESS,
-        token: 'secret token',
-        profile: 'Profile'
-      });
-    } else {
-      yield put({ type: actions.LOGIN_ERROR });
-    }
-  });
+  yield takeEvery(actions.login, onLogin);
 }
-
 export function* loginSuccess() {
-  yield takeEvery(actions.LOGIN_SUCCESS, function*(payload) {
-    yield localStorage.setItem('id_token', payload.token);
-  });
+  yield takeEvery(actions.loginSuccess, onLoginSuccess);
 }
-
 export function* loginError() {
-  yield takeEvery(actions.LOGIN_ERROR, function*() {});
+  yield takeEvery(actions.loginError, onLoginError);
 }
 
 export function* logout() {
-  yield takeEvery(actions.LOGOUT, function*() {
-    clearToken();
-    yield put(push('/'));
-  });
+  yield takeEvery(actions.logout, onLogout);
 }
-export function* checkAuthorization() {
-  yield takeEvery(actions.CHECK_AUTHORIZATION, function*() {
-    const token = getToken().get('idToken');
-    if (token) {
-      yield put({
-        type: actions.LOGIN_SUCCESS,
-        token,
-        profile: 'Profile'
-      });
-    }
-  });
-}
+
 export default function* rootSaga() {
   yield all([
-    fork(checkAuthorization),
     fork(loginRequest),
     fork(loginSuccess),
     fork(loginError),
-    fork(logout)
+    fork(logout),
   ]);
 }

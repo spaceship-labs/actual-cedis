@@ -15,6 +15,22 @@ const routes = [
     path: 'authCheck',
     component: asyncComponent(() => import('../AuthCheck')),
   },
+  {
+    path: 'cancel-requests',
+    component: asyncComponent(() => import('../CancelRequestsList')),
+  },
+  {
+    path: 'orders',
+    component: asyncComponent(() => import('../OrdersView')),
+  },
+  {
+    path: 'order/:id',
+    component: asyncComponent(() => import('../Order/Single')),
+  },
+  {
+    path: 'cancel-request/:id',
+    component: asyncComponent(() => import('../CancelRequest/CancelRequest')),
+  },
 ];
 
 class AppRouter extends Component {
@@ -26,7 +42,7 @@ class AppRouter extends Component {
           const { path, exact, ...otherProps } = singleRoute;
           return (
             <Route
-              exact={exact === false ? false : true}
+              exact={exact !== false}
               key={singleRoute.path}
               path={`${url}/${singleRoute.path}`}
               {...otherProps}

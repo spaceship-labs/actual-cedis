@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { connect } from 'react-redux';
-
-import App from './containers/App/App';
+import App from './containers/App/App'; // eslint-disable-line
 import asyncComponent from './helpers/AsyncFunc';
+import { isAuthenticated } from './services/auth';
 
 const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
@@ -15,38 +15,43 @@ const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
       ) : (
         <Redirect
           to={{
-            pathname: '/signin',
-            state: { from: props.location }
+            pathname: '/',
+            state: { from: props.location },
           }}
         />
       )
     }
   />
 );
-const PublicRoutes = ({ history, isLoggedIn }) => {
-  return (
-    <ConnectedRouter history={history}>
-      <div>
-        <Route
-          exact
-          path={'/'}
-          component={asyncComponent(() => import('./containers/Page/signin'))}
-        />
-        <Route
-          exact
-          path={'/signin'}
-          component={asyncComponent(() => import('./containers/Page/signin'))}
-        />
-        <RestrictedRoute
-          path="/dashboard"
-          component={App}
-          isLoggedIn={isLoggedIn}
-        />
-      </div>
-    </ConnectedRouter>
-  );
-};
+const PublicRoutes = ({ history, isLoggedIn }) => (
+  <ConnectedRouter history={history}>
+    <div>
+      <Route
+        exact
+        path="/"
+        component={asyncComponent(() => import('./containers/Login'))}
+      />
+      <Route
+        exact
+        path="/OrderSingle"
+        component={asyncComponent(() => import('./containers/Order/Single'))}
+      />
+      <Route
+        exact
+        path="/requestList"
+        component={asyncComponent(() =>
+          import('./containers/CancelRequest/CancelRequest')
+        )}
+      />
+      <RestrictedRoute
+        path="/dashboard"
+        component={App}
+        isLoggedIn={isLoggedIn}
+      />
+    </div>
+  </ConnectedRouter>
+);
 
-export default connect(state => ({
-  isLoggedIn: state.Auth.idToken !== null
+export default connect(() => ({
+  isLoggedIn: isAuthenticated(),
 }))(PublicRoutes);

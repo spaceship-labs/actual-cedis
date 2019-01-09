@@ -10,5 +10,5 @@ export default createDevTools(
     changePositionKey="ctrl-Q"
   >
     <LogMonitor />
-  </DockMonitor>,
+  </DockMonitor>
 );

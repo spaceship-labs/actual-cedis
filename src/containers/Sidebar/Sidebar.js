@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import clone from 'clone';
 import { Link } from 'react-router-dom';
-import { Layout } from 'antd';
+import { Layout, Icon } from 'antd';
 import options from './options';
-import Scrollbars from '../../components/utility/customScrollBar.js';
+import Scrollbars from '../../components/utility/customScrollBar';
 import Menu from '../../components/uielements/menu';
 import IntlMessages from '../../components/utility/intlMessages';
 import SidebarWrapper from './sidebar.style';
@@ -13,14 +13,14 @@ import Logo from '../../components/utility/logo';
 import themes from '../../settings/themes';
 import { themeConfig } from '../../settings';
 
-const SubMenu = Menu.SubMenu;
+const { SubMenu } = Menu;
 const { Sider } = Layout;
 
 const {
   toggleOpenDrawer,
   changeOpenKeys,
   changeCurrent,
-  toggleCollapsed
+  toggleCollapsed,
 } = appActions;
 const stripTrailingSlash = str => {
   if (str.substr(-1) === '/') {
@@ -34,16 +34,10 @@ class Sidebar extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.onOpenChange = this.onOpenChange.bind(this);
+    this.getAncestorKeys = this.getAncestorKeys.bind(this);
+    this.getMenuItem = this.getMenuItem.bind(this);
   }
-  handleClick(e) {
-    this.props.changeCurrent([e.key]);
-    if (this.props.app.view === 'MobileView') {
-      setTimeout(() => {
-        this.props.toggleCollapsed();
-        this.props.toggleOpenDrawer();
-      }, 100);
-    }
-  }
+
   onOpenChange(newOpenKeys) {
     const { app, changeOpenKeys } = this.props;
     const latestOpenKey = newOpenKeys.find(
@@ -61,15 +55,18 @@ class Sidebar extends Component {
     }
     changeOpenKeys(nextOpenKeys);
   }
-  getAncestorKeys = key => {
+  // eslint-disable-next-line
+  getAncestorKeys(key) {
     const map = {
-      sub3: ['sub2']
+      sub3: ['sub2'],
     };
     return map[key] || [];
-  };
-  getMenuItem = ({ singleOption, submenuStyle, submenuColor }) => {
+  }
+
+  getMenuItem({ singleOption, submenuStyle, submenuColor }) {
     const { key, label, leftIcon, children } = singleOption;
-    const url = stripTrailingSlash(this.props.url);
+    const { url: propsUrl } = this.props;
+    const url = stripTrailingSlash(propsUrl);
     if (children) {
       return (
         <SubMenu
@@ -100,9 +97,9 @@ class Sidebar extends Component {
     }
     return (
       <Menu.Item key={key}>
-        <Link to={`${url}/${key}`}>
+        <Link to={`/dashboard/${key}`}>
           <span className="isoMenuHolder" style={submenuColor}>
-            <i className={leftIcon} />
+            <Icon type={leftIcon} />
             <span className="nav-text">
               <IntlMessages id={label} />
             </span>
@@ -110,40 +107,55 @@ class Sidebar extends Component {
         </Link>
       </Menu.Item>
     );
-  };
+  }
+
+  handleClick(e) {
+    const {
+      changeCurrent,
+      app,
+      toggleCollapsed,
+      toggleOpenDrawer,
+    } = this.props;
+    changeCurrent([e.key]);
+    if (app.view === 'MobileView') {
+      setTimeout(() => {
+        toggleCollapsed();
+        toggleOpenDrawer();
+      }, 100);
+    }
+  }
+
   render() {
     const { app, toggleOpenDrawer, height } = this.props;
     const collapsed = clone(app.collapsed) && !clone(app.openDrawer);
     const { openDrawer } = app;
     const mode = collapsed === true ? 'vertical' : 'inline';
-    const onMouseEnter = event => {
+    const onMouseEnter = () => {
       if (openDrawer === false) {
         toggleOpenDrawer();
       }
-      return;
     };
     const onMouseLeave = () => {
       if (openDrawer === true) {
         toggleOpenDrawer();
       }
-      return;
     };
     const customizedTheme = themes[themeConfig.theme];
     const styling = {
-      backgroundColor: customizedTheme.backgroundColor
+      backgroundColor: customizedTheme.backgroundColor,
     };
     const submenuStyle = {
       backgroundColor: 'rgba(0,0,0,0.3)',
-      color: customizedTheme.textColor
+      color: customizedTheme.textColor,
     };
     const submenuColor = {
-      color: customizedTheme.textColor
+      color: customizedTheme.textColor,
     };
     return (
       <SidebarWrapper>
         <Sider
           trigger={null}
-          collapsible={true}
+          collapsible
           collapsed={collapsed}
           width={240}
           className="isomorphicSidebar"
@@ -176,7 +188,7 @@ class Sidebar extends Component {
 export default connect(
   state => ({
     app: state.App,
-    height: state.App.height
+    height: state.App.height,
   }),
   { toggleOpenDrawer, changeOpenKeys, changeCurrent, toggleCollapsed }
 )(Sidebar);

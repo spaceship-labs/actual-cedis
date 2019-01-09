@@ -6,9 +6,7 @@ export default class extends Component {
     const value = this.props.value || 'Please include Config';
     return (
       <EmptyComponent className="isoEmptyComponent">
-        <span>
-          {value}
-        </span>
+        <span>{value}</span>
       </EmptyComponent>
     );
   }

@@ -12,21 +12,23 @@ const { login } = authAction;
 
 class SignIn extends Component {
   state = {
-    redirectToReferrer: false
+    redirectToReferrer: false,
   };
+
   componentWillReceiveProps(nextProps) {
-    if (
-      this.props.isLoggedIn !== nextProps.isLoggedIn &&
-      nextProps.isLoggedIn === true
-    ) {
+    const { isLoggedIn: nextIsLoggedIn } = nextProps;
+    const { isLoggedIn } = this.props;
+    if (isLoggedIn !== nextIsLoggedIn && nextIsLoggedIn === true) {
       this.setState({ redirectToReferrer: true });
     }
   }
+
   handleLogin = () => {
-    const { login } = this.props;
+    const { login, history } = this.props; // eslint-disable-line
     login();
-    this.props.history.push('/dashboard');
+    history.push('/dashboard');
   };
+
   render() {
     const from = { pathname: '/dashboard' };
     const { redirectToReferrer } = this.state;
@@ -92,7 +94,7 @@ class SignIn extends Component {
 
 export default connect(
   state => ({
-    isLoggedIn: state.Auth.idToken !== null ? true : false
+    isLoggedIn: state.Auth.idToken !== null,
   }),
   { login }
 )(SignIn);

@@ -13,7 +13,7 @@ class LanguageSwitcher extends Component {
       isActivated,
       language,
       switchActivation,
-      changeLanguage
+      changeLanguage,
     } = this.props;
     return (
       <div className="isoButtonWrapper">
@@ -22,7 +22,7 @@ class LanguageSwitcher extends Component {
         </Button>
 
         <Modal
-          title={'Select Language'}
+          title="Select Language"
           visible={isActivated}
           onCancel={switchActivation}
           cancelText="Cancel"
@@ -54,7 +54,7 @@ class LanguageSwitcher extends Component {
 
 export default connect(
   state => ({
-    ...state.LanguageSwitcher
+    ...state.LanguageSwitcher,
   }),
   { switchActivation, changeLanguage }
 )(LanguageSwitcher);
