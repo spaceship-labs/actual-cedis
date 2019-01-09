@@ -19,13 +19,12 @@ export function* getCancelSaga(cancelId) {
 export function* createCancelSaga({ payload }) {
   const { orderId, cancelAll, details, reason } = payload;
   try {
-    const { data: state } = yield call(api.cancel.create, {
+    yield call(api.cancel.create, {
       orderId,
       cancelAll,
       details,
       reason,
     });
-    console.log(state);
     alert('Solicitud de cancelación exitosa');
   } catch (e) {
     alert('Error al generar la cancelación');
