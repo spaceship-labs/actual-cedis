@@ -4,9 +4,7 @@ import { Asesor } from '../../containers/Order/single.style';
 const Advisor = ({ asesordata: { nombre, telefono, celular, email } }) => (
   <div>
     <h3>
-      <strong>
-        <i className="icon-vendedor" /> ASESOR DE INTERIORES
-      </strong>
+      <strong>ASESOR DE INTERIORES</strong>
     </h3>
     <Asesor>
       <div>

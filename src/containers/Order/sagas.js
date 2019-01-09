@@ -1,12 +1,14 @@
-import { call, takeLatest, put } from 'redux-saga/effects';
-import { getOrder, setOrder } from './actions';
-import { orderSaga } from '../../redux/objects/sagas';
+import { takeLatest, put } from 'redux-saga/effects';
+import ordersActions from '../../redux/objects/actions';
+import containerActions from './actions';
 
-export function* getOrderSaga({ payload: orderId }) {
-  const { data } = yield call(orderSaga, orderId);
-  yield put(setOrder(data));
+export function* getOrderSaga({ payload: id }) {
+  yield put(ordersActions.getOrder(id));
 }
-
-export default function* OrderSaga() {
-  yield takeLatest(getOrder.type, getOrderSaga);
+export function* createCancelSaga({ payload }) {
+  yield put(ordersActions.createCancel(payload));
+}
+export default function* OrdersViewSaga() {
+  yield takeLatest(containerActions.getOrder.type, getOrderSaga);
+  yield takeLatest(containerActions.createCancel.type, createCancelSaga);
 }

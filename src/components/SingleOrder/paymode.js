@@ -1,11 +1,12 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import Numeral from 'numeral';
+import moment from 'moment';
 import { OrderPago } from '../../containers/Order/single.style';
 import PaymentSale from './paymentSale';
 
 const Paymode = ({
-  modopay: { forma, fecha, folio, tipo, terminal, monto, money },
+  dataorder: { Payments, subtotal, total, discount, ammountPaid, Client },
 }) => (
   <div>
     <h3>
@@ -37,16 +38,21 @@ const Paymode = ({
               <strong>MONTO COBRADO</strong>
             </Col>
           </Row>
-          <Row>
-            <Col span={4}>{forma} </Col>
-            <Col span={4}>{fecha} </Col>
-            <Col span={4}>{folio} </Col>
-            <Col span={4}>{tipo} </Col>
-            <Col span={4}>{terminal} </Col>
-            <Col span={4}>{Numeral(monto).format('$0,0.00')} </Col>
-          </Row>
-
-          <PaymentSale money={money} />
+          {Payments.map(
+            ({ type, folio, createdAt, ammount, name, currency, id }) => (
+              <Row key={id}>
+                <Col span={4}>{name} </Col>
+                <Col span={4}>{moment(createdAt).format('DD/MM/YYYY')}</Col>
+                <Col span={4}>{folio} </Col>
+                <Col span={4}>{type} </Col>
+                <Col span={4}>{currency} </Col>
+                <Col span={4}>{Numeral(ammount).format('$0,0.00')} </Col>
+              </Row>
+            )
+          )}
+          <PaymentSale
+            totalPayment={{ subtotal, total, discount, ammountPaid, Client }}
+          />
         </div>
       </div>
     </OrderPago>
