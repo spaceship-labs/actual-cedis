@@ -5,9 +5,11 @@ import CancelAllButton from './cancelAllButton';
 const NumberOrder = ({
   dataorder: {
     Client: { CardName, E_Mail: email },
-    Store: { name },
+    // Store: { name },
   },
   showCancel,
+  cancelAllOrder,
+  cancelAll,
 }) => (
   <OrderTextBlock>
     <h3>
@@ -22,10 +24,12 @@ const NumberOrder = ({
       <strong> {email}</strong>
     </p>
 
-    <p>
-      <strong>Tienda: </strong> {name}
-    </p>
-    <CancelAllButton showCancel={showCancel} />
+    <p>{/* <strong>Tienda: </strong> {name} */}</p>
+    <CancelAllButton
+      showCancel={showCancel}
+      cancelAllOrder={cancelAllOrder}
+      cancelAll={cancelAll}
+    />
   </OrderTextBlock>
 );
 

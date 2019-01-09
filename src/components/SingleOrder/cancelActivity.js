@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row } from 'antd';
+import moment from 'moment';
 import {
   Order,
   // BtnPrint,
@@ -13,7 +14,7 @@ class CancelActivity extends Component {
 
   render() {
     const {
-      dataorder: { folio },
+      dataorder: { folio, createdAt: date },
       stateCancel,
     } = this.props;
 
@@ -27,14 +28,14 @@ class CancelActivity extends Component {
               </h3>
             </ColBtn>
             <ColBtn xs={12} sm={12} md={12} lg={7} xl={7}>
-              <span>22/nov/2018</span>
+              <span>{moment(date).format('DD/MM/YYYY')}</span>
             </ColBtn>
             {/* <ColBtn xs={12} sm={12} md={12} lg={5} xl={5}>
               <BtnPrint type="primary">IMPRIMIR RECIBO</BtnPrint>
             </ColBtn> */}
             <ColBtn xs={24} sm={24} md={24} lg={8} xl={8}>
               <BtnCancel type="primary" onClick={stateCancel}>
-                CREAR SOLICITUD DE CANCELACION
+                CREAR SOLICITUD DE CANCELACIÓN
               </BtnCancel>
             </ColBtn>
           </Row>

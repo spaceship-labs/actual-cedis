@@ -8,8 +8,8 @@ const SapDocuments = ({ dataorder: { OrdersSap } }) => (
     </h3>
     <Sap>
       <ul>
-        {OrdersSap.map(({ document, invoiceSap }) => (
-          <li>
+        {OrdersSap.map(({ document, invoiceSap, id }) => (
+          <li key={id}>
             <p>
               <strong>Orden SAP:</strong> {document}
             </p>

@@ -32,11 +32,25 @@ class OrderSingle extends Component {
     this.handleCancel = this.handleCancel.bind(this);
     this.stateCancel = this.stateCancel.bind(this);
     this.cancelquantity = this.cancelquantity.bind(this);
+    this.cancelReason = this.cancelReason.bind(this);
+    this.cancelAllOrder = this.cancelAllOrder.bind(this);
+    this.verifyData = this.verifyData.bind(this);
     this.state = {
       visible: false,
       showCancel: false,
-      quantitycancel: 0,
+      details: [],
+      cancelAll: false,
+      reason: '',
+      shouldRender: false,
     };
+  }
+
+  static getDerivedStateFromProps(props) {
+    const { products } = props;
+    if (Object.keys(products).length > 0) {
+      return { shouldRender: true };
+    }
+    return null;
   }
 
   componentDidMount() {
@@ -55,9 +69,30 @@ class OrderSingle extends Component {
     });
   };
 
-  cancelquantity = ({ quantity }) => {
+  cancelReason = e => {
+    const {
+      target: { value },
+    } = e;
     this.setState({
-      quantitycancel: quantity,
+      reason: value,
+    });
+  };
+
+  cancelAllOrder = () => {
+    const { cancelAll } = this.state;
+    this.setState({
+      cancelAll: !cancelAll,
+    });
+  };
+
+  cancelquantity = (x, { props: { value, id } }) => {
+    const { details } = this.state;
+    this.setState(() => {
+      const arr = { id, value };
+      const result = details.find(({ id: Id }) => id === Id);
+      if (!result) return { details: details.concat(arr) };
+      result.value = value;
+      return result;
     });
   };
 
@@ -74,11 +109,29 @@ class OrderSingle extends Component {
     });
   };
 
+  verifyData = () => {
+    const { details, cancelAll, reason } = this.state;
+    const {
+      createCancel,
+      match: {
+        params: { id: orderId },
+      },
+    } = this.props;
+    if (reason.length > 10 && (details.length > 0 || cancelAll === true)) {
+      const cancelData = { orderId, cancelAll, details, reason };
+      return createCancel(cancelData);
+    }
+    if (reason.length < 10) {
+      return alert('falta complementar las razones de cancelacion');
+    }
+    return alert('No ha seleccionado articulos para cancelar');
+  };
+
   render() {
     const { order, products } = this.props;
     const { folio, Broker, OrderCancelations } = order;
-    const { visible, showCancel, quantitycancel } = this.state;
-    if (!folio) return <div>Loading...</div>;
+    const { visible, showCancel, shouldRender, reason, cancelAll } = this.state;
+    if (!shouldRender) return <div>Loading...</div>;
     return (
       <LayoutContentWrapper style={{ height: 'auto' }}>
         <LayoutContent>
@@ -100,7 +153,12 @@ class OrderSingle extends Component {
           )}
           <CancelActivity stateCancel={this.stateCancel} dataorder={order} />
           <Seccion>
-            <NumberOrder dataorder={order} showCancel={showCancel} />
+            <NumberOrder
+              dataorder={order}
+              showCancel={showCancel}
+              cancelAllOrder={this.cancelAllOrder}
+              cancelAll={cancelAll}
+            />
           </Seccion>
           <Seccion>
             <ItemsPurchased
@@ -108,11 +166,16 @@ class OrderSingle extends Component {
               products={products}
               order={order}
               cancelquantity={this.cancelquantity}
+              cancelAll={cancelAll}
             />
           </Seccion>
           {showCancel && (
             <Seccion>
-              <MotivoCancelacion quantitycancel={quantitycancel} />
+              <MotivoCancelacion
+                cancelReason={this.cancelReason}
+                reason={reason}
+                verifyData={this.verifyData}
+              />
             </Seccion>
           )}
           <Seccion>

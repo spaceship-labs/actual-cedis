@@ -2,7 +2,7 @@ import actions from './actions';
 
 const dispatcher = dispatch => ({
   getOrder: params => dispatch(actions.getOrder(params)),
-  // getProducts: params => dispatch(actions.getProducts(params)),
+  createCancel: params => dispatch(actions.createCancel(params)),
 });
 
 export default dispatcher;

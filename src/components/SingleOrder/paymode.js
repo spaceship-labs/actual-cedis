@@ -39,8 +39,8 @@ const Paymode = ({
             </Col>
           </Row>
           {Payments.map(
-            ({ type, folio, createdAt, ammount, name, currency }) => (
-              <Row>
+            ({ type, folio, createdAt, ammount, name, currency, id }) => (
+              <Row key={id}>
                 <Col span={4}>{name} </Col>
                 <Col span={4}>{moment(createdAt).format('DD/MM/YYYY')}</Col>
                 <Col span={4}>{folio} </Col>

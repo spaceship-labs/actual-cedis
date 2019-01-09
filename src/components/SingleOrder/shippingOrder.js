@@ -22,9 +22,7 @@ const ShippingOrder = ({
 }) => (
   <div>
     <h3>
-      <strong>
-        <i className="icon-envio" /> ENVÍO
-      </strong>
+      <strong>ENVÍO</strong>
     </h3>
     <OrderEnvio>
       <div>
