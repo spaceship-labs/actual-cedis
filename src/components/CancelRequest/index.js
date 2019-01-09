@@ -135,6 +135,7 @@ class CancelRequest extends Component {
             show={showDialog}
             acceptCb={this.sendUpdate}
             cancelCb={this.restartRequestModal}
+            folio={folio}
           />
         </LayoutContent>
       </LayoutContentWrapper>
