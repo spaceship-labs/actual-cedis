@@ -17,7 +17,7 @@ function* onLogin(action) {
 
 function* onLoginSuccess(action) {
   yield localStorage.setItem('id_token', action.payload.token);
-  yield put(push('/dashboard'));
+  yield put(push('/dashboard/orders'));
 }
 
 function* onLoginError() {} // eslint-disable-line
