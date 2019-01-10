@@ -134,8 +134,9 @@ export const CancelBanner = styled.div`
   }
 `;
 const stateColor = {
-  true: 'green',
-  false: 'red',
+  authorized: 'green',
+  rejected: 'red',
+  pending: 'gray',
 };
 export const TxtStrong = styled.p`
   font-weight: bold;

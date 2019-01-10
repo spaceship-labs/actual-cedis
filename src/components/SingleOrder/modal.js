@@ -8,27 +8,35 @@ import {
 } from '../../containers/Order/single.style';
 
 class OrderModal extends Component {
-  componentDidMount() {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      state: {
+        rejected: 'No autorizado',
+        authorized: 'Autorizado',
+        pending: 'Pendiente',
+      },
+    };
+  }
 
   render() {
-    const { modaldata, order } = this.props;
+    const { modaldata, orderFolio, products } = this.props;
+    const { state } = this.state;
     return (
       <div>
         <TitleModal>
           <TxtStrong>
-            DETALLE DE CANCELACIONES <TxtData>#{order}</TxtData>
+            DETALLE DE CANCELACIONES <TxtData>#{orderFolio}</TxtData>
           </TxtStrong>
         </TitleModal>
-        {modaldata.map(({ sku, auth }) => (
+        {modaldata.map(({ Detail, status, quantity }) => (
           <Row>
             <Col span={12}>
-              <p>SKU: {sku} </p>
-              <p>Cantidad: 123456789</p>
+              <p>SKU: {products[Detail].CodeBars} </p>
+              <p>Cantidad: {quantity}</p>
             </Col>
             <Col span={12}>
-              <StateClr auth={auth}>
-                {auth === 'true' ? 'Autorizado' : 'No Autorizado'}
-              </StateClr>
+              <StateClr auth={status}>{state[status]}</StateClr>
             </Col>
           </Row>
         ))}

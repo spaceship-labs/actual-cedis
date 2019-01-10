@@ -10,7 +10,7 @@ import {
 
 // import Title from 'antd/lib/skeleton/Avatar';
 import OrderModal from '../../components/SingleOrder/modal';
-import { modaldata, asesordata } from './fakeData';
+import { CancelationDetails, asesordata } from './fakeData';
 import LayoutContentWrapper from '../../components/utility/layoutWrapper';
 import LayoutContent from '../../components/utility/layoutContent';
 import CancelActivity from '../../components/SingleOrder/cancelActivity';
@@ -129,13 +129,13 @@ class OrderSingle extends Component {
 
   render() {
     const { order, products } = this.props;
-    const { folio, Broker, OrderCancelations } = order;
+    const { folio, Broker, OrderCancelations = true } = order;
     const { visible, showCancel, shouldRender, reason, cancelAll } = this.state;
     if (!shouldRender) return <div>Loading...</div>;
     return (
       <LayoutContentWrapper style={{ height: 'auto' }}>
         <LayoutContent>
-          {OrderCancelations && (
+          {OrderCancelations ? (
             <CancelBanner>
               <TxtStrong>
                 ESTATUS DE CANCELACIONES{' '}
@@ -147,9 +147,16 @@ class OrderSingle extends Component {
                 onCancel={this.handleCancel}
                 footer={null}
               >
-                <OrderModal modaldata={modaldata} order={folio} />
+                <OrderModal
+                  modaldata={CancelationDetails}
+                  orderFolio={folio}
+                  order={order}
+                  products={products}
+                />
               </Modal>
             </CancelBanner>
+          ) : (
+            ''
           )}
           <CancelActivity stateCancel={this.stateCancel} dataorder={order} />
           <Seccion>
