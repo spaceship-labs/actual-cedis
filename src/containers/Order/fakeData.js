@@ -1,25 +1,22 @@
-export const CancelationDetails = [
-  {
-    Detail: '5bd86d31612d2e4e111f7162',
-    quantity: 1,
-    status: 'authorized',
-  },
-  {
-    Detail: '5bd86d31612d2e4e111f7161',
-    quantity: 2,
-    status: 'rejected',
-  },
-  {
-    Detail: '5bd86d31612d2e4e111f715f',
-    quantity: 1,
-    status: 'authorized',
-  },
-  {
-    Detail: '5bd86d31612d2e4e111f7160',
-    quantity: 2,
-    status: 'pending',
-  },
-];
+export const cancelationDetails = {
+  type: 'InvoiceReserve-Cancelation',
+  result: '104000525',
+  Payments: [
+    {
+      pay: '39001359',
+      reference: '5b3d49ecb9c5bf845e55248f',
+    },
+  ],
+  PaymentsCancel: null,
+  series: null,
+  RequestTransfer: [
+    {
+      Request: 11000123,
+      reference: '5b3d49ecb9c5bf845e55248f',
+    },
+  ],
+  products: ['CO45036', 'CO34107', 'ST00222', 'CO56568', 'CO56971'],
+};
 
 export const asesordata = {
   nombre: 'pablo melendez',
