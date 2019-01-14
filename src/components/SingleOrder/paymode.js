@@ -34,6 +34,17 @@ const isTransferPayment = type =>
   type === types.TRANSFER || type === types.TRANSFER_USD;
 const isDepositPayment = type => type === types.DEPOSIT;
 
+const mapTerminalCode = code => {
+  const mapper = {
+    'american-express': 'American Express',
+    banamex: 'Banamex',
+    bancomer: 'Bancomer',
+    banorte: 'Banorte',
+    santander: 'Santander',
+  };
+  return mapper[code] || '';
+};
+
 const getPaymentTypeString = (type, msi) => {
   let paymentType = '1 sola exhibición';
   if (msi.length > 0) {
@@ -102,7 +113,7 @@ const Paymode = ({
               createdAt,
               ammount,
               name,
-              terminal = '',
+              terminal = 'N/A',
               id,
               msi = '',
             }) => (
@@ -111,7 +122,7 @@ const Paymode = ({
                 <Col span={4}>{moment(createdAt).format('DD/MM/YYYY')}</Col>
                 <Col span={4}>{folio} </Col>
                 <Col span={4}>{getPaymentTypeString(type, msi)} </Col>
-                <Col span={4}>{terminal} </Col>
+                <Col span={4}>{mapTerminalCode(terminal)} </Col>
                 <Col span={4}>{Numeral(ammount).format('$0,0.00')} </Col>
               </Row>
             )
