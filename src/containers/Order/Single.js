@@ -123,7 +123,7 @@ class OrderSingle extends Component {
       return createCancel(cancelData);
     }
     if (reason.length < 10) {
-      return alert('falta complementar las razones de cancelacion');
+      return alert('Favor de añadir los motivos de cancelación');
     }
     return alert('No ha seleccionado articulos para cancelar');
   };

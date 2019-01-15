@@ -153,6 +153,7 @@ export const TitleModal = styled.div`
 export const TxtData = styled.span`
   font-weight: normal;
   text-decoration: underline;
+  cursor: pointer;
 `;
 export const Modal = styled(modalCnl)`
   .title-cnl {

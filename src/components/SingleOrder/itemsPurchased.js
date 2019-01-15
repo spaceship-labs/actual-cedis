@@ -6,9 +6,7 @@ import {
   OrderItems,
   RowItem,
   DeleteItems,
-  // CursorPointer,
 } from '../../containers/Order/single.style';
-// import antiBind from '../services/utils';
 
 const { Option } = Select;
 const ItemsPurchased = ({

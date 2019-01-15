@@ -15,7 +15,7 @@ const DocumentsCancel = ({
 }) => (
   <div>
     <h3>
-      <strong>DOCUMENTOS CANCELACION </strong>
+      <strong>DOCUMENTOS SAP CANCELACIÓN </strong>
     </h3>
     <CancelSap>
       <Row>
