@@ -4,7 +4,7 @@ import { Sap } from '../../containers/Order/single.style';
 const SapDocuments = ({ dataorder: { OrdersSap } }) => (
   <div>
     <h3>
-      <strong>Documentos SAP</strong>
+      <strong>DOCUMENTOS SAP</strong>
     </h3>
     <Sap>
       <ul>

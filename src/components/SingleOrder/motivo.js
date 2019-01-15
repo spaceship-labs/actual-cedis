@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Modal } from 'antd';
+import { Input, Modal, Row } from 'antd';
 import {
   ReasonCancel,
   CursorPointer,
@@ -53,37 +53,39 @@ class MotivoCancelacion extends Component {
     const { cancelReason, reason } = this.props;
     return (
       <div>
-        <ReasonCancel>
-          <p>
-            <strong>MOTIVO DE CANCELACIÓN: </strong>
-          </p>
-          <div>
+        <Row>
+          <ReasonCancel>
+            <p>
+              <strong>MOTIVO DE CANCELACIÓN: </strong>
+            </p>
             <div>
-              <textarea row={8} onChange={cancelReason} value={reason} />
+              <div>
+                <textarea row={8} onChange={cancelReason} value={reason} />
+              </div>
+              {disable ? (
+                <SubmitMsj>
+                  <p>ENVIAR SOLICITUD DE CANCELACIÓN</p>
+                </SubmitMsj>
+              ) : (
+                <SubmitMsj>
+                  <CursorPointer>
+                    <p onClick={this.showpopup}>
+                      ENVIAR SOLICITUD DE CANCELACIÓN
+                    </p>
+                  </CursorPointer>
+                </SubmitMsj>
+              )}
+              <Modal
+                visible={visible}
+                onCancel={this.handleCancel}
+                onOk={this.handleOk}
+                title="Confirmación"
+              >
+                <p>¿Estás seguro de querer hacer esto?</p>
+              </Modal>
             </div>
-            {disable ? (
-              <SubmitMsj>
-                <p>ENVIAR SOLICITUD DE CANCELACIÓN</p>
-              </SubmitMsj>
-            ) : (
-              <SubmitMsj>
-                <CursorPointer>
-                  <p onClick={this.showpopup}>
-                    ENVIAR SOLICITUD DE CANCELACIÓN
-                  </p>
-                </CursorPointer>
-              </SubmitMsj>
-            )}
-            <Modal
-              visible={visible}
-              onCancel={this.handleCancel}
-              onOk={this.handleOk}
-              title="Confirmación"
-            >
-              <p>¿Estás seguro de querer hacer esto?</p>
-            </Modal>
-          </div>
-        </ReasonCancel>
+          </ReasonCancel>
+        </Row>
       </div>
     );
   }

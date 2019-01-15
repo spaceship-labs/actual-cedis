@@ -104,14 +104,20 @@ export const OrderEnvio = styled.div`
   margin: 10px 0px;
   font-size: 13px;
   padding: 4px 12px;
+
   .ant-row .ant-col-12 {
-    line-height: 60%;
+    line-height: 100%;
   }
 `;
 export const Sap = styled.div`
   margin: 10px 0px;
   font-size: 13px;
   line-height: 70%;
+`;
+export const CancelSap = styled.div`
+  margin: 10px 0px;
+  font-size: 13px;
+  padding: 20px 20px;
 `;
 export const Asesor = styled.div`
   margin: 10px 0px;
@@ -134,8 +140,9 @@ export const CancelBanner = styled.div`
   }
 `;
 const stateColor = {
-  true: 'green',
-  false: 'red',
+  authorized: 'green',
+  rejected: 'red',
+  pending: 'gray',
 };
 export const TxtStrong = styled.p`
   font-weight: bold;
@@ -195,7 +202,6 @@ export const RowItem = styled(Row)`
 export const ReasonCancel = styled.div`
   margin: 25px 0px;
   width: 100%;
-  height: 200px;
   textarea {
     width: 80%;
     height: 150px;
