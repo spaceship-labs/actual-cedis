@@ -10,7 +10,7 @@ import {
 
 // import Title from 'antd/lib/skeleton/Avatar';
 import OrderModal from '../../components/SingleOrder/modal';
-import { modaldata, asesordata } from './fakeData';
+import { asesordata, cancelationDetails } from './fakeData';
 import LayoutContentWrapper from '../../components/utility/layoutWrapper';
 import LayoutContent from '../../components/utility/layoutContent';
 import CancelActivity from '../../components/SingleOrder/cancelActivity';
@@ -19,6 +19,7 @@ import ItemsPurchased from '../../components/SingleOrder/itemsPurchased';
 import MotivoCancelacion from '../../components/SingleOrder/motivo';
 import Paymode from '../../components/SingleOrder/paymode';
 import SapDocuments from '../../components/SingleOrder/sapDocuments';
+import DocumentsCancel from '../../components/SingleOrder/documentCancel';
 import ShippingOrder from '../../components/SingleOrder/shippingOrder';
 import Advisor from '../../components/SingleOrder/advisor';
 import dispatch from './dispacher';
@@ -129,13 +130,13 @@ class OrderSingle extends Component {
 
   render() {
     const { order, products } = this.props;
-    const { folio, Broker, OrderCancelations } = order;
+    const { folio, Broker, OrderCancelations, CancelationDetails } = order;
     const { visible, showCancel, shouldRender, reason, cancelAll } = this.state;
     if (!shouldRender) return <div>Loading...</div>;
     return (
       <LayoutContentWrapper style={{ height: 'auto' }}>
         <LayoutContent>
-          {OrderCancelations && (
+          {OrderCancelations.length > 0 ? (
             <CancelBanner>
               <TxtStrong>
                 ESTATUS DE CANCELACIONES{' '}
@@ -147,9 +148,16 @@ class OrderSingle extends Component {
                 onCancel={this.handleCancel}
                 footer={null}
               >
-                <OrderModal modaldata={modaldata} order={folio} />
+                <OrderModal
+                  modaldata={CancelationDetails}
+                  orderFolio={folio}
+                  order={order}
+                  products={products}
+                />
               </Modal>
             </CancelBanner>
+          ) : (
+            ''
           )}
           <CancelActivity stateCancel={this.stateCancel} dataorder={order} />
           <Seccion>
@@ -183,6 +191,9 @@ class OrderSingle extends Component {
           </Seccion>
           <Seccion>
             <SapDocuments dataorder={order} />
+          </Seccion>
+          <Seccion>
+            <DocumentsCancel dataCancel={cancelationDetails} />
           </Seccion>
           <Seccion>
             <ShippingOrder shippingdata={order} />
