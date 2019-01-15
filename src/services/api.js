@@ -31,7 +31,7 @@ export default {
     },
   },
   orders: {
-    list: ({ page }) => get(`/order/find/${page}`),
+    list: ({ page }) => get(`/order?page=${page}`),
     findById: orderId => get(`/order/findbyid/${orderId}`),
   },
   cancel: {

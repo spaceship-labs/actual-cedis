@@ -112,7 +112,6 @@ export const OrderEnvio = styled.div`
 export const Sap = styled.div`
   margin: 10px 0px;
   font-size: 13px;
-  line-height: 70%;
 `;
 export const CancelSap = styled.div`
   margin: 10px 0px;
@@ -137,6 +136,9 @@ export const CancelBanner = styled.div`
   padding: 10px 0px;
   p {
     margin: 0px;
+  }
+  span {
+    cursor: pointer;
   }
 `;
 const stateColor = {
@@ -192,10 +194,6 @@ export const RowItem = styled(Row)`
   p {
     font-size: 12px;
     margin-bottom: 2px;
-  }
-  img {
-    width: 20px;
-    height: 25px;
   }
 `;
 

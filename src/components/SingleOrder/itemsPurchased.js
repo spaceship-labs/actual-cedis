@@ -9,7 +9,8 @@ import {
   // CursorPointer,
 } from '../../containers/Order/single.style';
 // import antiBind from '../services/utils';
-
+const urlImg = 'https://d116li125og699.cloudfront.net/uploads/products/';
+const sizeImg = '?d=100x100';
 const { Option } = Select;
 const ItemsPurchased = ({
   showCancel,
@@ -56,7 +57,11 @@ const ItemsPurchased = ({
                 <h3>{products[Product].Name || ''}</h3>
                 <Col span={12}>
                   {' '}
-                  <img src="./../orquideas.jpg" alt="articulo" />
+                  <img
+                    src={urlImg + products[Product].icon_filename + sizeImg}
+                    // src={urlImg + products[Product].icon_filename}
+                    alt={products[Product].ItemName}
+                  />
                 </Col>
                 <Col span={12}>
                   <p>{products[Product].CodeBars}</p>
@@ -93,7 +98,7 @@ const ItemsPurchased = ({
                       disabled={cancelAll}
                     >
                       {[...Array(quantityAvailable + 1)].map((x, i) => (
-                        <Option value={i} id={id}>
+                        <Option key={`#value${x}`} value={i} id={id}>
                           {i}
                         </Option>
                       ))}

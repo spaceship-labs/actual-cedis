@@ -7,19 +7,26 @@ const SapDocuments = ({ dataorder: { OrdersSap } }) => (
       <strong>DOCUMENTOS SAP</strong>
     </h3>
     <Sap>
-      <ul>
-        {OrdersSap.map(({ document, invoiceSap, id }) => (
-          <li key={id}>
-            <p>
-              <strong>Orden SAP:</strong> {document}
-            </p>
-            <p>
-              <strong>Factura de deudores SAP:</strong>{' '}
-              {`${invoiceSap || 'N/A'}`}
-            </p>
+      {OrdersSap.map(({ document, PaymentsSap, id }) => (
+        <ul key={id}>
+          <li>
+            {' '}
+            <strong>Orden SAP:</strong> {document}{' '}
           </li>
-        ))}
-      </ul>
+          <li>
+            <strong>Pagos :</strong>{' '}
+            <ul>
+              {PaymentsSap
+                ? PaymentsSap.map(
+                    ({ id: idPaymentSap, document: documentPaymentSap }) => (
+                      <li key={idPaymentSap}>{documentPaymentSap}</li>
+                    )
+                  )
+                : 'Ninguno'}
+            </ul>
+          </li>
+        </ul>
+      ))}
     </Sap>
   </div>
 );

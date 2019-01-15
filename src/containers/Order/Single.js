@@ -6,6 +6,7 @@ import {
   Modal,
   TxtStrong,
   TxtData,
+  // CursorPointer,
 } from './single.style';
 
 // import Title from 'antd/lib/skeleton/Avatar';
@@ -120,12 +121,15 @@ class OrderSingle extends Component {
     } = this.props;
     if (reason.length > 10 && (details.length > 0 || cancelAll === true)) {
       const cancelData = { orderId, cancelAll, details, reason };
-      return createCancel(cancelData);
+      createCancel(cancelData);
+      return true;
     }
     if (reason.length < 10) {
-      return alert('falta complementar las razones de cancelacion');
+      alert('falta complementar las razones de cancelacion');
+      return false;
     }
-    return alert('No ha seleccionado articulos para cancelar');
+    alert('No ha seleccionado articulos para cancelar');
+    return false;
   };
 
   render() {

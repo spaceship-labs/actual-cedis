@@ -9,10 +9,24 @@ const statusText = {
 
 const columns = [
   {
-    title: 'Folio',
-    key: 'folio',
+    title: 'Folio SAP',
+    key: 'folioSap',
     width: 300,
     render: object => renderCell(object, 'TextCell', 'folio'),
+    sorter: true,
+  },
+  {
+    title: 'Folio Mi Actual',
+    key: 'broker',
+    width: 300,
+    render: object => {
+      const { OrdersSap } = object;
+      const string = OrdersSap.map(({ invoiceSap, document }) => {
+        if (invoiceSap) return `${invoiceSap}, `;
+        return `${document}, `;
+      });
+      return renderCell(string, 'TextCell');
+    },
     sorter: true,
   },
   {
@@ -20,17 +34,6 @@ const columns = [
     key: 'Client',
     width: 300,
     render: object => renderCell(object, 'TextCell', 'CardName'),
-    sorter: true,
-  },
-  {
-    title: 'Broker',
-    key: 'broker',
-    width: 300,
-    render: object => {
-      const { Broker } = object;
-      const string = Broker ? Broker.Name || 'No Registrado' : 'No Aplica';
-      return renderCell(string, 'TextCell');
-    },
     sorter: true,
   },
   {

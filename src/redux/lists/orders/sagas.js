@@ -4,7 +4,7 @@ import api from '../../../services/api';
 
 export function* ordersSaga({ payload: page = 1 }) {
   const {
-    data: { data: orders, total },
+    data: { orders, total },
   } = yield call(api.orders.list, { page });
   yield put(actions.setOrders(orders));
   yield put(actions.setTotal(total));
