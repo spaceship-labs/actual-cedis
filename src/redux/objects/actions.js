@@ -8,7 +8,7 @@ const types = [
   'GET_CANCEL',
   'CREATE_CANCEL',
   'UPDATE_CANCEL',
-  'SET_CANCEL'
+  'SET_CANCEL',
 ];
 
 const {
@@ -17,7 +17,7 @@ const {
   getCancel,
   createCancel,
   updateCancel,
-  setCancel
+  setCancel,
 } = createActions(prefix, types);
 
 export default {
@@ -26,5 +26,5 @@ export default {
   getCancel,
   createCancel,
   updateCancel,
-  setCancel
+  setCancel,
 };

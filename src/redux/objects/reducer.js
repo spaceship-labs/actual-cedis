@@ -2,7 +2,7 @@ import actions from './actions';
 
 const initialState = {
   cancelRequest: {},
-  order: {}
+  order: {},
 };
 
 function objectsReducer(state = initialState, { type, payload }) {
