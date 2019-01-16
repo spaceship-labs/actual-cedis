@@ -5,7 +5,13 @@ import ImageCellView from './imageCell';
 
 const DateCell = data => {
   const date = new Date(data);
-  return <p>{date.toLocaleString()}</p>;
+  var options = {
+    weekday: 'short',
+    year: 'numeric',
+    month: '2-digit',
+    day: 'numeric',
+  };
+  return <p>{date.toLocaleString('en-US', options)}</p>;
 };
 const ImageCell = src => <ImageCellView src={src} />;
 const LinkCell = (link, href) => <a href={href || '#'}>{link}</a>;
