@@ -12,7 +12,16 @@ export function* changePageSaga({ payload: page }) {
   yield put(ordersActions.setPage(page));
 }
 
+export function* filterOrderSaga({ payload }) {
+  console.log(payload);
+  const page = yield select(pageSelector);
+  const { category, keyword } = payload;
+  const data = { page, category, keyword };
+  yield put(ordersActions.filterOrders(data));
+}
+
 export default function* OrdersViewSaga() {
   yield takeLatest(containerActions.getOrders.type, getOrdersSaga);
   yield takeLatest(containerActions.changePage.type, changePageSaga);
+  yield takeLatest(containerActions.filterOrders.type, filterOrderSaga);
 }

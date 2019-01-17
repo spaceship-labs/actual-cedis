@@ -33,6 +33,7 @@ export default {
   orders: {
     list: ({ page }) => get(`/order?page=${page}`),
     findById: orderId => get(`/order/findbyid/${orderId}`),
+    search: params => get('/order/findbyfilter', params),
   },
   cancel: {
     list: params => get('/cancel', params),

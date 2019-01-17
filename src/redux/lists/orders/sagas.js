@@ -10,6 +10,16 @@ export function* ordersSaga({ payload: page = 1 }) {
   yield put(actions.setTotal(total));
 }
 
+export function* filterOrderSaga({ payload: { page = 1, category, keyword } }) {
+  console.log('saga redux', page, category, keyword);
+  const {
+    data: { orders, total },
+  } = yield call(api.orders.search, { page, category, keyword });
+  yield put(actions.setOrders(orders));
+  yield put(actions.setTotal(total));
+}
+
 export default function* ordersSagas() {
   yield takeLatest(actions.getOrders.type, ordersSaga);
+  yield takeLatest(actions.filterOrders.type, filterOrderSaga);
 }

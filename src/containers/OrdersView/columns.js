@@ -9,15 +9,15 @@ const statusText = {
 
 const columns = [
   {
-    title: 'Folio SAP',
-    key: 'folioSap',
+    title: 'Folio Mi Actual',
+    key: 'folio',
     width: 300,
     render: object => renderCell(object, 'TextCell', 'folio'),
     sorter: true,
   },
   {
-    title: 'Folio Mi Actual',
-    key: 'broker',
+    title: 'Folio SAP',
+    key: 'folioSap',
     width: 300,
     render: object => {
       const { OrdersSap } = object;

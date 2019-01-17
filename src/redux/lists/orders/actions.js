@@ -8,11 +8,23 @@ const types = [
   'CHANGE_PAGE',
   'SET_PAGE',
   'SET_TOTAL',
+  'FILTER_ORDERS',
 ];
 
-const { getOrders, setOrders, changePage, setPage, setTotal } = createActions(
-  prefix,
-  types
-);
+const {
+  getOrders,
+  setOrders,
+  changePage,
+  setPage,
+  setTotal,
+  filterOrders,
+} = createActions(prefix, types);
 
-export default { getOrders, setOrders, changePage, setPage, setTotal };
+export default {
+  getOrders,
+  setOrders,
+  changePage,
+  setPage,
+  setTotal,
+  filterOrders,
+};
