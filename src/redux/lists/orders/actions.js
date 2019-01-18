@@ -9,6 +9,7 @@ const types = [
   'SET_PAGE',
   'SET_TOTAL',
   'FILTER_ORDERS',
+  'SET_ERROR',
 ];
 
 const {
@@ -18,6 +19,7 @@ const {
   setPage,
   setTotal,
   filterOrders,
+  setError,
 } = createActions(prefix, types);
 
 export default {
@@ -27,4 +29,5 @@ export default {
   setPage,
   setTotal,
   filterOrders,
+  setError,
 };

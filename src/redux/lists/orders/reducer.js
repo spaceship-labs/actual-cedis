@@ -1,7 +1,7 @@
 import actions from './actions';
 import shape from '../shape';
 
-export default function orderReducer(state = shape, { type, payload }) {
+export default function orderReducer(state = shape, { type, payload = '' }) {
   switch (type) {
     case actions.setOrders.type:
       return { ...state, entries: payload };
@@ -9,6 +9,8 @@ export default function orderReducer(state = shape, { type, payload }) {
       return { ...state, total: payload };
     case actions.setPage.type:
       return { ...state, page: payload };
+    case actions.setError.type:
+      return { ...state, error: payload };
     default:
       return state;
   }

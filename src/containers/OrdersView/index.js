@@ -5,6 +5,7 @@ import { containerSelector } from './selectors';
 import dispatcher from './dispatcher';
 import OrdersViewStyled from '../../components/OrdersView';
 import SearchBar from '../../components/search';
+import AlertDialog from '../../components/dialogAlert';
 
 class OrdersView extends Component {
   constructor(props) {
@@ -36,9 +37,11 @@ class OrdersView extends Component {
   };
 
   searchOrder = () => {
-    const { keyword, filter } = this.state;
-    if (keyword.length > 0) this.onChangeFilter();
-    this.onSearch(filter);
+    const { keyword, category } = this.state;
+    const { filterOrders, getOrders } = this.props;
+    if (keyword.length > 0) filterOrders({ category, keyword });
+    else getOrders();
+    this.validOrders();
   };
 
   onSearch = filter => {
@@ -50,8 +53,9 @@ class OrdersView extends Component {
   };
 
   validOrders = () => {
-    const { orders } = this.props;
-    console.log('ordenes', orders);
+    const { error } = this.props;
+    console.log('validate error');
+    if (error) AlertDialog('Error');
   };
 
   onChangeKeyWord = e => {

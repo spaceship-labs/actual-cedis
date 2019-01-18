@@ -10,7 +10,6 @@ const OrdersView = props => {
     orders,
     columns,
     rowKey,
-    filter,
     keyword,
     category,
   } = props;
@@ -20,7 +19,7 @@ const OrdersView = props => {
   //       <h3>Hola Mundo</h3>
   //     </div>
   //   );
-  const searchfunction = filter ? filterOrders : getOrders;
+  const searchfunction = keyword.length > 0 ? filterOrders : getOrders;
   return (
     <div>
       <h3>Pedidos</h3>

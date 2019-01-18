@@ -3,6 +3,7 @@ import { getToken } from './auth';
 
 // const API_BASE = 'https://sandboxapi.miactual.com';
 const API_BASE = 'http://localhost:1337';
+// const API_BASE = 'http://192.168.0.20:1337';
 
 axios.defaults.baseURL = API_BASE;
 const get = (url, params = {}) => axios.get(url, { params });
