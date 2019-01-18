@@ -13,7 +13,6 @@ export function* changePageSaga({ payload: page }) {
 }
 
 export function* filterOrderSaga({ payload }) {
-  console.log(payload);
   const page = yield select(pageSelector);
   const { category, keyword } = payload;
   const data = { page, category, keyword };

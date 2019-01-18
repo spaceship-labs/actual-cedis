@@ -11,12 +11,17 @@ export function* ordersSaga({ payload: page = 1 }) {
 }
 
 export function* filterOrderSaga({ payload: { page = 1, category, keyword } }) {
-  console.log('saga redux', page, category, keyword);
-  const {
-    data: { orders, total },
-  } = yield call(api.orders.search, { page, category, keyword });
-  yield put(actions.setOrders(orders));
-  yield put(actions.setTotal(total));
+  try {
+    const {
+      data: { orders, total },
+    } = yield call(api.orders.search, { page, category, keyword });
+    yield put(actions.setOrders(orders));
+    // console.log('ordenes sagas', orders);
+    yield put(actions.setTotal(total));
+  } catch (err) {
+    console.log(err);
+    throw new Error('Error de busqueda');
+  }
 }
 
 export default function* ordersSagas() {

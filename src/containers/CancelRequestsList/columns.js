@@ -22,6 +22,18 @@ const columns = [
     sorter: true,
   },
   {
+    title: 'Cliente',
+    key: 'client',
+    width: 300,
+    render: object => {
+      const {
+        Order: { CardName },
+      } = object;
+      return renderCell(CardName, 'TextCell');
+    },
+    sorter: true,
+  },
+  {
     title: 'Folio',
     key: 'folio',
     width: 300,

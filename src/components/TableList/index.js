@@ -11,9 +11,7 @@ const TableView = ({
   category,
 }) => {
   const Search = () => {
-    console.log(onChangeData);
-    console.log('datos de la funcion', keyword, category);
-    onChangeData(keyword, category);
+    onChangeData({ keyword, category });
   };
   return (
     <TableWrapper

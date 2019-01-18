@@ -28,22 +28,30 @@ class OrdersView extends Component {
     });
   };
 
-  searchOrder = () => {
-    const { filterOrders } = this.props;
-    const { category, keyword } = this.state;
-    if (keyword.length > 0) {
-      this.setState({
-        filter: true,
-      });
-    } else {
-      this.setState({
-        filter: false,
-      });
-    }
+  onChangeFilter = () => {
+    const { filter } = this.state;
+    this.setState({
+      filter: !filter,
+    });
+  };
 
-    const data = { category, keyword };
-    console.log('datos del estado', this.state);
-    filterOrders(data);
+  searchOrder = () => {
+    const { keyword, filter } = this.state;
+    if (keyword.length > 0) this.onChangeFilter();
+    this.onSearch(filter);
+  };
+
+  onSearch = filter => {
+    const { filterOrders, getOrders } = this.props;
+    const { category, keyword } = this.state;
+    if (!filter) filterOrders({ category, keyword });
+    else getOrders();
+    this.onChangeFilter();
+  };
+
+  validOrders = () => {
+    const { orders } = this.props;
+    console.log('ordenes', orders);
   };
 
   onChangeKeyWord = e => {
