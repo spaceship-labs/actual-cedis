@@ -16,7 +16,7 @@ import Checkout from '../../../image/svgs/checkout-ticket.svg';
 const Item = ({ object }) => <StatusH3 weight="bolder">{object}</StatusH3>;
 
 Item.defaultProps = {
-  description: 'Aqui va el producto',
+  object: 'Aqui va el producto',
 };
 
 const Cantidad = ({ object }) => (
@@ -36,17 +36,17 @@ const Entrega = ({ object }) => (
 );
 
 Entrega.defaultProps = {
-  delivery: 'Aqui va la fecha de entrega',
+  shipDate: 'Aqui va la fecha de entrega',
 };
 
 const Precio = ({ object }) => (
   <StatusP weight="normal" align="right" margin="0px">
-    {object.total}
+    {Math.round(object.total * 100) / 100}
   </StatusP>
 );
 
 Precio.defaultProps = {
-  price: 'Aqui va el precio',
+  object: 'Aqui va el precio',
 };
 
 const TestMain = ({
@@ -75,7 +75,7 @@ const TestMain = ({
       <Row>
         <Col md={6} lg={10}>
           <ColEnd>
-            <Item object={null} />
+            <Item />
           </ColEnd>
         </Col>
         <Col md={14} lg={10}>
@@ -116,7 +116,7 @@ const TestMain = ({
                 >
                   Precio
                 </StatusP>
-                <Precio object={cancelDetail} />
+                <Precio object={detail} />
               </Col>
             </Col>
           </Row>
