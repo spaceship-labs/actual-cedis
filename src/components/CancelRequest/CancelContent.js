@@ -1,91 +1,88 @@
-import React from 'react';
-import TestMain from './TestMain/TestMain';
+import React, { Component } from 'react';
 import SolicitudBar from './SolicitudBar/SolicitudBar';
 import OrderText from './OrderText/OrderText';
+import LayoutContentWrapper from '../utility/layoutWrapper';
+import LayoutContent from '../utility/layoutContent';
 import CambiosBar from './CambiosBar/CambiosBar';
-import TestRequestConfirmAprove from './TestMain/TestRequestConfirm/TestRequestConfirmAprove';
-import TestRequestConfirmDenied from './TestMain/TestRequestConfirm/TestRequestConfirmDenied';
-import TestRequestAproveAll from './TestMain/TestRequestConfirm/TestRequestAproveAll';
-import TestRequestCancelAll from './TestMain/TestRequestConfirm/TestRequestCancelAll';
+import Confirm from './PopUp/Confirm';
+import TestMain from './TestMain/TestMain';
 
-const CancelContent = ({
-  data,
-  toogleOption,
-  handleClickAprove,
-  handleClickDenied,
-  toogleBack,
-  autorizado,
-  rechazado,
-  goBack,
-  toogleConfirmA,
-  handleClickAN,
-  handleClickAY,
-  toogleConfirmD,
-  handleClickDN,
-  handleClickDY,
-  handleClickAproveAll,
-  handleClickDeniedAll,
-  toogleCAll,
-  toogleDAll,
-  handleClickCAllN,
-  handleClickCAllY,
-  handleClickDAllN,
-  handleClickDAllY,
-}) => (
-  <div>
-    <SolicitudBar
-      handleClickAproveAll={handleClickAproveAll}
-      handleClickDeniedAll={handleClickDeniedAll}
-    />
-    <OrderText />
-    <div>
-      {data.map(d => (
-        <TestMain
-          object={d}
-          toogleOption={toogleOption}
-          handleClickAprove={handleClickAprove}
-          handleClickDenied={handleClickDenied}
-          toogleBack={toogleBack}
-          autorizado={autorizado}
-          rechazado={rechazado}
-          goBack={goBack}
-          toogleConfirmA={toogleConfirmA}
-          handleClickAN={handleClickAN}
-          handleClickAY={handleClickAY}
-          toogleConfirmD={toogleConfirmD}
-          handleClickDN={handleClickDN}
-          handleClickDY={handleClickDY}
-          toogleCAll={toogleCAll}
-          toogleDAll={toogleDAll}
-          handleClickCAllN={handleClickCAllN}
-          handleClickCAllY={handleClickCAllY}
-          handleClickDAllY={handleClickDAllY}
-          handleClickDAllN={handleClickDAllN}
-        />
-      ))}
-    </div>
-    <CambiosBar />
-    <TestRequestConfirmAprove
-      toogle={toogleConfirmA}
-      handleClickAN={handleClickAN}
-      handleClickAY={handleClickAY}
-    />
-    <TestRequestConfirmDenied
-      toogle={toogleConfirmD}
-      handleClickDN={handleClickDN}
-      handleClickDY={handleClickDY}
-    />
-    <TestRequestAproveAll
-      toogle={toogleCAll}
-      handleClickCAllN={handleClickCAllN}
-      handleClickCAllY={handleClickCAllY}
-    />
-    <TestRequestCancelAll
-      toogle={toogleDAll}
-      handleClickDAllY={handleClickDAllY}
-      handleClickDAllN={handleClickDAllN}
-    />
-  </div>
-);
+// const antiBind = (fn, ...args) => e => fn(e, ...args);
+
+class CancelContent extends Component {
+  constructor(props) {
+    super(props);
+    this.ToogleDialog = this.ToogleDialog.bind(this);
+    this.state = {
+      showDialog: false,
+    };
+  }
+
+  ToogleDialog = e => {
+    if (e === true) {
+      this.setState({
+        showDialog: e,
+      });
+    } else {
+      this.setState({
+        showDialog: e,
+      });
+    }
+  };
+
+  allButton = val => {
+    console.log(val);
+    this.ToogleDialog(true);
+  };
+
+  Cancel = () => {
+    this.ToogleDialog(false);
+  };
+
+  renderArticle = cancelDetail => {
+    const {
+      cancelRequest: { Details: details, status },
+      products,
+    } = this.props;
+    const { id, Detail } = cancelDetail;
+    const detail = details[Detail];
+    const product = products[detail.Product];
+    return (
+      <TestMain
+        key={id}
+        product={product}
+        detail={detail}
+        cancelDetail={cancelDetail}
+        requestStatus={status}
+      />
+    );
+  };
+
+  render() {
+    const { cancelRequest: request } = this.props;
+    const { CancelationDetails: cancelDetails } = request;
+    const { showDialog } = this.state;
+    return (
+      <LayoutContentWrapper style={{ height: 'auto' }}>
+        <LayoutContent>
+          <SolicitudBar
+            folio={request.Order.folio}
+            buttons={this.allButton}
+            status={request.status}
+          />
+          <OrderText text={request.reason} />
+          <br />
+          {cancelDetails.map(this.renderArticle)}
+          <CambiosBar Toogle={() => this.ToogleDialog(true)} />
+          <Confirm
+            show={showDialog}
+            cancel={this.Cancel}
+            folio={request.Order.folio}
+          />
+        </LayoutContent>
+      </LayoutContentWrapper>
+    );
+  }
+}
 
 export default CancelContent;

@@ -61,10 +61,10 @@ export const ColEnd = styled(Col)`
 `;
 
 export const AllButton = styled(Button)`
-  color: ${props => props.color};
-  text-transform: ${props => props.transform};
+  color: white !important;
+  text-transform: uppercase !important;
   background-color: ${props => props.bgcolor};
-  font-size: ${props => props.font};
+  font-size: 10px !important;
 `;
 
 export const StatusIcon = styled.img`

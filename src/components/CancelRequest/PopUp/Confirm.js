@@ -1,22 +1,29 @@
-import React from 'react';
-import { Row } from 'antd';
+import React, { Component } from 'react';
+import { Row, Input } from 'antd';
 import {
   StatusPop,
   StatusH3,
   ItemCol,
   AllButton,
-} from '../../CancelRequest.style';
+} from '../CancelRequest.style';
 
-const TestRequestCancelAll = ({
-  toogle,
-  handleClickDAllY,
-  handleClickDAllN,
-}) => {
-  const isToogled = toogle;
-  const HDY = handleClickDAllY;
-  const HDN = handleClickDAllN;
-  if (isToogled) {
-    return (
+class Confirm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: '',
+    };
+  }
+
+  handleInput = e => {
+    const { value } = e.target;
+    this.setState({ password: value });
+  };
+
+  render() {
+    const { show, cancel, folio } = this.props;
+    const { password } = this.state;
+    return show ? (
       <StatusPop width="100px" height="auto">
         <ItemCol>
           <Row type="flex">
@@ -28,32 +35,30 @@ const TestRequestCancelAll = ({
               width="100%"
               align="center"
             >
-              ¿Esta seguro que desea rechazar todo?
+              ¿Esta seguro que desea aprobar la siguiente operación?
             </StatusH3>
+            <p>{`Para continuar, ingrese el numero de folio (${folio})`}</p>
+            <Input onChange={this.handleInput} value={password} />
+            <br />
           </Row>
           <Row type="flex" justify="center">
             <Row type="flex" justify="center">
               <AllButton
-                onClick={HDN}
                 type="danger"
                 size="large"
-                color="white!important"
-                transform="uppercase"
                 bgcolor="#C82828!important"
-                font="10px!important"
+                onClick={cancel}
               >
                 Cancelar
               </AllButton>
             </Row>
             <Row type="flex" justify="center">
               <AllButton
-                onClick={HDY}
                 type="primary"
                 size="large"
-                color="white!important"
-                transform="uppercase"
                 bgcolor="#33BA2C!important"
-                font="10px!important"
+                onClick={null}
+                disabled={`${folio}` !== password}
               >
                 Aceptar
               </AllButton>
@@ -61,9 +66,8 @@ const TestRequestCancelAll = ({
           </Row>
         </ItemCol>
       </StatusPop>
-    );
+    ) : null;
   }
-  return null;
-};
+}
 
-export default TestRequestCancelAll;
+export default Confirm;

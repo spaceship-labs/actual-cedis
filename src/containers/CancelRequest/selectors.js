@@ -1,31 +1,12 @@
-export const requestSelector = ({ containers }) =>
-  containers.CancelRequest.request;
+const cancelRequestSelector = ({ objects }) => objects.cancelRequest;
 
-export const statusSelector = ({ containers }) =>
-  containers.CancelRequest.status;
-
-export const acceptedSelector = ({ containers }) =>
-  containers.CancelRequest.accepted;
-
-export const rejectedSelector = ({ containers }) =>
-  containers.CancelRequest.rejected;
-
-export const propsSelector = ({ containers }) => {
+const containerSelector = state => {
   const {
-    CancelRequest: {
-      request,
-      accepted: acceptedElements,
-      rejected: rejectedElements,
-    },
-  } = containers;
+    objects: { cancelRequest },
+    lists: { products },
+  } = state;
 
-  return { request, acceptedElements, rejectedElements };
+  return { cancelRequest, products };
 };
 
-export default {
-  requestSelector,
-  statusSelector,
-  acceptedSelector,
-  rejectedSelector,
-  propsSelector,
-};
+export default { cancelRequestSelector, containerSelector };
