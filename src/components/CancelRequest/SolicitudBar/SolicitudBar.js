@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   SolicitudContainer,
@@ -12,7 +13,34 @@ import {
 } from '../CancelRequest.style';
 import Trash from '../../../image/svgs/trash.svg';
 
-const SolicitudBar = ({ handleClickAproveAll, handleClickDeniedAll }) => (
+// const antiBind = (fn, ...args) => e => fn(e, ...args);
+
+const Buttons = buttons => (
+  <ButtonsCol md={8} lg={6}>
+    <ColCenter>
+      <AllButton
+        type="primary"
+        size="default"
+        bgcolor="#33BA2C!important"
+        onClick={() => buttons('authorized')}
+      >
+        <strong> Autorizar todo</strong>
+      </AllButton>
+    </ColCenter>
+    <ColCenter>
+      <AllButton
+        type="danger"
+        size="default"
+        bgcolor="#C82828!important"
+        onClick={() => buttons('rejected')}
+      >
+        <strong> Rechazar todo</strong>
+      </AllButton>
+    </ColCenter>
+  </ButtonsCol>
+);
+
+const SolicitudBar = ({ folio, buttons, status }) => (
   <SolicitudContainer>
     <SolicitudItem type="flex" justify="start">
       <LogoCol span={2}>
@@ -33,37 +61,10 @@ const SolicitudBar = ({ handleClickAproveAll, handleClickDeniedAll }) => (
           transform="uppercase"
           padding="0px 0px 0px 10px"
         >
-          Ninguna solicitud pendiente
+          #{folio}
         </StatusSpan>
       </TextCol>
-      <ButtonsCol md={8} lg={6}>
-        <ColCenter>
-          <AllButton
-            onClick={handleClickAproveAll}
-            type="primary"
-            size="default"
-            color="white!important"
-            transform="uppercase"
-            bgcolor="#33BA2C!important"
-            font="10px!important"
-          >
-            <strong> Autorizar todo</strong>
-          </AllButton>
-        </ColCenter>
-        <ColCenter>
-          <AllButton
-            onClick={handleClickDeniedAll}
-            type="danger"
-            size="default"
-            color="white!important"
-            transform="uppercase"
-            bgcolor="#C82828!important"
-            font="10px!important"
-          >
-            <strong> Rechazar todo</strong>
-          </AllButton>
-        </ColCenter>
-      </ButtonsCol>
+      {status === 'pending' ? Buttons(buttons) : null}
     </SolicitudItem>
   </SolicitudContainer>
 );
