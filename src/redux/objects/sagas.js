@@ -2,6 +2,7 @@ import { call, takeLatest, put } from 'redux-saga/effects';
 import actions from './actions';
 import productActions from '../lists/products/actions';
 import api from '../../services/api';
+import { arrayToObject, extractKeyValues } from '../../helpers/dataStructures';
 
 export function* orderSaga({ payload: orderId }) {
   const { data: order } = yield call(api.orders.findById, orderId);
@@ -11,9 +12,19 @@ export function* orderSaga({ payload: orderId }) {
   yield put(actions.setOrder(order));
 }
 
-export function* getCancelSaga(cancelId) {
-  const { data: cancelOrder } = yield call(api.cancel.get, { id: cancelId });
-  return cancelOrder;
+export function* getCancelSaga({ payload: cancelId }) {
+  const { data: cancelOrder } = yield call(api.cancel.get, cancelId);
+
+  const productsId = yield call(
+    extractKeyValues,
+    cancelOrder.Details,
+    'Product',
+    false
+  );
+  yield put(productActions.getProducts(productsId));
+
+  const Details = yield call(arrayToObject, cancelOrder.Details, 'id');
+  yield put(actions.setCancel({ ...cancelOrder, Details }));
 }
 
 export function* createCancelSaga({ payload }) {
@@ -32,14 +43,19 @@ export function* createCancelSaga({ payload }) {
 }
 
 export function* updateCancelSaga({ payload }) {
-  const { cancelOrderId: id, ...params } = payload;
-  const { data: cancelOrder } = yield call(api.cancel.update, { id, params });
-  return cancelOrder;
+  try {
+    const { params } = payload;
+    const { data: cancelOrder } = yield call(api.cancel.update, { ...params });
+    yield put(actions.getCancel(cancelOrder.id));
+    alert('Solicitud Procesada con exito');
+  } catch (err) {
+    console.log(err);
+    throw new Error('API Error');
+  }
 }
 
 export default function* objectsSagas() {
   yield takeLatest(actions.getOrder.type, orderSaga);
   yield takeLatest(actions.getCancel.type, getCancelSaga);
-  yield takeLatest(actions.createCancel.type, createCancelSaga);
   yield takeLatest(actions.updateCancel.type, updateCancelSaga);
 }
