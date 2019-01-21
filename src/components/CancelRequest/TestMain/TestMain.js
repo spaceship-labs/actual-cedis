@@ -3,11 +3,9 @@ import { Row, Col } from 'antd';
 import {
   StatusH3,
   StatusP,
-  StatusSpan,
   ColCenter,
   ColEnd,
   StatusContent,
-  RequestIcon,
   StatusIcon,
 } from '../CancelRequest.style';
 
@@ -15,32 +13,10 @@ import TestOption from './TestOption';
 import TestRegresar from './TestRegresar/TestRegresar';
 import Checkout from '../../../image/svgs/checkout-ticket.svg';
 
-const Item = ({ object }) => (
-  <StatusH3 weight="bolder">{object.description.value}</StatusH3>
-);
+const Item = ({ object }) => <StatusH3 weight="bolder">{object}</StatusH3>;
 
 Item.defaultProps = {
   description: 'Aqui va el producto',
-};
-
-const Codigo = ({ object }) => (
-  <StatusP weight="bolder">
-    Codigo: <StatusSpan weight="lighter">{object.code}</StatusSpan>
-  </StatusP>
-);
-
-Codigo.defaultProps = {
-  code: 'Aqui va el codigo',
-};
-
-const Color = ({ object }) => (
-  <StatusP weight="bolder">
-    Color: <StatusSpan weight="lighter">{object.color}</StatusSpan>
-  </StatusP>
-);
-
-Color.defaultProps = {
-  color: 'Aqui va el color',
 };
 
 const Cantidad = ({ object }) => (
@@ -55,7 +31,7 @@ Cantidad.defaultProps = {
 
 const Entrega = ({ object }) => (
   <StatusP weight="normal" align="right" margin="0px">
-    {object.delivery}
+    {object.shipDate}
   </StatusP>
 );
 
@@ -65,7 +41,7 @@ Entrega.defaultProps = {
 
 const Precio = ({ object }) => (
   <StatusP weight="normal" align="right" margin="0px">
-    {object.price}
+    {object.total}
   </StatusP>
 );
 
@@ -74,14 +50,13 @@ Precio.defaultProps = {
 };
 
 const TestMain = ({
-  object,
-  toogleOption,
-  handleClickAprove,
-  handleClickDenied,
-  toogleBack,
-  autorizado,
-  rechazado,
-  goBack,
+  detail,
+  cancelDetail,
+  accept,
+  reject,
+  unSet,
+  options,
+  requestStatus,
 }) => (
   <div>
     <StatusContent>
@@ -100,20 +75,7 @@ const TestMain = ({
       <Row>
         <Col md={6} lg={10}>
           <ColEnd>
-            <Item object={object} />
-            <Row type="flex">
-              <RequestIcon
-                type="file-unknown"
-                width="30px"
-                height="30px"
-                font="25px"
-                margin="0px 5px"
-              />
-              <Col>
-                <Codigo object={object} />
-                <Color object={object} />
-              </Col>
-            </Row>
+            <Item object={null} />
           </ColEnd>
         </Col>
         <Col md={14} lg={10}>
@@ -128,7 +90,7 @@ const TestMain = ({
                 >
                   Cantidad
                 </StatusP>
-                <Cantidad object={object} />
+                <Cantidad object={cancelDetail} />
               </Col>
             </Col>
             <Col span={11}>
@@ -141,7 +103,7 @@ const TestMain = ({
                 >
                   Entrega aproximada
                 </StatusP>
-                <Entrega object={object} />
+                <Entrega object={detail} />
               </Col>
             </Col>
             <Col span={8}>
@@ -154,25 +116,24 @@ const TestMain = ({
                 >
                   Precio
                 </StatusP>
-                <Precio object={object} />
+                <Precio object={cancelDetail} />
               </Col>
             </Col>
           </Row>
         </Col>
         <Col md={4} lg={4}>
-          <ColCenter height="100px!important">
-            <TestOption
-              toogle={toogleOption}
-              handleClickAprove={handleClickAprove}
-              handleClickDenied={handleClickDenied}
-            />
-            <TestRegresar
-              toogle={toogleBack}
-              autorizado={autorizado}
-              rechazado={rechazado}
-              goBack={goBack}
-            />
-          </ColCenter>
+          {requestStatus === 'pending' ? (
+            <ColCenter>
+              {!options ? (
+                <TestOption
+                  handleClickAprove={accept}
+                  handleClickDenied={reject}
+                />
+              ) : (
+                <TestRegresar clickCb={unSet} />
+              )}
+            </ColCenter>
+          ) : null}
         </Col>
       </Row>
     </StatusContent>
