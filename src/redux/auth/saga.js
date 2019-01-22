@@ -3,6 +3,7 @@ import { push } from 'connected-react-router';
 import actions from './actions';
 import api from '../../services/api';
 import { logout as authLogout } from '../../services/auth';
+import AlertDialog from '../../components/dialogAlert';
 
 function* onLogin(action) {
   try {
@@ -12,6 +13,7 @@ function* onLogin(action) {
   } catch (e) {
     yield put(actions.setLoading(false));
     yield put(actions.loginError(e));
+    AlertDialog('LOGIN ERROR', 'Contraseña y/o usuario incorrectos ');
   }
 }
 

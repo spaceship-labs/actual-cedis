@@ -2,6 +2,7 @@ import { call, takeLatest, put } from 'redux-saga/effects';
 import actions from './actions';
 import productsActions from '../lists/products/actions';
 import api from '../../services/api';
+import AlertDialog from '../../components/dialogAlert';
 import { arrayToObject, extractKeyValues } from '../../helpers/dataStructures';
 
 export function* orderSaga({ payload: orderId }) {
@@ -36,9 +37,9 @@ export function* createCancelSaga({ payload }) {
       details,
       reason,
     });
-    alert('Solicitud de cancelación exitosa');
+    AlertDialog('SUCCESSFUL', 'Solicitud de cancelación exitosa');
   } catch (e) {
-    alert('Error al generar la cancelación');
+    AlertDialog('ERROR', 'Error al generar la cancelación');
   }
 }
 
@@ -47,9 +48,9 @@ export function* updateCancelSaga({ payload }) {
     const { params } = payload;
     const { data: cancelOrder } = yield call(api.cancel.update, { ...params });
     yield put(actions.getCancel(cancelOrder.id));
-    alert('Solicitud Procesada con exito');
+    AlertDialog('SUCCESSFUL', 'Solicitud Procesada con éxito');
   } catch (err) {
-    console.log(err);
+    AlertDialog('ERROR', 'API Error');
     throw new Error('API Error');
   }
 }
@@ -57,5 +58,6 @@ export function* updateCancelSaga({ payload }) {
 export default function* objectsSagas() {
   yield takeLatest(actions.getOrder.type, orderSaga);
   yield takeLatest(actions.getCancel.type, getCancelSaga);
+  yield takeLatest(actions.createCancel.type, createCancelSaga);
   yield takeLatest(actions.updateCancel.type, updateCancelSaga);
 }

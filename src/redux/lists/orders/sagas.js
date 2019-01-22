@@ -1,6 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import actions from './actions';
 import api from '../../../services/api';
+import AlertDialog from '../../../components/dialogAlert';
 
 export function* ordersSaga({ payload: page = 1 }) {
   const {
@@ -17,12 +18,16 @@ export function* filterOrderSaga({ payload: { page = 1, category, keyword } }) {
       category,
       keyword,
     });
-    const { orders, total } = data;
+    const { orders = [''], total } = data;
     yield put(actions.setOrders(orders));
     yield put(actions.setTotal(total));
   } catch (error) {
-    console.log('error');
-    yield put(actions.setError({ error }));
+    // const {
+    //   response: { data },
+    // } = error;
+    // AlertDialog('', data);
+    const { message } = error;
+    AlertDialog('', message);
   }
 }
 

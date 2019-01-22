@@ -1,10 +1,9 @@
 import React from 'react';
 import { Modal } from 'antd';
 
-const AlertDialog = ({ message }) => {
-  console.log('dialog alert');
+const AlertDialog = (tittle, message) => {
   Modal.info({
-    title: 'ERROR',
+    title: tittle,
     content: (
       <div>
         <p>{message}</p>
@@ -13,4 +12,5 @@ const AlertDialog = ({ message }) => {
     onOk() {},
   });
 };
+
 export default AlertDialog;

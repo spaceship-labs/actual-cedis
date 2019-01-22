@@ -5,7 +5,7 @@ import { containerSelector } from './selectors';
 import dispatcher from './dispatcher';
 import OrdersViewStyled from '../../components/OrdersView';
 import SearchBar from '../../components/search';
-import AlertDialog from '../../components/dialogAlert';
+import Loading from '../../components/loading';
 
 class OrdersView extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class OrdersView extends Component {
     this.state = {
       category: 'folioActual',
       keyword: '',
-      filter: false,
     };
   }
 
@@ -29,33 +28,11 @@ class OrdersView extends Component {
     });
   };
 
-  onChangeFilter = () => {
-    const { filter } = this.state;
-    this.setState({
-      filter: !filter,
-    });
-  };
-
   searchOrder = () => {
     const { keyword, category } = this.state;
     const { filterOrders, getOrders } = this.props;
     if (keyword.length > 0) filterOrders({ category, keyword });
     else getOrders();
-    this.validOrders();
-  };
-
-  onSearch = filter => {
-    const { filterOrders, getOrders } = this.props;
-    const { category, keyword } = this.state;
-    if (!filter) filterOrders({ category, keyword });
-    else getOrders();
-    this.onChangeFilter();
-  };
-
-  validOrders = () => {
-    const { error } = this.props;
-    console.log('validate error');
-    if (error) AlertDialog('Error');
   };
 
   onChangeKeyWord = e => {
@@ -68,17 +45,18 @@ class OrdersView extends Component {
   };
 
   render() {
-    const { pagination, changePage, filterOrders } = this.props;
+    const { pagination, changePage, filterOrders, loading } = this.props;
     const newProps = {
       ...this.props,
       pagination: { ...pagination, onChange: changePage },
     };
-    const { keyword, category, filter } = this.state;
+    const { keyword, category } = this.state;
     const categoryFilter = {
       folioSap: 'Folio Sap',
       folio: 'Folio mi actual',
       cardName: 'Cliente',
     };
+    if (loading) return <Loading />;
     return (
       <div>
         <SearchBar
@@ -93,7 +71,6 @@ class OrdersView extends Component {
           {...newProps}
           columns={columns}
           rowKey={item => `orden-${item.id}-view`}
-          filter={filter}
           filterOrders={filterOrders}
           keyword={keyword}
           category={category}

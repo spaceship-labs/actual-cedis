@@ -5,6 +5,7 @@ import { containerSelector } from './selectors';
 import CancelRequestsListStyled from '../../components/CancelRequestsList';
 import dispatcher from './dispatcher';
 import SearchBar from '../../components/search';
+import Loading from '../../components/loading';
 
 class CancelRequestsList extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ class CancelRequestsList extends Component {
   // };
 
   render() {
-    const { pagination, changePage, filterCancel } = this.props;
+    const { pagination, changePage, filterCancel, loading } = this.props;
     const newProps = {
       ...this.props,
       pagination: { ...pagination, onChange: changePage },
@@ -70,6 +71,8 @@ class CancelRequestsList extends Component {
       folio: 'Folio mi actual',
       cardName: 'Cliente',
     };
+    if (loading) return <Loading />;
+
     return (
       <div>
         <SearchBar
