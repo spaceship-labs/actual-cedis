@@ -42,7 +42,7 @@ export default {
       post(`/cancel/${orderId}/order`, params),
     get: orderId => get(`/cancel/${orderId}/order`),
     update: ({ id, ...params }) => put(`/cancel/${id}/order`, params),
-    search: params => get('/order/cancel/findbyfilter', params),
+    search: params => get('/cancel/findbyfilter', params),
   },
   alerts: {
     list: params => get('/alert', { params }),
