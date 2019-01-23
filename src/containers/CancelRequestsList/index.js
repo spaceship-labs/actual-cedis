@@ -74,7 +74,7 @@ class CancelRequestsList extends Component {
           columns={columns}
           rowKey={item => `orden-${item.id}-view`}
           filter={filter}
-          filterOrders={filterCancel}
+          filterCancel={filterCancel}
           keyword={keyword}
           category={category}
         />
