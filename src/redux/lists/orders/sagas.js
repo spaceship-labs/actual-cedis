@@ -22,12 +22,10 @@ export function* filterOrderSaga({ payload: { page = 1, category, keyword } }) {
     yield put(actions.setOrders(orders));
     yield put(actions.setTotal(total));
   } catch (error) {
-    // const {
-    //   response: { data },
-    // } = error;
-    // AlertDialog('', data);
-    const { message } = error;
-    AlertDialog('', message);
+    const {
+      response: { data },
+    } = error;
+    AlertDialog('', data);
   }
 }
 

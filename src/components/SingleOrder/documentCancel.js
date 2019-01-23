@@ -79,13 +79,9 @@ const DocumentsCancel = ({
               <strong>Productos sin cancelar :</strong>
               <ul>
                 <li>
-                  {products.map(item => (
-                    <span key={item}>
-                      {item} {''},{' '}
-                    </span>
-                  ))}
-                </li>{' '}
-              </ul>{' '}
+                  <span>{products.map(item => item).toString()}</span>
+                </li>
+              </ul>
             </li>
           </ul>
         </Col>

@@ -23,9 +23,9 @@ const columns = [
       const { OrdersSap } = object;
       const string = OrdersSap.map(({ invoiceSap, document }) => {
         if (invoiceSap) return `${invoiceSap}, `;
-        return `${document}, `;
+        return `${document} `;
       });
-      return renderCell(string, 'TextCell');
+      return renderCell(string.toString(), 'TextCell');
     },
     sorter: true,
   },

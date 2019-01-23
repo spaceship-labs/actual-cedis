@@ -39,25 +39,11 @@ class CancelRequestsList extends Component {
   };
 
   searchOrder = () => {
-    const { keyword } = this.state;
-    if (keyword.length > 0) {
-      this.setState({
-        filter: true,
-      });
-    } else {
-      this.setState({
-        filter: false,
-      });
-    }
-    // this.onSearch(filter);
+    const { keyword, category } = this.state;
+    const { filterCancel, getOrders } = this.props;
+    if (keyword.length > 0) filterCancel({ category, keyword });
+    else getOrders();
   };
-
-  // onSearch = filter => {
-  //   const { filterCancel, getOrders } = this.props;
-  //   const { category, keyword } = this.state;
-  //   if (!filter) filterCancel ({ category, keyword });
-  //   else getOrders();
-  // };
 
   render() {
     const { pagination, changePage, filterCancel, loading } = this.props;
