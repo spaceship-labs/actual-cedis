@@ -48,7 +48,7 @@ Precio.defaultProps = {
 
 const ArticleRow = ({
   product,
-  detail,
+  // detail,
   cancelDetail,
   accept,
   reject,
@@ -71,9 +71,7 @@ const ArticleRow = ({
             </Col>
           </Col>
           <Col span={11}>
-            <Col>
-              <Entrega object={detail.shipDate} />
-            </Col>
+            <Col>{/* <Entrega object={detail.shipDate} /> */}</Col>
           </Col>
           <Col span={8}>
             <Col>
