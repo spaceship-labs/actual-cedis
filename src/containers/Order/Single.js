@@ -136,7 +136,6 @@ class OrderSingle extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { order, products } = this.props;
     const { folio, Broker, OrderCancelations, CancelationDetails } = order;
     const { visible, showCancel, shouldRender, reason, cancelAll } = this.state;

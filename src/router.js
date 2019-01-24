@@ -31,13 +31,14 @@ const PublicRoutes = ({ history, isLoggedIn }) => (
         path="/"
         component={asyncComponent(() => import('./containers/Login'))}
       />
-      <Route
+      {/* <Route
         exact
         path="/requestList"
         component={asyncComponent(() =>
           import('./containers/CancelRequest/old/CancelRequest')
         )}
-      />
+      /> */}
+      {/* <Redirect exact from="" to="orders" /> */}
       <RestrictedRoute
         path="/dashboard"
         component={App}
