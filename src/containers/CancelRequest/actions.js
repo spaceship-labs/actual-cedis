@@ -2,7 +2,7 @@ import { createActions } from 'ractionx';
 
 const prefix = '@actual/cedis/containers/CancelRequest';
 
-export const types = ['GET_CANCEL_REQUEST'];
+export const types = ['GET_CANCEL'];
 
-const { getCancelRequest } = createActions(prefix, types);
-export default { getCancelRequest };
+const { getCancel } = createActions(prefix, types);
+export default { getCancel };
