@@ -115,7 +115,7 @@ export const StatusContent = styled.div`
 
 export const StatusPop = styled.div`
   background-color: #f8f8f8;
-  position: absolute;
+  position: fixed;
   margin-left: auto;
   margin-right: auto;
   left: 0;
