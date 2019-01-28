@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import Numeral from 'numeral';
 import {
   StatusH3,
   StatusP,
@@ -8,20 +9,36 @@ import {
   StatusContent,
   StatusIcon,
 } from '../CancelRequest.style';
-
 import TestOption from './TestOption';
 import TestRegresar from './TestRegresar/TestRegresar';
 import Checkout from '../../../image/svgs/checkout-ticket.svg';
+import TestAutorizado from './TestRegresar/TestAutorizado';
+import TestCancelado from './TestRegresar/TestCancelado';
 
-const Item = ({ object }) => <StatusH3 weight="bolder">{object}</StatusH3>;
-
-Item.defaultProps = {
-  object: 'Aqui va el producto',
+const DateCell = data => {
+  const date = new Date(data);
+  const options = {
+    weekday: 'short',
+    year: 'numeric',
+    month: '2-digit',
+    day: 'numeric',
+  };
+  return (
+    <StatusP weight="normal" align="right" margin="0px">
+      {date.toLocaleString('en-US', options)}
+    </StatusP>
+  );
 };
 
-const Cantidad = ({ object }) => (
+const Item = cancelRequest => (
+  <StatusH3 weight="bolder">
+    {cancelRequest === undefined ? <div>Hola</div> : <div>error loading</div>}
+  </StatusH3>
+);
+
+const Cantidad = ({ detail: { quantity } }) => (
   <StatusP weight="normal" align="right" margin="0px">
-    {object.quantity}
+    {quantity}
   </StatusP>
 );
 
@@ -29,11 +46,7 @@ Cantidad.defaultProps = {
   quantity: 'Aqui va la cantidad',
 };
 
-const Entrega = ({ object }) => (
-  <StatusP weight="normal" align="right" margin="0px">
-    {object.shipDate}
-  </StatusP>
-);
+const Entrega = ({ object }) => <div>{DateCell(object.shipDate)}</div>;
 
 Entrega.defaultProps = {
   shipDate: 'Aqui va la fecha de entrega',
@@ -41,7 +54,7 @@ Entrega.defaultProps = {
 
 const Precio = ({ object }) => (
   <StatusP weight="normal" align="right" margin="0px">
-    {Math.round(object.total * 100) / 100}
+    {Numeral(object.total).format('$0,0.00')}
   </StatusP>
 );
 
@@ -50,13 +63,14 @@ Precio.defaultProps = {
 };
 
 const TestMain = ({
+  product,
   detail,
-  cancelDetail,
   accept,
   reject,
   unSet,
   options,
   requestStatus,
+  answer,
 }) => (
   <div>
     <StatusContent>
@@ -75,7 +89,7 @@ const TestMain = ({
       <Row>
         <Col md={6} lg={10}>
           <ColEnd>
-            <Item />
+            <Item product={product} />
           </ColEnd>
         </Col>
         <Col md={14} lg={10}>
@@ -90,7 +104,7 @@ const TestMain = ({
                 >
                   Cantidad
                 </StatusP>
-                <Cantidad object={cancelDetail} />
+                <Cantidad detail={detail} />
               </Col>
             </Col>
             <Col span={11}>
@@ -103,7 +117,7 @@ const TestMain = ({
                 >
                   Entrega aproximada
                 </StatusP>
-                <Entrega object={detail} />
+                {/* <Entrega detail={detail} /> */}
               </Col>
             </Col>
             <Col span={8}>
@@ -116,7 +130,7 @@ const TestMain = ({
                 >
                   Precio
                 </StatusP>
-                <Precio object={detail} />
+                {/* <Precio detail={detail} /> */}
               </Col>
             </Col>
           </Row>
@@ -124,13 +138,20 @@ const TestMain = ({
         <Col md={4} lg={4}>
           {requestStatus === 'pending' ? (
             <ColCenter>
-              {!options ? (
+              {options ? (
                 <TestOption
                   handleClickAprove={accept}
                   handleClickDenied={reject}
                 />
               ) : (
-                <TestRegresar clickCb={unSet} />
+                <div>
+                  <TestRegresar clickCb={unSet} />
+                  {answer === 'authorized' ? (
+                    <TestAutorizado />
+                  ) : (
+                    <TestCancelado />
+                  )}
+                </div>
               )}
             </ColCenter>
           ) : null}
