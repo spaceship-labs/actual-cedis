@@ -21,7 +21,7 @@ class Confirm extends Component {
   };
 
   render() {
-    const { show, cancel, folio } = this.props;
+    const { show, accept, cancel, folio } = this.props;
     const { password } = this.state;
     return show ? (
       <StatusPop width="100px" height="auto">
@@ -57,7 +57,7 @@ class Confirm extends Component {
                 type="primary"
                 size="large"
                 bgcolor="#33BA2C!important"
-                onClick={null}
+                onClick={accept}
                 disabled={`${folio}` !== password}
               >
                 Aceptar
