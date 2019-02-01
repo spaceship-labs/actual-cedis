@@ -136,7 +136,6 @@ class OrderSingle extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { order, products } = this.props;
     const { folio, Broker, OrderCancelations, CancelationDetails } = order;
     const { visible, showCancel, shouldRender, reason, cancelAll } = this.state;
@@ -167,7 +166,11 @@ class OrderSingle extends Component {
           ) : (
             ''
           )}
-          <CancelActivity stateCancel={this.stateCancel} dataorder={order} />
+          <CancelActivity
+            stateCancel={this.stateCancel}
+            dataorder={order}
+            showCancel={showCancel}
+          />
           <Seccion>
             <NumberOrder
               dataorder={order}

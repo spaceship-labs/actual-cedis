@@ -15,7 +15,7 @@ const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
       ) : (
         <Redirect
           to={{
-            pathname: '/',
+            pathname: '/login',
             state: { from: props.location },
           }}
         />
@@ -27,17 +27,19 @@ const PublicRoutes = ({ history, isLoggedIn }) => (
   <ConnectedRouter history={history}>
     <div>
       <Route
-        exact
-        path="/"
+        path="/login"
         component={asyncComponent(() => import('./containers/Login'))}
       />
+
       <Route
         exact
-        path="/requestList"
-        component={asyncComponent(() =>
-          import('./containers/CancelRequest/old/CancelRequest')
-        )}
+        path="/"
+        render={() => {
+          if (isLoggedIn) return <Redirect to="dashboard/orders" />;
+          return <Redirect to="login" />;
+        }}
       />
+
       <RestrictedRoute
         path="/dashboard"
         component={App}

@@ -13,7 +13,6 @@ export function* cancelRequestsSaga({ payload: page = 1 }) {
 export function* filterCancelOrderSaga({
   payload: { page = 1, category, keyword },
 }) {
-  console.log('sagas redux', category, keyword);
   const {
     data: { orderCancelations: cancelRequests, total },
   } = yield call(api.cancel.search, { page, category, keyword });

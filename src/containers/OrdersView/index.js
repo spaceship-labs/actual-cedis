@@ -52,7 +52,7 @@ class OrdersView extends Component {
     };
     const { keyword, category } = this.state;
     const categoryFilter = {
-      folioSap: 'Folio Sap',
+      folioSap: 'Folio SAP',
       folio: 'Folio mi actual',
       cardName: 'Cliente',
     };

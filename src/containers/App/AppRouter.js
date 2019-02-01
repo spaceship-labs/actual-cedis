@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import asyncComponent from '../../helpers/AsyncFunc';
 
 const routes = [
   {
     path: '',
-    component: asyncComponent(() => import('../dashboard')),
+    exact: true,
+    render: ({ ...props }) => {
+      const {
+        match: { url },
+      } = props;
+      if (url === '/dashboard/') return <Redirect to="orders" />;
+      return <Redirect to="dashboard/orders" />;
+    },
   },
   {
     path: 'cancel-requests',
@@ -37,10 +44,10 @@ class AppRouter extends Component {
     return (
       <div style={style}>
         {routes.map(singleRoute => {
-          const { path, exact, ...otherProps } = singleRoute;
+          const { path, ...otherProps } = singleRoute;
           return (
             <Route
-              exact={exact !== false}
+              exact
               key={singleRoute.path}
               path={`${url}/${singleRoute.path}`}
               {...otherProps}
