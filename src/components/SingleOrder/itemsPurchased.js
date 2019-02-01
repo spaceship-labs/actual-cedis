@@ -7,6 +7,7 @@ import {
   RowItem,
   DeleteItems,
 } from '../../containers/Order/single.style';
+
 const urlImg = 'https://d116li125og699.cloudfront.net/uploads/products/';
 const sizeImg = '?d=100x100';
 const { Option } = Select;

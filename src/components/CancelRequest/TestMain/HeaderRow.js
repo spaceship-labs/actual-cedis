@@ -54,19 +54,7 @@ const HeaderRow = () => (
               </StatusP>
             </Col>
           </Col>
-          <Col span={11}>
-            <Col>
-              <StatusP
-                weight="bold"
-                align="right"
-                margin="0px 0px 28px 0px"
-                transform="uppercase"
-              >
-                Entrega aproximada
-              </StatusP>
-            </Col>
-          </Col>
-          <Col span={8}>
+          <Col span={19}>
             <Col>
               <StatusP
                 weight="bold"

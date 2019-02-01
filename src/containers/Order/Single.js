@@ -90,13 +90,13 @@ class OrderSingle extends Component {
     });
   };
 
-  cancelquantity = (x, { props: { value, id } }) => {
+  cancelquantity = (x, { props: { value: quantity, id } }) => {
     const { details } = this.state;
     this.setState(() => {
-      const arr = { id, value };
+      const arr = { id, quantity };
       const result = details.find(({ id: Id }) => id === Id);
       if (!result) return { details: details.concat(arr) };
-      result.value = value;
+      result.quantity = quantity;
       return result;
     });
   };
