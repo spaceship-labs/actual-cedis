@@ -16,6 +16,7 @@ class CancelActivity extends Component {
     const {
       dataorder: { folio, createdAt: date },
       stateCancel,
+      showCancel,
     } = this.props;
 
     return (
@@ -35,7 +36,9 @@ class CancelActivity extends Component {
             </ColBtn> */}
             <ColBtn xs={24} sm={24} md={24} lg={8} xl={8}>
               <BtnCancel type="primary" onClick={stateCancel}>
-                CREAR SOLICITUD DE CANCELACIÓN
+                {showCancel
+                  ? 'CANCELAR SOLICITUD DE CANCELACIÓN'
+                  : 'CREAR SOLICITUD DE CANCELACIÓN'}
               </BtnCancel>
             </ColBtn>
           </Row>

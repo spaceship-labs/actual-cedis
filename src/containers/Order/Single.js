@@ -166,7 +166,11 @@ class OrderSingle extends Component {
           ) : (
             ''
           )}
-          <CancelActivity stateCancel={this.stateCancel} dataorder={order} />
+          <CancelActivity
+            stateCancel={this.stateCancel}
+            dataorder={order}
+            showCancel={showCancel}
+          />
           <Seccion>
             <NumberOrder
               dataorder={order}

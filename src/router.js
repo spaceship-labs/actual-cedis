@@ -39,14 +39,7 @@ const PublicRoutes = ({ history, isLoggedIn }) => (
           return <Redirect to="login" />;
         }}
       />
-      {/* <Route
-        exact
-        path="/requestList"
-        component={asyncComponent(() =>
-          import('./containers/CancelRequest/old/CancelRequest')
-        )}
-      /> */}
-      {/* <Redirect exact from="" to="orders" /> */}
+
       <RestrictedRoute
         path="/dashboard"
         component={App}
