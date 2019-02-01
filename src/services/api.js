@@ -3,6 +3,7 @@ import { getToken } from './auth';
 
 // const API_BASE = 'https://sandboxapi.miactual.com';
 const API_BASE = 'http://localhost:1337';
+// const API_BASE = 'http://192.168.1.101:1337';
 
 axios.defaults.baseURL = API_BASE;
 const get = (url, params = {}) => axios.get(url, { params });
@@ -31,8 +32,9 @@ export default {
     },
   },
   orders: {
-    list: ({ page }) => get(`/order/find/${page}`),
+    list: ({ page }) => get(`/order?page=${page}`),
     findById: orderId => get(`/order/findbyid/${orderId}`),
+    search: params => get('/order/findbyfilter', params),
   },
   cancel: {
     list: params => get('/cancel', params),
@@ -40,6 +42,10 @@ export default {
       post(`/cancel/${orderId}/order`, params),
     get: orderId => get(`/cancel/${orderId}/order`),
     update: ({ id, ...params }) => put(`/cancel/${id}/order`, params),
+    search: params => {
+      console.log('API', params);
+      return get('/cancel/findbyfilter', params);
+    },
   },
   alerts: {
     list: params => get('/alert', { params }),

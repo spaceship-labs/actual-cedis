@@ -31,8 +31,8 @@ class MotivoCancelacion extends Component {
       visible: false,
     });
     const { verifyData } = this.props;
-    verifyData();
-    handleverify();
+    const verify = verifyData();
+    if (verify) handleverify();
   };
 
   handleverify = () => {

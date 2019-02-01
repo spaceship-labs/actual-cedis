@@ -2,6 +2,11 @@ import React from 'react';
 import { Col, Row } from 'antd';
 import { CancelSap } from '../../containers/Order/single.style';
 
+const mapperType = {
+  'InvoiceReserve-Cancelation': 'Factura de reserva SAP',
+  orderCancelation: 'Order SAP',
+};
+
 const DocumentsCancel = ({
   dataCancel: {
     type,
@@ -21,43 +26,62 @@ const DocumentsCancel = ({
       <Row>
         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
           <ul>
-            <li>Tipo : {type}</li>
-            <li>Resultado : {result}</li>
             <li>
-              Pagos:
+              <strong>{mapperType[type]} : </strong>
+              {result}
+            </li>
+
+            <li>
+              <strong>Pagos :</strong>
               <ul>
                 {Payments.map(({ pay }) => (
-                  <li>{pay}</li>
+                  <li key={pay}>{pay}</li>
                 ))}
               </ul>
             </li>
-            <li>
-              Pagos cancelados : {PaymentsCancel ? 'Aceptado' : 'Rechazado'}
-            </li>
+            {PaymentsCancel ? (
+              <li>
+                <strong>Pagos cancelados :</strong>
+                <ul>
+                  {PaymentsCancel.map(({ pay }) => (
+                    <li key={pay}>{pay}</li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              ''
+            )}
           </ul>
         </Col>
         <Col xs={24} sm={24} md={12} lg={12} xl={12}>
           <ul>
-            <li>Series : {series ? 'Aceptado' : 'Rechazado'}</li>
+            {series ? (
+              <li>
+                <strong>Series :</strong>
+                <ul>
+                  {series.map(({ pay }) => (
+                    <li key={pay}>{pay}</li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              ''
+            )}
             <li>
-              Solicitud de transferencia:
+              <strong>Solicitud de translado :</strong>
               <ul>
                 {RequestTransfer.map(({ Request }) => (
-                  <li>{Request}</li>
+                  <li key={Request}>{Request}</li>
                 ))}
               </ul>
             </li>
             <li>
-              Productos:
+              <strong>Productos sin cancelar :</strong>
               <ul>
                 <li>
-                  {products.map(item => (
-                    <span>
-                      {item} {''},{' '}
-                    </span>
-                  ))}
-                </li>{' '}
-              </ul>{' '}
+                  <span>{products.map(item => item).toString()}</span>
+                </li>
+              </ul>
             </li>
           </ul>
         </Col>

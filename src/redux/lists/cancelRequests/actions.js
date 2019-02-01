@@ -8,6 +8,7 @@ const types = [
   'CHANGE_PAGE',
   'SET_PAGE',
   'SET_TOTAL',
+  'FILTER_CANCEL',
 ];
 
 const {
@@ -16,6 +17,7 @@ const {
   changePage,
   setPage,
   setTotal,
+  filterCancel,
 } = createActions(prefix, types);
 
 export default {
@@ -24,4 +26,5 @@ export default {
   changePage,
   setPage,
   setTotal,
+  filterCancel,
 };

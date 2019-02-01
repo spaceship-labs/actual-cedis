@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 import { Icon, Input, Popconfirm } from 'antd';
 import * as numeral from 'numeral';
 import ImageCellView from './imageCell';
+import moment from 'moment';
 
 const DateCell = data => {
   const date = new Date(data);
-  var options = {
-    weekday: 'short',
-    year: 'numeric',
-    month: '2-digit',
-    day: 'numeric',
-  };
-  return <p>{date.toLocaleString('en-US', options)}</p>;
+  // return <p>{date.toLocaleString()}</p>;
+  return <p>{moment(date).format('DD/MM/YYYY')}</p>;
 };
 const ImageCell = src => <ImageCellView src={src} />;
 const LinkCell = (link, href) => <a href={href || '#'}>{link}</a>;

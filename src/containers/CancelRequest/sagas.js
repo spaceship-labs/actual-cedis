@@ -1,6 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import containerActions from './actions';
 import objectsActions from '../../redux/objects/actions';
+import AlertDialog from '../../components/dialogAlert';
 
 export function* getCancelRequestSaga({ payload: cancelRequestId }) {
   yield put(containerActions.setLoading(true));
@@ -12,9 +13,9 @@ export function* updateCancelSaga({ payload }) {
   const answersKeys = Object.keys(answers);
 
   if (requestStatus === 'partially' && answersKeys.length === 0) {
-    alert('No Changes');
+    AlertDialog('UPDATE', 'No Changes');
   } else if (requestStatus !== 'partially' && answersKeys.length > 0) {
-    alert('Inconsistent Data');
+    AlertDialog('UPDATE', 'Inconsistent Data');
   } else {
     const detailApprovement = answersKeys.map(item => ({
       id: item,

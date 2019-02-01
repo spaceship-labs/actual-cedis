@@ -4,11 +4,14 @@ import TableList from '../TableList';
 const CancelRequestsList = props => {
   const {
     getCancelRequests,
+    filterCancel,
     pagination,
     loading,
     cancelRequests,
     columns,
     rowKey,
+    keyword,
+    category,
   } = props;
   // if (!loading)
   //   return (
@@ -16,16 +19,20 @@ const CancelRequestsList = props => {
   //       <h3>Hola Mundo</h3>
   //     </div>
   //   );
+  const searchfunction = keyword.length > 0 ? filterCancel : getCancelRequests;
+
   return (
     <div>
       <h3>Pedidos</h3>
       <TableList
-        onChange={getCancelRequests}
+        onChangeData={searchfunction}
         rowKey={rowKey}
         pagination={pagination}
         loading={loading}
         entries={cancelRequests}
         columns={columns}
+        keyword={keyword}
+        category={category}
       />
     </div>
   );

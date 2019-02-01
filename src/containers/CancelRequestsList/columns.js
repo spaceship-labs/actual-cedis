@@ -15,17 +15,22 @@ ESTE ES EL BUENO:
 */
 const columns = [
   {
-    title: 'Fecha',
-    key: 'venta',
-    width: 300,
-    render: object => renderCell(object, 'DateCell', 'createdAt'),
-    sorter: true,
-  },
-  {
-    title: 'Folio',
+    title: 'Folio Mi Actual',
     key: 'folio',
     width: 300,
     render: object => renderCell(object.Order, 'TextCell', 'folio'),
+    sorter: true,
+  },
+  {
+    title: 'Cliente',
+    key: 'client',
+    width: 300,
+    render: object => {
+      const {
+        Order: { CardName },
+      } = object;
+      return renderCell(CardName, 'TextCell');
+    },
     sorter: true,
   },
   {
@@ -33,6 +38,13 @@ const columns = [
     key: 'reason',
     width: 300,
     render: object => renderCell(object, 'TextCell', 'reason'),
+    sorter: true,
+  },
+  {
+    title: 'Fecha',
+    key: 'venta',
+    width: 300,
+    render: object => renderCell(object, 'DateCell', 'createdAt'),
     sorter: true,
   },
   {

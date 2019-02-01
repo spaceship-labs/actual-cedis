@@ -9,10 +9,10 @@ const options = [
     label: 'Cancelaciones',
     leftIcon: 'file-excel',
   },
-  {
-    key: 'alerts',
-    label: 'Alertas',
-    leftIcon: 'exclamation-circle',
-  },
+  // {
+  //   key: 'alerts',
+  //   label: 'Alertas',
+  //   leftIcon: 'exclamation-circle',
+  // },
 ];
 export default options;

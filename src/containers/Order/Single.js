@@ -6,6 +6,7 @@ import {
   Modal,
   TxtStrong,
   TxtData,
+  // CursorPointer,
 } from './single.style';
 
 // import Title from 'antd/lib/skeleton/Avatar';
@@ -23,7 +24,10 @@ import DocumentsCancel from '../../components/SingleOrder/documentCancel';
 import ShippingOrder from '../../components/SingleOrder/shippingOrder';
 import Advisor from '../../components/SingleOrder/advisor';
 import dispatch from './dispacher';
+import Loading from '../../components/loading';
+import AlertDialog from '../../components/dialogAlert';
 import { containerSelector } from './selectors';
+
 // import antiBind from './../../components/services/utils';
 
 class OrderSingle extends Component {
@@ -120,19 +124,23 @@ class OrderSingle extends Component {
     } = this.props;
     if (reason.length > 10 && (details.length > 0 || cancelAll === true)) {
       const cancelData = { orderId, cancelAll, details, reason };
-      return createCancel(cancelData);
+      createCancel(cancelData);
+      return true;
     }
     if (reason.length < 10) {
-      return alert('Favor de añadir los motivos de cancelación');
+      AlertDialog('ERROR', 'Falta complementar las razones de la cancelación');
+      return false;
     }
-    return alert('No ha seleccionado articulos para cancelar');
+    AlertDialog('ERROR', 'No ha seleccionado artículos para cancelar');
+    return false;
   };
 
   render() {
+    console.log(this.props);
     const { order, products } = this.props;
     const { folio, Broker, OrderCancelations, CancelationDetails } = order;
     const { visible, showCancel, shouldRender, reason, cancelAll } = this.state;
-    if (!shouldRender) return <div>Loading...</div>;
+    if (!shouldRender) return <Loading />;
     return (
       <LayoutContentWrapper style={{ height: 'auto' }}>
         <LayoutContent>

@@ -6,8 +6,10 @@ export default function cancelRequestsReducer(
   { type, payload }
 ) {
   switch (type) {
+    case actions.getCancelRequests.type:
+      return { ...state, loading: true };
     case actions.setCancelRequests.type:
-      return { ...state, entries: payload };
+      return { ...state, entries: payload, loading: false };
     case actions.setTotal.type:
       return { ...state, total: payload };
     case actions.setPage.type:

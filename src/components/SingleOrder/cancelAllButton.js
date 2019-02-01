@@ -44,32 +44,32 @@ class CancelAllButton extends Component {
       <div>
         {showCancel && (
           <CursorPointer>
-            <TxtStrong>
-              <CancelAll onClick={this.showpopup}>
+            <CancelAll onClick={this.showpopup}>
+              <TxtStrong>
                 {cancelAll
                   ? 'CANCELAR POR ARTÍCULOS'
                   : 'CANCELAR TODA LA ORDEN'}
-              </CancelAll>
-              <Modal
-                visible={visible}
-                onCancel={this.handleCancel}
-                onOk={this.handleOk}
-                title="Cancelar orden"
-              >
-                <p>
-                  {' '}
-                  {cancelAll
-                    ? '¿Seguro que quieres cancelar por artículos?'
-                    : '¿Seguro que quieres cancelar toda la orden?'}
-                </p>
-                <p>
-                  Para poder proceder con la solicitud de cancelación
-                  exitosamente, deberá llenar el cuadro que se encuentra al
-                  final de esta página: <strong>Motivo de cancelación.</strong>{' '}
-                  (Mínimo una línea de texto)
-                </p>
-              </Modal>
-            </TxtStrong>
+              </TxtStrong>
+            </CancelAll>
+            <Modal
+              visible={visible}
+              onCancel={this.handleCancel}
+              onOk={this.handleOk}
+              title="Cancelar orden"
+            >
+              <p>
+                {' '}
+                {cancelAll
+                  ? '¿Seguro que quieres cancelar por artículos?'
+                  : '¿Seguro que quieres cancelar toda la orden?'}
+              </p>
+              <p>
+                Para poder proceder con la solicitud de cancelación
+                exitosamente, deberá llenar el cuadro que se encuentra al final
+                de esta página: <strong>Motivo de cancelación.</strong> (Mínimo
+                una línea de texto)
+              </p>
+            </Modal>
           </CursorPointer>
         )}
       </div>
