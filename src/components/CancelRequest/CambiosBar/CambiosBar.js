@@ -6,21 +6,23 @@ import {
   ColCenter,
 } from '../CancelRequest.style';
 
-const CambiosBar = ({ buttonCb }) => (
+const CambiosBar = ({ buttonCb, status }) => (
   <BarChanges>
     <SolicitudItem type="flex" justify="end">
       <ColCenter>
-        <AllButton
-          type="default"
-          size="default"
-          color="white!important"
-          transform="uppercase"
-          bgcolor="black!important"
-          font="12px!important"
-          onClick={buttonCb}
-        >
-          <strong>GUARDAR CAMBIOS</strong>
-        </AllButton>
+        {status === 'pending' ? (
+          <AllButton
+            type="default"
+            size="default"
+            color="white!important"
+            transform="uppercase"
+            bgcolor="black!important"
+            font="12px!important"
+            onClick={buttonCb}
+          >
+            <strong>GUARDAR CAMBIOS</strong>
+          </AllButton>
+        ) : null}
       </ColCenter>
     </SolicitudItem>
   </BarChanges>

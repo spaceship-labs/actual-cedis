@@ -81,7 +81,9 @@ class MotivoCancelacion extends Component {
                 onOk={this.handleOk}
                 title="Confirmación"
               >
-                <p>¿Estás seguro de querer hacer esto?</p>
+                <p>
+                  ¿Estás seguro de querer enviar la solicitud de cancelación?
+                </p>
               </Modal>
             </div>
           </ReasonCancel>
