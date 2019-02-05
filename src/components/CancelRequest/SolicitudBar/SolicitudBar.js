@@ -40,7 +40,7 @@ const SolicitudBar = ({ folio, buttonsCb, status }) => (
       <ButtonsCol md={8} lg={6}>
         {status === 'pending'
           ? [
-              <ColCenter>
+              <ColCenter key="authorizedBtn">
                 <AllButton
                   type="primary"
                   size="default"
@@ -53,7 +53,7 @@ const SolicitudBar = ({ folio, buttonsCb, status }) => (
                   <strong> Autorizar todo</strong>
                 </AllButton>
               </ColCenter>,
-              <ColCenter>
+              <ColCenter key="rejectedBtn">
                 <AllButton
                   type="danger"
                   size="default"

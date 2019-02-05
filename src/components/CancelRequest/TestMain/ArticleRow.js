@@ -70,10 +70,7 @@ const ArticleRow = ({
               <Cantidad object={cancelDetail.quantity} />
             </Col>
           </Col>
-          <Col span={11}>
-            <Col>{/* <Entrega object={detail.shipDate} /> */}</Col>
-          </Col>
-          <Col span={8}>
+          <Col span={19}>
             <Col>
               <Precio object={cancelDetail.total} />
             </Col>

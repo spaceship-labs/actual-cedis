@@ -130,7 +130,7 @@ class CancelRequest extends Component {
           <OrderText>{request.reason}</OrderText>
           <HeaderRow />
           {cancelDetails.map(this.renderArticle)}
-          <CambiosBar buttonCb={this.showConfirmDialog} />
+          <CambiosBar buttonCb={this.showConfirmDialog} status={status} />
           <TestRequestConfirmAprove
             show={showDialog}
             acceptCb={this.sendUpdate}
