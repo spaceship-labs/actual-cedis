@@ -38,10 +38,8 @@ export default {
   },
   cancel: {
     list: params => get('/cancel', params),
-    create: ({ orderId, ...params }) => {
-      // console.log(orderId, params);
-      return post(`/cancel/${orderId}/order`, params);
-    },
+    create: ({ orderId, ...params }) =>
+      post(`/cancel/${orderId}/order`, params),
     get: orderId => get(`/cancel/${orderId}/order`),
     update: ({ id, ...params }) => put(`/cancel/${id}/order`, params),
     search: params => get('/cancel/findbyfilter', params),
