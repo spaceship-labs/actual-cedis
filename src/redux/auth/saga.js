@@ -7,7 +7,8 @@ import AlertDialog from '../../components/dialogAlert';
 
 function* onLogin(action) {
   try {
-    yield put(actions.setLoading(true));
+    // yield put(actions.setLoading(true));
+    console.log('action', action);
     const { data } = yield call(api.login.do, action.payload);
     yield put(actions.loginSuccess(data));
   } catch (e) {

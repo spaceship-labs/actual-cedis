@@ -16,6 +16,7 @@ const DocumentsCancel = ({
     series,
     RequestTransfer,
     products,
+    CreditMemo,
   },
 }) => (
   <div>
@@ -59,8 +60,27 @@ const DocumentsCancel = ({
               <li>
                 <strong>Series :</strong>
                 <ul>
-                  {series.map(({ pay }) => (
-                    <li key={pay}>{pay}</li>
+                  {series.map(({ DetailId, Number }) => (
+                    <div>
+                      <li key={DetailId}>{DetailId}</li>
+                      <ul>
+                        {Number.map(item => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              ''
+            )}
+            {CreditMemo ? (
+              <li>
+                <strong>Notas de credito :</strong>
+                <ul>
+                  {CreditMemo.map(item => (
+                    <li key={item}>{item}</li>
                   ))}
                 </ul>
               </li>
