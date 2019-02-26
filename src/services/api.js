@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from './auth';
 
 // const API_BASE = 'https://sandboxapi.miactual.com';
-const API_BASE = 'http://localhost:1337';
+const API_BASE = 'https://stagedapi.miactual.com';
 // const API_BASE = 'http://192.168.1.101:1337';
 
 axios.defaults.baseURL = API_BASE;
