@@ -96,7 +96,8 @@ class OrderSingle extends Component {
       const arr = { id, quantity };
       const result = details.find(({ id: Id }) => id === Id);
       if (!result) return { details: details.concat(arr) };
-      result.quantity = quantity;
+      if (result && quantity !== 0) result.quantity = quantity;
+      else return { details: details.filter(({ id: ID }) => ID !== id) };
       return result;
     });
   };
