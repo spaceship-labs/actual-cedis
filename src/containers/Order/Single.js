@@ -123,13 +123,16 @@ class OrderSingle extends Component {
         params: { id: orderId },
       },
     } = this.props;
-    if (reason.length > 10 && (details.length > 0 || cancelAll === true)) {
+    if (reason.length >= 10 && (details.length > 0 || cancelAll === true)) {
       const cancelData = { orderId, cancelAll, details, reason };
       createCancel(cancelData);
       return true;
     }
     if (reason.length < 10) {
-      AlertDialog('ERROR', 'Falta complementar las razones de la cancelación');
+      AlertDialog(
+        'ERROR',
+        'Falta complementar las razones de la cancelación. Mínimo 10 caracteres'
+      );
       return false;
     }
     AlertDialog('ERROR', 'No ha seleccionado artículos para cancelar');
