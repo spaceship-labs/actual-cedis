@@ -56,7 +56,9 @@ class MotivoCancelacion extends Component {
         <Row>
           <ReasonCancel>
             <p>
-              <strong>MOTIVO DE CANCELACIÓN: </strong>
+              <strong>
+                MOTIVO DE CANCELACIÓN <sub>(Mínimo 10 caracteres)</sub>
+              </strong>
             </p>
             <div>
               <div>

@@ -5,7 +5,6 @@ import {
   Order,
   // BtnPrint,
   BtnCancel,
-  TxtData,
   ColBtn,
 } from '../../containers/Order/single.style';
 
@@ -24,9 +23,7 @@ class CancelActivity extends Component {
         <Order>
           <Row gutter={16}>
             <ColBtn xs={12} sm={12} md={12} lg={9} xl={9}>
-              <h3>
-                NUMERO DE ORDEN <TxtData>#{folio}</TxtData>
-              </h3>
+              <h3>NUMERO DE ORDEN #{folio}</h3>
             </ColBtn>
             <ColBtn xs={12} sm={12} md={12} lg={7} xl={7}>
               <span>{moment(date).format('DD/MM/YYYY')}</span>
