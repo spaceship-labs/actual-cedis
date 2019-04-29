@@ -22,7 +22,7 @@ export const BtnPrint = styled(Button)`
   width: 100%;
 `;
 export const BtnCancel = styled(Button)`
-  font-size: 20px;
+  font-size: 14px;
   background: red !important;
   border-style: none !important;
   width: 100%;

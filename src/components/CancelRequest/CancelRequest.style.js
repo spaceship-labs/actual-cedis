@@ -107,7 +107,6 @@ export const RequestIcon = styled(Icon)`
 `;
 
 export const StatusContent = styled.div`
-  white-space: nowrap;
   @media only screen and (max-width: 1036px) {
     font-size: 12px;
   }
